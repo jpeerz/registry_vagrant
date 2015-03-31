@@ -1,0 +1,9 @@
+vagrant
+.vagrant
+.idea
+webroot/*
+.DS_Store
+about_drupal
+members_drupal
+communities_drupal
+drush-backups/*
