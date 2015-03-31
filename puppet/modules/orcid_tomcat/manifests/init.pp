@@ -9,5 +9,5 @@ class orcid_tomcat($local_password) {
       managehome => true,
       password => $local_password,
    }
-   
+
 }
