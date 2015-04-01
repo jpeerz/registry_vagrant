@@ -1,5 +1,10 @@
-# but build to match our production
 Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |v|
+     #v.gui = true
+     v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
+     v.memory = 4000
+     #v.cpus = 2
+  end
 
   # Enable the Puppet provisioner, with will look in manifests
   config.vm.provision :puppet do |puppet|
@@ -13,10 +18,10 @@ Vagrant.configure("2") do |config|
 
   # Forward guest port to host portand name mapping
   config.vm.network :forwarded_port, guest: 80, host: 80
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
 
-#  config.vm.synced_folder "git", "/home/orcid_tomcat/git", 
-#     owner: "orcid_tomcat",
-#     group: "orcid_tomcat",
-#     mount_options: ["dmode=775,fmode=664"]
+  config.vm.synced_folder "git", "/home/orcid_tomcat/git", 
+     mount_options: ["uid=7006,gid=7006,dmode=775,fmode=664"]
+
 
 end
