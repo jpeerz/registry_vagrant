@@ -1,18 +1,9 @@
 
-class orcid_tomcat($local_password, $tomcat_mem_args = "-Xmx3000m -XX:MaxPermSize=512m") {
+class orcid_tomcat($tomcat_mem_args = "-Xmx3000m -XX:MaxPermSize=512m") {
 
    $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
    $tomcat_bin = "apache-tomcat-8.0.21"
    $tomcat_tar = "${tomcat_bin}.tar.gz"
-
-   user { "orcid_tomcat":
-      ensure  => present,
-      uid  => '7006',
-      shell  => '/bin/bash',
-      home  => '/home/orcid_tomcat',
-      managehome => true,
-      password => $local_password,
-   }
 
    file { "/home/orcid_tomcat/bin":
       ensure  => directory,
@@ -71,21 +62,6 @@ class orcid_tomcat($local_password, $tomcat_mem_args = "-Xmx3000m -XX:MaxPermSiz
           mode => "0700",
     }
 
-    $orcid_tomcat_webappdirs = [ "/home/orcid_tomcat/bin/tomcat/orcid-web-webapps",
-                  "/home/orcid_tomcat/bin/tomcat/orcid-metrics-web-webapps",
-                  "/home/orcid_tomcat/bin/tomcat/orcid-scheduler-web-webapps",
-                  "/home/orcid_tomcat/bin/tomcat/orcid-solr-web-webapps",
-                  "/home/orcid_tomcat/bin/tomcat/orcid-pub-web-webapps",
-                  "/home/orcid_tomcat/bin/tomcat/orcid-api-web-webapps",
-                  "/home/orcid_tomcat/bin/tomcat/jenkins-webapps" ]
-
-    file { $orcid_tomcat_webappdirs:
-        ensure  => directory,
-        require => File["/home/orcid_tomcat/bin/tomcat"],
-        owner => orcid_tomcat,
-        group => orcid_tomcat,
-        mode => 0744,
-    }
 
 
 }
