@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
   #config.vm.network :forwarded_port, guest: 80, host: 80
   config.vm.network :forwarded_port, guest: 8080, host: 8080
 
-  config.vm.synced_folder "webapps", "/home/orcid_tomcat/bin/tomcat/webapps", 
+  config.vm.synced_folder "webapps", "/home/orcid_tomcat/webapps", 
      mount_options: ["uid=7006,gid=7006,dmode=775,fmode=664"]
 
   config.vm.synced_folder "git", "/home/orcid_tomcat/git", 

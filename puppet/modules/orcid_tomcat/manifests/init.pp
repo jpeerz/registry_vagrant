@@ -1,9 +1,16 @@
 
-class orcid_tomcat($tomcat_mem_args = "-Xmx3000m -XX:MaxPermSize=512m") {
+class orcid_tomcat($orcid_props_loc, $tomcat_mem_args = "-Xmx3000m -XX:MaxPermSize=512m") {
 
    $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
    $tomcat_bin = "apache-tomcat-8.0.21"
    $tomcat_tar = "${tomcat_bin}.tar.gz"
+
+   file { "/home/orcid_tomcat/webapps":
+      ensure  => directory,
+      owner => orcid_tomcat,
+      group => orcid_tomcat,
+      require => User["orcid_tomcat"],
+   }  
 
    file { "/home/orcid_tomcat/bin":
       ensure  => directory,
@@ -35,8 +42,20 @@ class orcid_tomcat($tomcat_mem_args = "-Xmx3000m -XX:MaxPermSize=512m") {
         mode => 0744,
     }
 
-    file { ["/usr/local/orcid", "/usr/local/orcid/webapps", "/usr/local/orcid/webapps/conf"]:
-        ensure => directory,
+    file { ["/home/orcid_tomcat/data", "/home/orcid_tomcat/data/solr", 
+       "/home/orcid_tomcat/conf", "/home/orcid_tomcat/git"]:
+          ensure => directory,
+          owner => orcid_tomcat,
+          group => orcid_tomcat,
+          require => User["orcid_tomcat"],
+          mode => "0700",
+    }
+
+    exec { "git about clone":
+        command => "sudo -u orcid_tomcat git clone --shared https://github.com/ORCID/ORCID-Source.git",
+        creates => "/home/orcid_tomcat/git/ORCID-Source",
+        path    => "/usr/bin",
+        require => File["/home/orcid_tomcat/git"],
     }
 
     file { "/etc/init.d/tomcat":
@@ -54,13 +73,6 @@ class orcid_tomcat($tomcat_mem_args = "-Xmx3000m -XX:MaxPermSize=512m") {
         require => File["/etc/init.d/tomcat"],
     }
 
-   file { ["/home/orcid_tomcat/data", "/home/orcid_tomcat/data/solr", "/home/orcid_tomcat/conf"]:
-          ensure => directory,
-          owner => orcid_tomcat,
-          group => orcid_tomcat,
-          require => User["orcid_tomcat"],
-          mode => "0700",
-    }
 
 
 

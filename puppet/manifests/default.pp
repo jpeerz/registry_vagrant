@@ -19,6 +19,7 @@ class { 'orcid_java': }
 
 class {
    orcid_tomcat:
+     orcid_props_loc => '/home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties',
      require => [Class["orcid_java"],User["orcid_tomcat"]]
 }
 
