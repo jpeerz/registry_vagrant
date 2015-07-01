@@ -19,7 +19,13 @@ class { 'orcid_java': }
 
 class {
    orcid_tomcat:
-     orcid_props_loc => '/home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties',
+   tomcat_catalina_opts => '-Xmx2000m -XX:MaxPermSize=512m
+-Dfile.encoding=utf-8 
+-Dorg.orcid.config.file=file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties 
+-Dsolr.solr.home=/home/orcid_tomcat/bin/tomcat/webapps/orcid-solr-web/solr 
+-Dsolr.data.dir=/home/orcid_tomcat/data/orcid-solr 
+-Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true
+',
      require => [Class["orcid_java"],User["orcid_tomcat"]]
 }
 

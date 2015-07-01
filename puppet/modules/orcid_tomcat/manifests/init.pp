@@ -1,5 +1,5 @@
 
-class orcid_tomcat($orcid_props_loc, $tomcat_mem_args = "-Xmx3000m -XX:MaxPermSize=512m") {
+class orcid_tomcat($tomcat_catalina_opts) {
 
    $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
    $tomcat_bin = "apache-tomcat-8.0.21"
@@ -41,6 +41,16 @@ class orcid_tomcat($orcid_props_loc, $tomcat_mem_args = "-Xmx3000m -XX:MaxPermSi
         group => orcid_tomcat,
         mode => 0744,
     }
+
+  file { "/home/orcid_tomcat/bin/tomcat/bin/startup.sh":
+        ensure        => file,
+        path          => '/home/orcid_tomcat/bin/tomcat/bin/startup.sh',
+        content       => template('orcid_tomcat/home/orcid_tomcat/bin/tomcat/bin/startup.sh.erb'),
+        mode          => '0755',
+        group         => 'orcid_tomcat',
+        owner         => 'orcid_tomcat',
+        require => File["/home/orcid_tomcat/bin/tomcat"]
+  }
 
     file { ["/home/orcid_tomcat/data", "/home/orcid_tomcat/data/solr", 
        "/home/orcid_tomcat/conf", "/home/orcid_tomcat/git"]:
