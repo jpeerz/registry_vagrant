@@ -1,4 +1,3 @@
-
 class orcid_tomcat($tomcat_catalina_opts) {
 
    $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
@@ -10,7 +9,7 @@ class orcid_tomcat($tomcat_catalina_opts) {
       owner => orcid_tomcat,
       group => orcid_tomcat,
       require => User["orcid_tomcat"],
-   }  
+   }
 
    file { "/home/orcid_tomcat/bin":
       ensure  => directory,
@@ -52,8 +51,35 @@ class orcid_tomcat($tomcat_catalina_opts) {
         require => File["/home/orcid_tomcat/bin/tomcat"]
   }
 
+
+  file { "/home/orcid_tomcat/bin/tomcat/conf/server.xml":
+        ensure        => file,
+        source  => "puppet:///modules/orcid_tomcat/home/orcid_tomcat/bin/tomcat/conf/server.xml",
+        mode          => '0755',
+        group         => 'orcid_tomcat',
+        owner         => 'orcid_tomcat',
+        require => File["/home/orcid_tomcat/bin/tomcat"]
+  }
+
+  orcid_tomcat::orcid_tomcat_log4j { "web_log4j": }
+  orcid_tomcat::orcid_tomcat_log4j { "pub_log4j": }
+  orcid_tomcat::orcid_tomcat_log4j { "api_log4j": }
+  orcid_tomcat::orcid_tomcat_log4j { "solr_log4j": }
+  orcid_tomcat::orcid_tomcat_log4j { "scheduler_log4j": }
+  orcid_tomcat::orcid_tomcat_log4j { "metrics_log4j": }
+
+
+    file { ["/home/orcid_tomcat/git"]:
+          ensure => directory,
+          owner => orcid_tomcat,
+          group => orcid_tomcat,
+          require => User["orcid_tomcat"],
+          mode => "0775",
+    }
+
+
     file { ["/home/orcid_tomcat/data", "/home/orcid_tomcat/data/solr", 
-       "/home/orcid_tomcat/conf", "/home/orcid_tomcat/git"]:
+       "/home/orcid_tomcat/conf"]:
           ensure => directory,
           owner => orcid_tomcat,
           group => orcid_tomcat,

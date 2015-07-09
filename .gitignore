@@ -2,7 +2,6 @@ vagrant
 .vagrant
 .idea
 git
-webroot/*
 .DS_Store
 about_drupal
 members_drupal
