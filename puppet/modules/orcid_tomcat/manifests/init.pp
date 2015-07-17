@@ -87,10 +87,12 @@ class orcid_tomcat($tomcat_catalina_opts) {
           mode => "0700",
     }
 
-    exec { "git about clone":
+    exec { "git clone ORCID-Source":
         command => "sudo -u orcid_tomcat git clone --shared https://github.com/ORCID/ORCID-Source.git",
+        cwd => "/home/orcid_tomcat/git",
         creates => "/home/orcid_tomcat/git/ORCID-Source",
         path    => "/usr/bin",
+        timeout => "600",
         require => File["/home/orcid_tomcat/git"],
     }
 
