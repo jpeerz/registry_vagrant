@@ -122,40 +122,44 @@
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
-        <!--
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost_access_log." suffix=".txt"
+               prefix="localhost_access_log" suffix=".txt"
                pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
         <Context path="/orcid-web">
-            <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/web_log4j.xml"/>
-            <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-                   conditionUnless="isMonitoring"
-                   prefix="access_log." suffix=".txt"
-                   pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
-            <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-                   conditionIf="isMonitoring"
-                   prefix="monitoring_access_log." suffix=".txt"
-                   pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
-            </Context>
+          <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/web_log4j.xml"/>
+          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                 conditionUnless="isMonitoring"
+                 prefix="access_log" suffix=".txt"
+                 pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
+          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                 conditionIf="isMonitoring"
+                 prefix="monitoring_access_log." suffix=".txt"
+                 pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
+        </Context>
         <Context path="/orcid-pub-web">
-            <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/pub_log4j.xml"/>
-            <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-                   prefix="pub_access_log." suffix=".txt"
-                   pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
-            </Context>
-            <Context path="/orcid-api-web">
-                <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/api_log4j.xml"/>
-            <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-                   prefix="api_access_log." suffix=".txt"
-                   pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
+          <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/pub_log4j.xml"/>
+          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                 prefix="pub_access_log" suffix=".txt"
+                 pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
+        </Context>
+        <Context path="/orcid-api-web">
+          <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/api_log4j.xml"/>
+           <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                  prefix="api_access_log" suffix=".txt"
+                  pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
         </Context>
         <Context path="/orcid-solr-web">
-            <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/solr_log4j.xml"/>
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="solr_access_log." suffix=".txt"
-               pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
+          <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/solr_log4j.xml"/>
+          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                 prefix="solr_access_log" suffix=".txt"
+                 pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
         </Context>
-      -->
+        <Context path="/orcid-scheduler-web">
+          <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/scheduler_log4j.xml"/>
+          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                 prefix="scheduler_access_log" suffix=".txt"
+                 pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
+        </Context>
       </Host>
     </Engine>
   </Service>
