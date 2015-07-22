@@ -1,0 +1,3 @@
+VAGRANT_SSH_PORT=`vagrant ssh-config | awk '/Port/{print $2}'`
+ssh -p $VAGRANT_SSH_PORT -gNR 5432:localhost:5432  vagrant@localhost -i .vagrant/machines/default/virtualbox/private_key &
+echo "SSH tunnels set up"

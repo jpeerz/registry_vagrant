@@ -3,19 +3,26 @@ class orcid_tomcat($tomcat_catalina_opts) {
    $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
    $tomcat_bin = "apache-tomcat-8.0.21"
    $tomcat_tar = "${tomcat_bin}.tar.gz"
-
-   file { "/home/orcid_tomcat/webapps":
+   
+   file { "/home/orcid_tomcat":
       ensure  => directory,
       owner => orcid_tomcat,
       group => orcid_tomcat,
       require => User["orcid_tomcat"],
    }
 
+   file { "/home/orcid_tomcat/webapps":
+      ensure  => directory,
+      owner => orcid_tomcat,
+      group => orcid_tomcat,
+      require => File["/home/orcid_tomcat"],
+   }
+
    file { "/home/orcid_tomcat/bin":
       ensure  => directory,
       owner => orcid_tomcat,
       group => orcid_tomcat,
-      require => User["orcid_tomcat"],
+      require => File["/home/orcid_tomcat"],
    }	
 
     # download the tgz file
@@ -73,7 +80,7 @@ class orcid_tomcat($tomcat_catalina_opts) {
           ensure => directory,
           owner => orcid_tomcat,
           group => orcid_tomcat,
-          require => User["orcid_tomcat"],
+          require => File["/home/orcid_tomcat"],
           mode => "0775",
     }
 
@@ -83,7 +90,7 @@ class orcid_tomcat($tomcat_catalina_opts) {
           ensure => directory,
           owner => orcid_tomcat,
           group => orcid_tomcat,
-          require => User["orcid_tomcat"],
+          require => File["/home/orcid_tomcat"],
           mode => "0700",
     }
 

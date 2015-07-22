@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
      #v.gui = true
      v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
      v.memory = 4000
-     #v.cpus = 2
+     v.cpus = 4
   end
 
   # Enable the Puppet provisioner, with will look in manifests
@@ -19,8 +19,6 @@ Vagrant.configure("2") do |config|
   # Forward guest port to host portand name mapping
   #config.vm.network :forwarded_port, guest: 80, host: 80
   config.vm.network :forwarded_port, guest: 8080, host: 8080
-  # Private network will make the host available on 192.168.0.1
-  config.vm.network :private_network, ip: "192.168.0.2"
 
 
   config.vm.synced_folder "git", "/home/orcid_tomcat/git", 
