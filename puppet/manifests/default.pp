@@ -38,3 +38,5 @@ class {
     require => [Class["orcid_java"], User["orcid_tomcat"]]
 }
 
+include orcid_deployment
+
