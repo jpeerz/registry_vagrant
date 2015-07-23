@@ -69,7 +69,7 @@ def build_and_install_apps():
         info('No new apps to install')
         
 def clean_previous_builds():
-    if(args.clean):
+    if(args.build):
         for app in deployment_types[args.type]['apps']:
             dir = app_cache_dir(app)
             if(os.path.isdir(dir)):
@@ -85,7 +85,7 @@ def build():
         subprocess.check_call('git fetch --tags'.split())
         subprocess.check_call(['git', 'checkout', args.release])
         
-    if(args.current and not(args.clean)):
+    if(args.current):
         subprocess.check_call('mvn install -Dmaven.test.skip=true'.split())
     else:
         subprocess.check_call('mvn clean install -Dmaven.test.skip=true'.split())
@@ -157,7 +157,7 @@ group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('--current', help='deploy the version currently checked out in ~orcid_tomcat/git', action='store_true')
 group.add_argument('--release', help='the tag of the ORCID release in git')
 parser.add_argument('--no-tomcat', help='do not start and stop tomcat', dest='tomcat', action='store_false', default=True)
-parser.add_argument('--clean', help='build the webapps from scratch, even if they exsist already in ~orcid_tomcat/webapps', action='store_true')
+parser.add_argument('--no-build', help='use already built version in ~orcid_tomcat/webapps', dest='build', action='store_false', default=True)
 args = parser.parse_args()
 
 info('Starting ORCID deployment')
