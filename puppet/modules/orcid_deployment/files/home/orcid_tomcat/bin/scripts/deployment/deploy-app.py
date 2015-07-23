@@ -1,29 +1,24 @@
 #!/usr/bin/env python
 
-import logging
 import argparse
 import re
 import sys
 import os
 import shutil
 import glob
-import subprocess
-import time
-import signal
+import shared
 
 # Init
-logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.INFO)
+logging = shared.logging
 info = logging.info
 
 # Config
 
-orcid_home = os.path.expanduser('~orcid_tomcat')
-git_dir = os.path.join(orcid_home, 'git')
+git_dir = os.path.join(shared.orcid_home, 'git')
 orcid_source_dir = os.path.join(git_dir, 'ORCID-Source')
-webapps_dir = os.path.join(orcid_home, 'webapps')
-tomcat_home = os.path.join(orcid_home, 'bin', 'tomcat')
-fonts_src_dir = os.path.join(orcid_home, 'git', 'ORCID-Fonts-Dot-Com')
-fonts_deploy_dir = os.path.join(tomcat_home, 'orcid-web-webapps', 'ROOT', 'static', 'ORCID-Fonts-Dot-Com')
+webapps_dir = os.path.join(shared.orcid_home, 'webapps')
+fonts_src_dir = os.path.join(shared.orcid_home, 'git', 'ORCID-Fonts-Dot-Com')
+fonts_deploy_dir = os.path.join(shared.tomcat_home, 'orcid-web-webapps', 'ROOT', 'static', 'ORCID-Fonts-Dot-Com')
 
 deployment_types = {
 'orcid-web': { 'apps': ['orcid-web'], 'deploy_fonts': True },
@@ -99,42 +94,20 @@ def deploy_fonts():
 def link_apps():
     for app in deployment_types[args.type]['apps']:
         info('Linking %s to tomcat webapps dir...', app)
-        app_path = os.path.join(tomcat_home, 'webapps', app)
+        app_path = os.path.join(shared.tomcat_home, 'webapps', app)
         os.symlink(os.path.join(webapps_dir, app + '-' + release_number), app_path)
     # Make empty dir for non-deployed apps, to stop tomcat complaining
     for app in deployment_types['all']['apps']:
-    	app_path =  os.path.join(tomcat_home, 'webapps', app)
+    	app_path =  os.path.join(shared.tomcat_home, 'webapps', app)
     	if not(os.path.lexists(app_path)): os.mkdir(app_path)
 
-def stop_tomcat():
-    if args.tomcat:
-        subprocess.check_call(os.path.join(tomcat_home, 'bin', 'shutdown.sh'), stderr=subprocess.STDOUT)
-        logging.info('Waiting for Tomcat to shutdown normally...')
-        tomcat_pid = wait_for_tomcat()
-        if(tomcat_pid):
-            logging.info('Tomcat did not shutdown normally, so about to kill...')
-            os.kill(tomcat_pid, signal.SIGKILL)
-            logging.info('Waiting after sending kill signal to Tomcat...')
-            tomcat_pid = wait_for_tomcat()
-            if(tomcat_pid):
-                logging.error("Tomcat still running with pid %s", tomcat_pid)
-                exit(1)
 
-def wait_for_tomcat():
-    pgrep_output = None
-    for i in range(15):
-        time.sleep(1)
-        try:
-            pgrep_output = subprocess.check_output(['pgrep',  '-f',  'org.apache.catalina.startup.Bootstrap start$'])
-        except subprocess.CalledProcessError:
-            return None
-    return int(pgrep_output)
             
 def clean_tomcat():
 	# Clean directories
     dirs_to_clean = ['work']
     for dir_to_clean in dirs_to_clean:
-        full_dir_path = os.path.join(tomcat_home, dir_to_clean, '*')
+        full_dir_path = os.path.join(shared.tomcat_home, dir_to_clean, '*')
         info('About to clean directory %s' , full_dir_path)
         for item in glob.glob(full_dir_path):
             if os.path.isfile(item) or os.path.islink(item):
@@ -143,18 +116,13 @@ def clean_tomcat():
                 shutil.rmtree(item)
     # Unlink all apps
     for app in deployment_types['all']['apps']:
-    	app_path = os.path.join(tomcat_home, 'webapps', app)
+    	app_path = os.path.join(shared.tomcat_home, 'webapps', app)
     	if os.path.islink(app_path): os.remove(app_path)
         elif os.path.isdir(app_path): os.rmdir(app_path)
     # Remove catalina.out
-    catalina_out = os.path.join(tomcat_home, 'logs', 'catalina.out')
+    catalina_out = os.path.join(shared.tomcat_home, 'logs', 'catalina.out')
     if os.path.exists(catalina_out): os.remove(catalina_out)
     
-def start_tomcat():
-    if args.tomcat:
-        os.chdir(orcid_home)
-        subprocess.Popen(['nohup', os.path.join(tomcat_home, 'bin', 'startup.sh')])
-        logging.info('Remember to check the logs!')
 
 # Start of script
 
@@ -174,9 +142,11 @@ logging.info('Release number = %s', release_number)
 logging.info('Git directory = %s', git_dir)
 
 build_and_install_apps()
-stop_tomcat()
-clean_tomcat()
+if args.tomcat:
+    shared.stop_tomcat()
+    clean_tomcat()
 link_apps()
 deploy_fonts()
-start_tomcat()
+if args.tomcat:
+    shared.start_tomcat()
 
