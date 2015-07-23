@@ -11,6 +11,9 @@ Vagrant.configure("2") do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file = "default.pp"
     puppet.module_path = "puppet/modules"
+    puppet.facter = {
+      'orcid_config_file' => ENV['ORCID_CONFIG_FILE'],
+    }
   end
 
   # Every Vagrant virtual environment requires a box to build off of.

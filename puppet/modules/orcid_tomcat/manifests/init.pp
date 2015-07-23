@@ -1,4 +1,4 @@
-class orcid_tomcat($tomcat_catalina_opts) {
+class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties', $tomcat_catalina_opts) {
 
   $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
   $tomcat_bin = "apache-tomcat-8.0.21"
