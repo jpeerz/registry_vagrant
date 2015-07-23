@@ -108,20 +108,27 @@ def link_apps():
 
 def stop_tomcat():
     if args.tomcat:
-        shutdown_output = subprocess.check_output(os.path.join(tomcat_home, 'bin', 'shutdown.sh'), stderr=subprocess.STDOUT)
-        if(not('Tomcat may not be running' in shutdown_output)):
-            logging.info('Waiting for Tomcat to shutdown normally...')
-            time.sleep(15)
+        subprocess.check_call(os.path.join(tomcat_home, 'bin', 'shutdown.sh'), stderr=subprocess.STDOUT)
+        logging.info('Waiting for Tomcat to shutdown normally...')
+        tomcat_pid = wait_for_tomcat()
+        if(tomcat_pid):
+            logging.info('Tomcat did not shutdown normally, so about to kill...')
+            os.kill(tomcat_pid, signal.SIGKILL)
+            logging.info('Waiting after sending kill signal to Tomcat...')
+            tomcat_pid = wait_for_tomcat()
+            if(tomcat_pid):
+                logging.error("Tomcat still running with pid %s", tomcat_pid)
+                exit(1)
+
+def wait_for_tomcat():
+    pgrep_output = None
+    for i in range(15):
+        time.sleep(1)
         try:
             pgrep_output = subprocess.check_output(['pgrep',  '-f',  'org.apache.catalina.startup.Bootstrap start$'])
         except subprocess.CalledProcessError:
-            pass
-        else:
-            logging.info('Tomcat did not shutdown normally, so about to kill...')
-            pid_of_java = int(pgrep_output)
-            os.kill(pid_of_java, signal.SIGKILL)
-            logging.info('Waiting after sending kill signal to Tomcat...')
-            time.sleep(15)
+            return None
+    return int(pgrep_output)
             
 def clean_tomcat():
 	# Clean directories
