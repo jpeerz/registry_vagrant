@@ -4,13 +4,6 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
   $tomcat_bin = "apache-tomcat-8.0.21"
   $tomcat_tar = "${tomcat_bin}.tar.gz"
 
-  file { "/home/orcid_tomcat":
-    ensure  => directory,
-    owner => orcid_tomcat,
-    group => orcid_tomcat,
-    require => User["orcid_tomcat"],
-  }
-
   file { "/home/orcid_tomcat/webapps":
     ensure  => directory,
     owner => orcid_tomcat,

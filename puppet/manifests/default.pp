@@ -15,6 +15,13 @@ user { "orcid_tomcat":
   password => '$6$ZHUQRrIW.9iTAJ0Z$9vyWYor7k6SwxWvra5osKjZyuqHN30tQQJJFsrbDQkwfN1z1eRG7LUJUK6krOIWlCLCR9G05tA5pXfS4CPsyO/',
 }
 
+file { "/home/orcid_tomcat":
+  ensure  => directory,
+  owner => orcid_tomcat,
+  group => orcid_tomcat,
+  require => User["orcid_tomcat"],
+}
+
 class { 'orcid_java': }
 
 notify { "config file is ${orcid_config_file}": }
