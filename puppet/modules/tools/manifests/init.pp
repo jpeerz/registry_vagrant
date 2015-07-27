@@ -5,7 +5,9 @@ class tools {
     "curl",
     "git-core",
     "htop",
-    "vim"
+    "vim",
+    "git",
+    "maven"
   ]
 
   # install packages
