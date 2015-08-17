@@ -109,5 +109,12 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
     target  => '/etc/init.d/tomcat',
     require => File["/etc/init.d/tomcat"],
   }
+  
+  cron { log_cleaner:
+	command => "python /home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py -delete 45",
+	user => orcid_tomcat
+	hour => 0,
+	minute => 0
+  }
 
 }
