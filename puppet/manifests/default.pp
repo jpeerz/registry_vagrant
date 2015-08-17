@@ -40,3 +40,4 @@ class {
 
 include orcid_deployment
 
+$clean_old_logs_script_path = "/home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py"

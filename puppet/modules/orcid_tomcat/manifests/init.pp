@@ -119,7 +119,7 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
   }
   
   cron { log_cleaner:
-	command => "python /home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py -delete 45",
+	command => "python $clean_old_logs_script_path -delete 45",
 	user => orcid_tomcat
 	hour => 0,
 	minute => 0
