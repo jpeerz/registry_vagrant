@@ -110,6 +110,14 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
     require => File["/etc/init.d/tomcat"],
   }
   
+  file { "/home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py":
+    ensure    => file,
+    source  => "puppet:///modules/orcid_tomcat/files/scripts/delete_old_logs/delete_old_logs.py",
+    mode    => '0755',
+    group    => 'orcid_tomcat',
+    owner    => 'orcid_tomcat'
+  }
+  
   cron { log_cleaner:
 	command => "python /home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py -delete 45",
 	user => orcid_tomcat
