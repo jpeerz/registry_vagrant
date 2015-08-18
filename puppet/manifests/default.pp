@@ -35,7 +35,7 @@ class {
 -Dsolr.data.dir=/home/orcid_tomcat/data/orcid-solr 
 -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true
 ',
-    require => [Class["orcid_java"], User["orcid_tomcat"]]
+    require => [Class["orcid_java"], User["orcid_tomcat"]],
 	orcid_old_logs_script => "/home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py"
 }
 

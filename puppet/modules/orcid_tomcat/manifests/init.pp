@@ -1,4 +1,4 @@
-class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties', $tomcat_catalina_opts) {
+class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties', $tomcat_catalina_opts, $orcid_old_logs_script) {
 
   $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
   $tomcat_bin = "apache-tomcat-8.0.21"
@@ -120,7 +120,7 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
   
   cron { log_cleaner:
 	command => "python $orcid_old_logs_script -delete 45",
-	user => orcid_tomcat
+	user => orcid_tomcat,
 	hour => 0,
 	minute => 0
   }
