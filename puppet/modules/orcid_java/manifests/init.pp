@@ -7,10 +7,25 @@ class orcid_java  () {
       creates => "/etc/apt/sources.list.d/webupd8team-java-trusty.list",
    }
 
-   exec { "java install 1":
-      command => template("orcid_java/scripts/install_java.erb"),
+   exec { "java install 0":
+      command => "sudo /usr/bin/apt-get -q -y update",
       creates => "/usr/bin/java",
       require => Exec["java install webupd8team"],
+   }
+   
+   exec { "java install 1":
+      command => "sudo echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections",      
+      require => Exec["java install 0"],
+   }
+   
+   exec { "java install 2":
+      command => "sudo echo oracle-java8-installer shared/accepted-oracle-license-v1-1 seen true | sudo /usr/bin/debconf-set-selections",      
+      require => Exec["java install 1"],
+   }
+   
+   exec { "java install 3":
+      command => "sudo /usr/bin/apt-get install -q -y oracle-java8-installer",      
+      require => Exec["java install 2"],
    }
 
 
