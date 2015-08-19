@@ -1,4 +1,4 @@
-sudo /usr/bin/apt-get -q -y update
-sudo echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
 sudo /usr/bin/apt-get install -q -y oracle-java8-installer
-sudo update-java-alternatives -s java-8-oracle
+es "" | apt-get -f install

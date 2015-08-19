@@ -7,13 +7,15 @@ class orcid_java  () {
       creates => "/etc/apt/sources.list.d/webupd8team-java-trusty.list",
    }
 
-   exec { "java install 1":
-      command => template("orcid_java/scripts/install_java.erb"),
-      creates => "/usr/bin/java",
-      require => Exec["java install webupd8team"],
+   exec { "sudo apt-get update":
+		command => "sudo /usr/bin/apt-get -q -y update",
+		require => Exec["java install webupd8team"],
    }
-
-
-
+   
+   exec { "install java":	
+    command => template("orcid_java/scripts/install_java.erb"),
+    creates => "/usr/bin/java",
+    require => Exec["sudo apt-get update"],	
+   }      
+       
 }
-
