@@ -110,9 +110,23 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
     require => File["/etc/init.d/tomcat"],
   }
   
+  file { "/home/orcid_tomcat/scripts":
+    ensure  => directory,
+    owner => orcid_tomcat,
+    group => orcid_tomcat,
+    require => File["/home/orcid_tomcat"],
+  }
+  
+  file { "/home/orcid_tomcat/scripts/delete_old_logs":
+    ensure  => directory,
+    owner => orcid_tomcat,
+    group => orcid_tomcat,
+    require => File["/home/orcid_tomcat/scripts"],
+  }
+  
   file { "/home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py":
     ensure    => file,
-    source  => "puppet:///modules/orcid_tomcat/files/scripts/delete_old_logs/delete_old_logs.py",
+    source  => "puppet:///modules/orcid_tomcat/home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py",
     mode    => '0755',
     group    => 'orcid_tomcat',
     owner    => 'orcid_tomcat'
