@@ -23,10 +23,10 @@ class orcid_java  () {
       require => Exec["java install 1"],
    }
    
-   exec { "java install 3":
-      command => "sudo /usr/bin/apt-get install -q -y oracle-java8-installer",      
-      require => Exec["java install 2"],
-   }
+   package {['oracle-java8-installer',]:
+		ensure  => installed,
+		require => Exec["java install 2"],
+	}
 
 
 

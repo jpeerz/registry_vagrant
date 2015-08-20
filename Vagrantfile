@@ -27,6 +27,4 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "git", "/home/orcid_tomcat/git", 
      mount_options: ["uid=7006,gid=7006,dmode=775,fmode=664"],
      create: true
-
-	config.vm.boot_timeout = 900
 end
