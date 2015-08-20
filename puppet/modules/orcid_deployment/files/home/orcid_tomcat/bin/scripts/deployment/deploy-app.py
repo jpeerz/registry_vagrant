@@ -94,6 +94,12 @@ def deploy_fonts():
             shutil.copytree(os.path.join(fonts_src_dir), fonts_deploy_dir)
         
 def link_apps():
+    # Unlink all apps first
+    for app in deployment_types['all']['apps']:
+        app_path = os.path.join(shared.tomcat_home, 'webapps', app)
+        if os.path.islink(app_path): os.remove(app_path)
+        elif os.path.isdir(app_path): os.rmdir(app_path)
+    # Link apps for the given deployment type
     for app in deployment_types[args.type]['apps']:
         info('Linking %s to tomcat webapps dir...', app)
         app_path = os.path.join(shared.tomcat_home, 'webapps', app)
@@ -103,28 +109,6 @@ def link_apps():
     	app_path =  os.path.join(shared.tomcat_home, 'webapps', app)
     	if not(os.path.lexists(app_path)): os.mkdir(app_path)
 
-
-            
-def clean_tomcat():
-	# Clean directories
-    dirs_to_clean = ['work']
-    for dir_to_clean in dirs_to_clean:
-        full_dir_path = os.path.join(shared.tomcat_home, dir_to_clean, '*')
-        info('About to clean directory %s' , full_dir_path)
-        for item in glob.glob(full_dir_path):
-            if os.path.isfile(item) or os.path.islink(item):
-                os.remove(item)
-            else:
-                shutil.rmtree(item)
-    # Unlink all apps
-    for app in deployment_types['all']['apps']:
-    	app_path = os.path.join(shared.tomcat_home, 'webapps', app)
-    	if os.path.islink(app_path): os.remove(app_path)
-        elif os.path.isdir(app_path): os.rmdir(app_path)
-    # Remove catalina.out
-    catalina_out = os.path.join(shared.tomcat_home, 'logs', 'catalina.out')
-    if os.path.exists(catalina_out): os.remove(catalina_out)
-    
 
 # Start of script
 
@@ -146,7 +130,7 @@ logging.info('Git directory = %s', git_dir)
 build_and_install_apps()
 if args.tomcat:
     shared.stop_tomcat()
-    clean_tomcat()
+    shared.clean_tomcat()
 link_apps()
 deploy_fonts()
 if args.tomcat:
