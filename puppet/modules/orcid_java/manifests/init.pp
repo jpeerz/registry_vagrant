@@ -10,6 +10,7 @@ class orcid_java  () {
    exec { "java install 1":
       command => template("orcid_java/scripts/install_java.erb"),
       creates => "/usr/bin/java",
+      timeout     => 900,
       require => Exec["java install webupd8team"],
    }
 
