@@ -40,5 +40,20 @@ class orcid_deployment {
     owner    => 'orcid_tomcat',
     require => File["/home/orcid_tomcat/bin/scripts"]
   }
-  
+
+  file { "/home/orcid_tomcat/bin/scripts/deployment/tomcat-oom-monitor.py":
+    ensure    => file,
+    source  => "puppet:///modules/orcid_deployment/home/orcid_tomcat/bin/scripts/deployment/tomcat-oom-monitor.py",
+    mode    => '0755',
+    group    => 'orcid_tomcat',
+    owner    => 'orcid_tomcat',
+    require => File["/home/orcid_tomcat/bin/scripts"]
+  }
+
+  cron { tomcat-oom-monitor:
+	command => "python /home/orcid_tomcat/bin/scripts/deployment/tomcat-oom-monitor.py",
+	user => orcid_tomcat,
+	minute => '*/2'
+  }
+
 }
