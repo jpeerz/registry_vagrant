@@ -1,11 +1,11 @@
 class orcid_maven {
 
   package { "maven2":
-        ensure => 'absent',
+    ensure => 'absent',
   }
 
   package { "maven":
-        ensure => 'latest',
+    ensure => 'latest',
   }
 
 }
