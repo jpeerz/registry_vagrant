@@ -19,7 +19,7 @@ git_dir = os.path.join(shared.orcid_home, 'git')
 orcid_source_dir = os.path.join(git_dir, 'ORCID-Source')
 webapps_dir = os.path.join(shared.orcid_home, 'webapps')
 fonts_src_dir = os.path.join(shared.orcid_home, 'git', 'ORCID-Fonts-Dot-Com')
-fonts_deploy_dir = os.path.join(shared.tomcat_home, 'orcid-web-webapps', 'ROOT', 'static', 'ORCID-Fonts-Dot-Com')
+fonts_deploy_dir = os.path.join(shared.tomcat_home, 'webapps', 'orcid-web', 'static', 'ORCID-Fonts-Dot-Com')
 
 deployment_types = {
 'orcid-web': { 'apps': ['orcid-web'], 'deploy_fonts': True },
