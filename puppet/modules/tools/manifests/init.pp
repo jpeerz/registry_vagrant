@@ -6,8 +6,7 @@ class tools {
     "git-core",
     "htop",
     "vim",
-    "git",
-    "maven"
+    "git"
   ]
 
   # install packages

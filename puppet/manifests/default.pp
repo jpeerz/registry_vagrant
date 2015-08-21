@@ -39,4 +39,5 @@ class {
 	orcid_old_logs_script => "/home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py"
 }
 
+include orcid_maven
 include orcid_deployment
