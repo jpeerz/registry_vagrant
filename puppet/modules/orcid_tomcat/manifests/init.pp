@@ -86,14 +86,13 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
     mode => "0700",
   }
 
-  exec { "git clone ORCID-Source":
-    command => "sudo -H -u orcid_tomcat bash -c 'cd /home/orcid_tomcat/git; git clone --shared https://github.com/ORCID/ORCID-Source.git;'",
+ exec { "git clone ORCID-Source":
+    command => "sudo su - orcid_tomcat -c 'cd /home/orcid_tomcat/git; git clone --shared https://github.com/ORCID/ORCID-Source.git;'",
     creates => "/home/orcid_tomcat/git/ORCID-Source",
-    path   => "/usr/bin",
     timeout => "1200",
     require => [File["/home/orcid_tomcat/git"],Package['git']],
   }
-
+  
   file { "/etc/init.d/tomcat":
     ensure => file,
     mode  => '0755',
