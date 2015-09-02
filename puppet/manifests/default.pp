@@ -36,7 +36,7 @@ class {
 -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true
 ',
     require => [Class["orcid_java"], User["orcid_tomcat"]],
-	orcid_old_logs_script => "/home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py"
+	clean_orcid_old_logs_cmd => "python /home/orcid_tomcat/scripts/delete_old_logs/delete_old_logs.py -delete 45"
 }
 
 include orcid_maven
