@@ -13,7 +13,7 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
 . /lib/lsb/init-functions
 
-export CATALINA_OPTS="<%= @tomcat_catalina_opts %>"
+export CATALINA_OPTS="<%= @tomcat_catalina_opts %> -Dorg.orcid.config.file=<%= @orcid_config_file %>"
 
 PRGDIR="<%= @tomcat_loc %>/bin"
 EXECUTABLE="catalina.sh"
