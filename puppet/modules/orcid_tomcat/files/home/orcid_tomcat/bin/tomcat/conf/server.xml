@@ -122,9 +122,6 @@
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost_access_log" suffix=".txt"
-               pattern='%h %l %u %t "%r" %s %b %T "%{Referer}i" "%{User-Agent}i" "-" - "%{Content-Type}o" "%{username}r" "%{X-Forwarded-For}i" "%I" "%{Authorization}i" "%{Location}o" "-" "%S"' />
         <Context path="/orcid-web">
           <Parameter name="log4jConfigLocation" value="file:///home/orcid_tomcat/conf/web_log4j.xml"/>
           <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
