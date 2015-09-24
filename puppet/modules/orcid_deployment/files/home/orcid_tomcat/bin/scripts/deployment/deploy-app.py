@@ -30,7 +30,7 @@ deployment_types = {
 'web-and-solr': { 'apps': ['orcid-web', 'orcid-pub-web', 'orcid-api-web', 'orcid-solr-web', 'orcid-internal-api'], 'deploy_fonts': True },
 'back': { 'apps': ['orcid-solr-web', 'orcid-scheduler-web'], 'deploy_fonts': False },
 'solr': { 'apps': ['orcid-solr-web'], 'deploy_fonts': False },
-'all': { 'apps': ['orcid-web', 'orcid-pub-web', 'orcid-api-web', 'orcid-solr-web', 'orcid-scheduler-web'], 'deploy_fonts': True }
+'all': { 'apps': ['orcid-web', 'orcid-pub-web', 'orcid-api-web', 'orcid-internal-api', 'orcid-solr-web', 'orcid-scheduler-web'], 'deploy_fonts': True }
 }
 
 # Function definitions
