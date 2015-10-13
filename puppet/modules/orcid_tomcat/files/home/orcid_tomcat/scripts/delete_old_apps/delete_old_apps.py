@@ -4,13 +4,13 @@ from os.path import expanduser
 from logging.handlers import TimedRotatingFileHandler
 
 home = expanduser("~")
-logs_directory = home + '/logs/clean_old_apps/'
-log_file = 'clean_old_apps.log'
+logs_directory = home + '/logs/delete_old_apps/'
+log_file = 'delete_old_apps.log'
 
 if not os.path.exists(logs_directory):
     os.makedirs(logs_directory)
 
-logger = logging.getLogger('clean_old_apps')
+logger = logging.getLogger('delete_old_apps')
 formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
 fileHandler = TimedRotatingFileHandler(logs_directory + log_file,
                                        when='midnight',
