@@ -1,4 +1,4 @@
-class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties', $tomcat_catalina_opts,  $clean_orcid_old_logs_cmd) {
+class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties', $tomcat_catalina_opts,  $clean_orcid_old_logs_cmd, $clean_old_apps) {
 
   $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
   $tomcat_bin = "apache-tomcat-8.0.21"
@@ -137,4 +137,32 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
 	minute => 0
   }
 
+  file { "/home/orcid_tomcat/scripts/delete_old_logs":
+    ensure  => directory,
+    owner => orcid_tomcat,
+    group => orcid_tomcat,
+    require => File["/home/orcid_tomcat/scripts"],
+  }
+            
+  file { "/home/orcid_tomcat/scripts/delete_old_apps":
+    ensure  => directory,
+    owner => orcid_tomcat,
+    group => orcid_tomcat,
+    require => File["/home/orcid_tomcat/scripts"],
+  }
+  
+  file { "/home/orcid_tomcat/scripts/delete_old_apps/delete_old_apps.py":
+    ensure    => file,
+    source  => "puppet:///modules/orcid_tomcat/home/orcid_tomcat/scripts/delete_old_apps/delete_old_apps.py",
+    mode    => '0755',
+    group    => 'orcid_tomcat',
+    owner    => 'orcid_tomcat'
+  }
+            
+  cron { old_apps_cleaner:
+	command => "$clean_old_apps",
+	user => orcid_tomcat,
+	hour => 0,
+	minute => 5
+  }
 }
