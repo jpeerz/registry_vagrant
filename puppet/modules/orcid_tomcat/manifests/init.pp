@@ -1,4 +1,4 @@
-class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties', $tomcat_catalina_opts,  $clean_orcid_old_logs_cmd) {
+class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Source/orcid-persistence/src/main/resources/staging-persistence.properties', $clean_access_logs_cmd = 'echo not_defined', $tomcat_catalina_opts,  $clean_orcid_old_logs_cmd) {
 
   $tomcat_loc = '/home/orcid_tomcat/bin/tomcat'
   $tomcat_bin = "apache-tomcat-8.0.21"
@@ -157,5 +157,12 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
 	user => orcid_tomcat,
 	hour => 0,
 	minute => 5
+  }
+  
+  cron { access_logs_cleanner:	
+	command => "$clean_access_logs_cmd",
+	user => orcid_tomcat,
+	hour => 0,
+	minute => 0	
   }
 }
