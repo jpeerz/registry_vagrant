@@ -50,6 +50,7 @@ class orcid_jenkins {
   $jenkins_port = '8383'
   $jenkins_user = 'orcid_tomcat'
   $jenkins_group = 'orcid_tomcat'
+  $jenkins_email_list = 'angel.montenegro@avantica.net r.peters@orcid.org f.ramirez@ost.orcid.org w.simpson@orcid.org s.tyagi@ost.orcid.org'
   
   file { "/etc/default/jenkins":
         ensure        => file,
