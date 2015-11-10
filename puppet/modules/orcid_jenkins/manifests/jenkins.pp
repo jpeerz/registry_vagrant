@@ -1,4 +1,4 @@
-class orcid::jenkins {
+class orcid_jenkins {
 
   jenkins::plugin { 'git': }
   jenkins::plugin { 'git-client': }
