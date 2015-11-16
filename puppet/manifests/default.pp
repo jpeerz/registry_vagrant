@@ -41,4 +41,5 @@ class {
 
 include orcid_maven
 include orcid_deployment
+include orcid_python
 include orcid_jenkins
