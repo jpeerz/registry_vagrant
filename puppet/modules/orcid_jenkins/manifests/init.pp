@@ -44,6 +44,8 @@ class orcid_jenkins {
 	jenkins::plugin { 'github': 
 		version => '1.14.0',
 	}	 
+	
+	$jenkins_ext_fw = 'server custom tomcat tcp/8383 default accept'
 }
 
 
