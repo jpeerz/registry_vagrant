@@ -3,7 +3,8 @@ class orcid_jenkins {
 	class {'jenkins':
 		install_java => false,
 		config_hash	=> {
-			'HTTP_PORT' => {value => '8383'},			
+			'HTTP_PORT' => {value => '8383'},	
+			'JAVA_HOME' => {value => '/usr/lib/jvm/java-8-oracle/'},			
 		},
 	}
 	
