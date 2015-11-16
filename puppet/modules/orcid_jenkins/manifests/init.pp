@@ -7,9 +7,42 @@ class orcid_jenkins {
 		},
 	}
 	
-	jenkins::plugin { 'git': }
-	jenkins::plugin { 'git-client': }
-	jenkins::plugin { 'github-api': }  	
+	jenkins::plugin { 'credentials': 
+		version => '1.22',
+	}
+	jenkins::plugin { 'ssh-credentials': 
+		version => '1.11',
+	}
+	jenkins::plugin { 'scm-api': 
+		version => '0.2',
+	}
+	jenkins::plugin { 'mailer': 
+		version => '1.15',
+	}
+	jenkins::plugin { 'matrix-project': 
+		version => '1.4',
+	}
+	jenkins::plugin { 'junit': 
+		version => '1.2',
+	}
+	jenkins::plugin { 'script-security': 
+		version => '1.13',
+	}
+	jenkins::plugin { 'git-client': 
+		version => '1.18.0',
+	}
+	jenkins::plugin { 'git': 
+		version => '2.4.0',
+	}	
+	jenkins::plugin { 'plain-credentials': 
+		version => '1.1',
+	}
+	jenkins::plugin { 'github-api': 
+		version => '1.69',
+	} 
+	jenkins::plugin { 'github': 
+		version => '1.14.0',
+	}	 
 }
 
 
