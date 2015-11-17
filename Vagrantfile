@@ -20,12 +20,6 @@ Vagrant.configure("2") do |config|
     fi;
   SHELL
 
-  # Install the puppet jenkins package we need
-  config.vm.provision :shell do |shell|
-	shell.inline = "mkdir -p /etc/puppet/modules;
-                  puppet module install rtyler-jenkins"
-	end
-  
   # Enable the Puppet provisioner, with will look in manifests
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
