@@ -1,9 +1,15 @@
 class orcid_jenkins {	
 	
 	class {'jenkins':
+		user => 'orcid_tomcat',
+		group => 'orcid_tomcat',
+		manage_user  => false,
+		manage_group => false,	
 		install_java => false,
 		config_hash	=> {
-			'HTTP_PORT' => {value => '8383'},	
+			'HTTP_PORT' => {value => '8383'},
+			'JENKINS_USER' => {value => 'orcid_tomcat'},
+			'JENKINS_GROUP' => {value => 'orcid_tomcat'},			
 			'JAVA_HOME' => {value => '/usr/lib/jvm/java-8-oracle/'},			
 		},
 	}
