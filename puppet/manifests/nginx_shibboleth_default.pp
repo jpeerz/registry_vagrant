@@ -4,7 +4,8 @@ Exec {
 }
 
 include bootstrap
-include tools
+include orcid_base::baseapps
+include orcid_base::common_libs
 
 class {
    shibboleth_nginx:
