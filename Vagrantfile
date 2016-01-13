@@ -46,4 +46,40 @@ Vagrant.configure("2") do |config|
        create: true
   end
 
+  config.vm.define "nginx_shibboleth", autostart: false do |nginx_shibboleth|
+
+    nginx_shibboleth.vm.box = "ubuntu/trusty64"
+    nginx_shibboleth.vm.provider "virtualbox" do |vb|
+       vb.memory = "4092"
+    end
+
+    if !ENV.has_key?("HOST_NAME")
+      raise Vagrant::Errors::VagrantError.new, 'HOST_NAME needs to be defined'
+    end
+
+    nginx_shibboleth.vm.provision "shell", inline: <<-SHELL
+      if [ $(dpkg-query -s puppet | grep -c "3.8.1-1puppetlabs1") -eq 0 ];
+        then
+          sudo wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+          sudo dpkg -i puppetlabs-release-trusty.deb
+          sudo apt-get update;  
+          sudo apt-get -q -y --force-yes install puppet=3.8.1-1puppetlabs1 puppet-common=3.8.1-1puppetlabs1; 
+          sudo apt-mark -q hold puppet puppet-common;     
+      fi;
+    SHELL
+
+    host_name = ENV['HOST_NAME']
+    nginx_shibboleth.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file = "nginx_shibboleth_default.pp"
+      puppet.module_path = "puppet/modules"
+      puppet.facter = {
+        "HOST_NAME" => ENV['HOST_NAME'],
+        "SB_ENTITY_ID" => ENV['SB_ENTITY_ID'],
+      }
+      puppet.options = ENV['PUPPET_OPTIONS']
+    end
+    
+  end
+
 end

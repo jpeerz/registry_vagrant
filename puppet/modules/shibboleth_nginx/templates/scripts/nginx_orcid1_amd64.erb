@@ -1,0 +1,6 @@
+sudo /usr/bin/apt-get -q -y update; 
+sudo dpkg -i /src/nginx-common_1.4.6-1orcid1_all.deb; 
+sudo dpkg -i /src/nginx-extras_1.4.6-1orcid1_amd64.deb; 
+sudo echo "nginx-common hold" | sudo dpkg --set-selections
+sudo echo "nginx-extras hold" | sudo dpkg --set-selections
+sudo touch /var/lib/nginx/nginx-extras_1.4.6-1orcid1_amd64_puppet.touched

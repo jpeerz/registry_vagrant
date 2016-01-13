@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" ID="_74cf263a2b4be44ada8e80b53b803aea7a38a459" entityID="https://orcid.org/saml2/sp/1"><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>
+<ds:Reference URI="#_74cf263a2b4be44ada8e80b53b803aea7a38a459">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
+<ds:DigestValue>JvOdFuoN//LYXTD5CFh8KvvHKtMgBxW+HbZyKj2xok0gFZmb3+GW3BynobvxTdg7bu+dAhA/sBI5
+eTl1UDRofg==</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+gEBYuzlpsVJtn4Py/ArNrs+NW808gh/Lyrldd0f+Cal4Kg4SeGeg9uJdW57Zs+t8oZYoo3iBAhLM
+inrDjquW//PtDdidn1lF3teIRoFoFQWLxttRWyGMWJ9tYzNvaE9Q0qcmSkVNl05k8NgENlH9Db4Z
+owiNQOmp+bwaucw59QYslp6YSVxv5iicIzbPQT0FZB8PiEv2zuL8WeNwQcOfZs3Hni4+nPWIPToY
+TAJ891AuAevIlq+6qfA7qx1sySr/va90wUEvdP3qBKOers84pXkdvDyhSLXct8/OplCg3BhFIC/b
+D21/ubiWwm7oihZTzWSCcvXy1bCX4tQweZnePA==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+sc0jpqb+dwN2xBx2tpRroLkxJMIn7ESYmoi/4s6yydlkck0e92keUPUo9ayVIIImYfwITcDs3dLY
+s9FfWtCzumYp/HKB0niP787w/lY02l1RxkI2gL+jucZq20hqE/bNp3jjBcteZy+atVICJmxXO5qU
+hD7OHlVjwjEnjy7Oky394TIrLGgm9WdMdyWdYVcdQXMTLw3qtTclO68rVVK6Ufojm0t1lv4dfyqv
+fW8fOLQm9ySSlsA3OzbCBRyYE1eJO/+JwY8MdcEa944W4JC7Z0yc8K2mmVMgN0786vbzugJpiASV
+RMTEp3lnXCL8kOZxSV0P+auOzbZt1kP8FH64cw==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIC9DCCAdygAwIBAgIJAO0CR1JgdYxIMA0GCSqGSIb3DQEBBQUAMBoxGDAWBgNVBAMTD3dlYi02
+Lm9yY2lkLm9yZzAeFw0xNTA5MDkxNzMwNTBaFw0yNTA5MDYxNzMwNTBaMBoxGDAWBgNVBAMTD3dl
+Yi02Lm9yY2lkLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALHNI6am/ncDdsQc
+draUa6C5MSTCJ+xEmJqIv+LOssnZZHJNHvdpHlD1KPWslSCCJmH8CE3A7N3S2LPRX1rQs7pmKfxy
+gdJ4j+/O8P5WNNpdUcZCNoC/o7nGattIahP2zad44wXLXmcvmrVSAiZsVzualIQ+zh5VY8IxJ48u
+zpMt/eEyKyxoJvVnTHclnWFXHUFzEy8N6rU3JTuvK1VSulH6I5tLdZb+HX8qr31vHzi0JvckkpbA
+Nzs2wgUcmBNXiTv/icGPDHXBGveOFuCQu2dMnPCtpplTIDdO/Or287oCaYgElUTExKd5Z1wi/JDm
+cUldD/mrjs22bdZD/BR+uHMCAwEAAaM9MDswGgYDVR0RBBMwEYIPd2ViLTYub3JjaWQub3JnMB0G
+A1UdDgQWBBQXWfZ6tkdPhKDBmppgASS8aACIJzANBgkqhkiG9w0BAQUFAAOCAQEAjdAUB4vWPvpT
+Ot9zHA3Zdghh6EGSTnnCRtXVvgnTgGEbyyuMcJNh/Pq6BrIJrdpJ8zCQJOBN48vT7hs+3fgpO9zQ
+jCV9wu7TehKHEjPg7mSDTVU+zT4xncoh2YJ+CwXE4PG8bPNnYgdG7PvHR5Ia5/2lMs9BwVFkklQk
+GM9mMIOLWJMv7P6FJmMWooa3gyOwgTxAnOlmxgWCzS+mgjDDtLnpQhbnX+T3te/OkSSYJpEuzeIr
+dfyHcsf9dHj+wE1MORUFfbx0FsGx2majBhOeRBSM5bjT1yQe2FMwFHw/KlhkjPs28rCyeaAccxJS
+X3SaEh/RQYZJA3QVBkWiqkc6JA==
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature>
+
+  <md:Extensions xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport">
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha224"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha224"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha384"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2009/xmldsig11#dsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/>
+  </md:Extensions>
+
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:Extensions>
+      <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://orcid.org/Shibboleth.sso/Login"/>
+      <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://orcid.org/Shibboleth.sso/Login" index="1"/>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="en">ORCID</mdui:DisplayName>
+        <mdui:Description xml:lang="en">ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized.</mdui:Description>
+        <mdui:InformationURL xml:lang="en">http://orcid.org/content/about-orcid</mdui:InformationURL>
+        <mdui:PrivacyStatementURL xml:lang="en">http://orcid.org/content/orcid-privacy-policy</mdui:PrivacyStatementURL>
+      </mdui:UIInfo>
+    </md:Extensions>
+    <md:KeyDescriptor>
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>web-6.orcid.org</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=web-6.orcid.org</ds:X509SubjectName>
+          <ds:X509Certificate>MIIC9DCCAdygAwIBAgIJAO0CR1JgdYxIMA0GCSqGSIb3DQEBBQUAMBoxGDAWBgNV
+BAMTD3dlYi02Lm9yY2lkLm9yZzAeFw0xNTA5MDkxNzMwNTBaFw0yNTA5MDYxNzMw
+NTBaMBoxGDAWBgNVBAMTD3dlYi02Lm9yY2lkLm9yZzCCASIwDQYJKoZIhvcNAQEB
+BQADggEPADCCAQoCggEBALHNI6am/ncDdsQcdraUa6C5MSTCJ+xEmJqIv+LOssnZ
+ZHJNHvdpHlD1KPWslSCCJmH8CE3A7N3S2LPRX1rQs7pmKfxygdJ4j+/O8P5WNNpd
+UcZCNoC/o7nGattIahP2zad44wXLXmcvmrVSAiZsVzualIQ+zh5VY8IxJ48uzpMt
+/eEyKyxoJvVnTHclnWFXHUFzEy8N6rU3JTuvK1VSulH6I5tLdZb+HX8qr31vHzi0
+JvckkpbANzs2wgUcmBNXiTv/icGPDHXBGveOFuCQu2dMnPCtpplTIDdO/Or287oC
+aYgElUTExKd5Z1wi/JDmcUldD/mrjs22bdZD/BR+uHMCAwEAAaM9MDswGgYDVR0R
+BBMwEYIPd2ViLTYub3JjaWQub3JnMB0GA1UdDgQWBBQXWfZ6tkdPhKDBmppgASS8
+aACIJzANBgkqhkiG9w0BAQUFAAOCAQEAjdAUB4vWPvpTOt9zHA3Zdghh6EGSTnnC
+RtXVvgnTgGEbyyuMcJNh/Pq6BrIJrdpJ8zCQJOBN48vT7hs+3fgpO9zQjCV9wu7T
+ehKHEjPg7mSDTVU+zT4xncoh2YJ+CwXE4PG8bPNnYgdG7PvHR5Ia5/2lMs9BwVFk
+klQkGM9mMIOLWJMv7P6FJmMWooa3gyOwgTxAnOlmxgWCzS+mgjDDtLnpQhbnX+T3
+te/OkSSYJpEuzeIrdfyHcsf9dHj+wE1MORUFfbx0FsGx2majBhOeRBSM5bjT1yQe
+2FMwFHw/KlhkjPs28rCyeaAccxJSX3SaEh/RQYZJA3QVBkWiqkc6JA==
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes128-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes192-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes256-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes192-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
+    </md:KeyDescriptor>
+    <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://orcid.org/Shibboleth.sso/Artifact/SOAP" index="1"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://orcid.org/Shibboleth.sso/SLO/SOAP"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://orcid.org/Shibboleth.sso/SLO/Redirect"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://orcid.org/Shibboleth.sso/SLO/POST"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://orcid.org/Shibboleth.sso/SLO/Artifact"/>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://orcid.org/Shibboleth.sso/SAML2/POST" index="1"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://orcid.org/Shibboleth.sso/SAML2/POST-SimpleSign" index="2"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://orcid.org/Shibboleth.sso/SAML2/Artifact" index="3"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://orcid.org/Shibboleth.sso/SAML2/ECP" index="4"/>
+    <md:AttributeConsumingService index="1">
+      <md:ServiceName xml:lang="en">ORCID</md:ServiceName>
+      <md:ServiceDescription xml:lang="en">ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized.</md:ServiceDescription>
+      <md:RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="eduPersonTargetedID" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
+      <md:RequestedAttribute FriendlyName="displayName" Name="urn:oid:2.16.840.1.113730.3.1.241" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="sn" Name="urn:oid:2.5.4.4" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="givenName" Name="urn:oid:2.5.4.42" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+    </md:AttributeConsumingService>
+  </md:SPSSODescriptor>
+
+  <md:Organization>
+    <md:OrganizationName xml:lang="en">ORCID, Inc</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="en">ORCID</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="en">http://orcid.org/</md:OrganizationURL>
+  </md:Organization>
+
+  <md:ContactPerson contactType="support">
+    <md:GivenName>ORCID Support</md:GivenName>
+    <md:EmailAddress>support@orcid.org</md:EmailAddress>
+  </md:ContactPerson>
+  <md:ContactPerson contactType="administrative">
+    <md:GivenName>Laura</md:GivenName>
+    <md:SurName>Paglione</md:SurName>
+    <md:EmailAddress>l.paglione@orcid.org</md:EmailAddress>
+  </md:ContactPerson>
+  <md:ContactPerson contactType="technical">
+    <md:GivenName>Will</md:GivenName>
+    <md:SurName>Simpson</md:SurName>
+    <md:EmailAddress>w.simpson@ost.orcid.org</md:EmailAddress>
+  </md:ContactPerson>
+
+</md:EntityDescriptor>

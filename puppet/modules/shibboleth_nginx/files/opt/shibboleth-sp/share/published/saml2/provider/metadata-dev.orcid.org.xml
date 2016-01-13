@@ -1,0 +1,93 @@
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" ID="_66dffa0715045104bf5995423246a58120e808df" entityID="https://raw.githubusercontent.com/ORCID/shibboleth_nginx_vagrant/shibboleth/1">
+
+  <md:Extensions xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport">
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha224"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha224"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha384"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2009/xmldsig11#dsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/>
+  </md:Extensions>
+
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:1.0:protocol">
+    <md:Extensions>
+      <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://dev.orcid.org/Shibboleth.sso/Login"/>
+      <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://dev.orcid.org/Shibboleth.sso/Login" index="1"/>
+    </md:Extensions>
+    <md:KeyDescriptor>
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>vagrant-ubuntu-trusty-64</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=vagrant-ubuntu-trusty-64</ds:X509SubjectName>
+          <ds:X509Certificate>MIIDDzCCAfegAwIBAgIJANJDZO7kuge8MA0GCSqGSIb3DQEBBQUAMCMxITAfBgNV
+BAMTGHZhZ3JhbnQtdWJ1bnR1LXRydXN0eS02NDAeFw0xNTA2MjYxNjE2MThaFw0y
+NTA2MjMxNjE2MThaMCMxITAfBgNVBAMTGHZhZ3JhbnQtdWJ1bnR1LXRydXN0eS02
+NDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSs1LUPSdSqeR7kKxWk
+wVtW1SW0YTEqr/ulbvQt7rKeCqNTIvw+J9QSGLLwawlk1sLrShmhBU7d97d/uWzH
+Sw2p282uAupgm+CO6LngEVtQjWGyFB4x99j5qmh/eVrzwvTP4vdwxs7os5WI+2oh
+klb4TsJ3LHrCsowztwNdX84pO6u35YAYy6kfMJsZzxoq3qv14K4VHwYFZIfcmIT7
+2ENerWRO/ECr0BYYhVebR8nhyCLuMXdQh2G91qAnTiOglqHPxz2ujBg8Qrgsnx1G
+n87OpCw6OqAEiNncrwfjTLuEvVrgTjSCRV7iOsJaNVUYg67wUX+G/C9mHnxAjjqx
+TfUCAwEAAaNGMEQwIwYDVR0RBBwwGoIYdmFncmFudC11YnVudHUtdHJ1c3R5LTY0
+MB0GA1UdDgQWBBTXHDefLL6EVhrXHSan35VoF1DU4DANBgkqhkiG9w0BAQUFAAOC
+AQEAmVR4q3loqQ0pOxjIvCtEBTh1T25Xt5hetw42HFGlOJHuPj1eckLRwfbBIM0A
+StzgV6mhkgYeL8pQ0GrHa/efJP4iaTfWV5LHA2g1A0pRfzRx568tnIJDwHT4Kfai
+t4riGvK2IXJ+0Iop43qEb+pDzLu2fDqt7h+d3KIvAblVdm2IsDNIjyDpavLhvgde
+wbWXywEdEsCXLti2ZpnWwuyM93zI10Nbvws33AGQ+wwOcOB9P39SN+itfRUYa8rW
+VO9zRExBf+Lk0vqZo5EpXOJjr0LXeFRAHLthEvPTxgWU034qqc41l0zrEGjVte68
+ccyjXoq4EYi3+eXC1IXzlE4/ng==
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes128-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes192-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes256-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes192-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
+    </md:KeyDescriptor>
+    <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://dev.orcid.org/Shibboleth.sso/Artifact/SOAP" index="1"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://dev.orcid.org/Shibboleth.sso/SLO/SOAP"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://dev.orcid.org/Shibboleth.sso/SLO/Redirect"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev.orcid.org/Shibboleth.sso/SLO/POST"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://dev.orcid.org/Shibboleth.sso/SLO/Artifact"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev.orcid.org/Shibboleth.sso/SAML2/POST" index="1"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://dev.orcid.org/Shibboleth.sso/SAML2/POST-SimpleSign" index="2"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://dev.orcid.org/Shibboleth.sso/SAML2/Artifact" index="3"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://dev.orcid.org/Shibboleth.sso/SAML2/ECP" index="4"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://dev.orcid.org/Shibboleth.sso/SAML/POST" index="5"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://dev.orcid.org/Shibboleth.sso/SAML/Artifact" index="6"/>
+    <md:AttributeConsumingService index="1">
+      <md:ServiceName xml:lang="en">ORCID Service</md:ServiceName>
+      <md:ServiceDescription xml:lang="en">Minimal attributes used for managing the link from your ORCID account to your SSO account.</md:ServiceDescription>
+      <!-- Legacy mace format attributes -->
+      <md:RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:mace:dir:attribute-def:eduPersonPrincipalName" NameFormat="urn:mace:shibboleth:1.0:attributeNamespace:uri"/>
+      <md:RequestedAttribute FriendlyName="eduPersonTargetedID" Name="urn:mace:dir:attribute-def:eduPersonTargetedID" NameFormat="urn:mace:shibboleth:1.0:attributeNamespace:uri"/>
+      <md:RequestedAttribute FriendlyName="displayName" Name="urn:mace:dir:attribute-def:displayName" NameFormat="urn:mace:shibboleth:1.0:attributeNamespace:uri"/>
+      <md:RequestedAttribute FriendlyName="sn" Name="urn:mace:dir:attribute-def:sn" NameFormat="urn:mace:shibboleth:1.0:attributeNamespace:uri"/>
+      <md:RequestedAttribute FriendlyName="givenName" Name="urn:mace:dir:attribute-def:givenName" NameFormat="urn:mace:shibboleth:1.0:attributeNamespace:uri"/>
+      <md:RequestedAttribute FriendlyName="displayName" Name="urn:mace:dir:attribute-def:displayName" NameFormat="urn:mace:shibboleth:1.0:attributeNamespace:uri"/>
+      <!-- Current oid format attributes -->
+      <md:RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="eduPersonTargetedID" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="displayName" Name="urn:oid:2.16.840.1.113730.3.1.241" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="sn" Name="urn:oid:2.5.4.4" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="givenName" Name="urn:oid:2.5.4.42" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+      <md:RequestedAttribute FriendlyName="displayName" Name="urn:oid:2.16.840.1.113730.3.1.241" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+    </md:AttributeConsumingService>
+  </md:SPSSODescriptor>
+
+</md:EntityDescriptor>
