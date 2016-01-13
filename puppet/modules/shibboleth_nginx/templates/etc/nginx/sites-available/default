@@ -1,0 +1,513 @@
+# You may add here your
+# server {
+#    ...
+# }
+# statements for each of your virtual hosts to this file
+
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+proxy_cache_path /tmp/nginx levels=1:2 keys_zone=static_file_zone:10m inactive=60m;
+proxy_cache_key "$scheme$request_method$host$request_uri";
+
+fastcgi_cache_path /tmp/nginx levels=1:2 keys_zone=shib_zone:10m inactive=60m;
+fastcgi_cache_key "$http_accept_encoding$scheme$request_method$host$request_uri";
+
+# https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
+# https://www.ssllabs.com/ssltest/viewClient.html?name=IE&version=6&platform=XP
+ssl_dhparam      /etc/nginx/dhparam.pem;
+ssl_certificate      /etc/nginx/ssl.crt;
+ssl_certificate_key  /etc/nginx/ssl.key;
+ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;
+ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";
+ssl_prefer_server_ciphers on;
+ssl_session_cache shared:SSL:10m;
+
+
+set_real_ip_from 10.0.0.0/8;
+real_ip_header X-Forwarded-For;
+
+geo $limited {
+     default 1;
+     10.0.0.0/8 0;
+}
+
+map $limited $limit {
+     1 $binary_remote_addr;
+     0 "";
+}
+
+limit_req_zone  $limit  zone=api:50m   rate=4r/s;
+limit_req_zone  $limit  zone=web:50m   rate=8r/s;
+
+server {
+    listen 80;
+    listen 443 ssl;
+
+
+    server_name api.<%= @host_name %>;
+    access_log  off;
+
+    keepalive_timeout 5;
+
+    client_max_body_size 200m;
+
+    location / {
+        client_max_body_size 200m;
+        limit_req   zone=web  burst=40;
+
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @api_ip_port %>/orcid-api-web$request_uri;
+
+        proxy_redirect http://$host/orcid-api-web/ http://$host/;
+        proxy_redirect https://$host/orcid-api-web/ https://$host/;
+    }
+}
+
+server {
+    listen 80;
+    listen 443 ssl;
+
+    server_name communities.<%= @host_name %>;
+    access_log  off;
+
+    keepalive_timeout 5;
+
+    client_max_body_size 200m;
+
+    location / {
+        client_max_body_size 200m;
+        limit_req   zone=web  burst=40;
+
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
+
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @communities_ip_port %>/;
+    }
+}
+
+server {
+    listen 80;
+    listen 443 ssl;
+    server_name members.<%= @host_name %>;
+
+    access_log  off;
+    keepalive_timeout 5;
+    client_max_body_size 200m;
+
+    location / {
+        client_max_body_size 200m;
+        limit_req   zone=web  burst=40;
+
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
+
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @members_ip_port %>/;
+    }
+
+}
+
+server {
+    listen 80;
+    listen 443 ssl;
+    server_name pub.<%= @host_name %>;
+
+    access_log  off;
+    keepalive_timeout 5;
+    client_max_body_size 200m;
+
+    location / {
+        client_max_body_size 200m;
+        limit_req   zone=web  burst=40;
+
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @pub_ip_port %>/orcid-pub-web/;
+
+        proxy_redirect http://$host/orcid-pub-web/ http://$host/;
+        proxy_redirect https://$host/orcid-pub-web/ https://$host/;
+    }
+}
+
+
+server {
+    listen 80 default_server;
+    listen 443 default_server ssl;
+    listen [::]:80 ipv6only=on;
+    listen [::]:443 ipv6only=on;
+
+    # Make site accessible from http://localhost/
+    server_name <%= @host_name %>;
+
+    access_log  off;
+    keepalive_timeout 5;
+    client_max_body_size 50m;
+
+    set $do_https_rewrite "T";    # should we redir to https
+    set $isHttps "F"; # asking for https
+    set $isId "F";  # is it an orcid id uri
+    set $isMeta "F"; # is it json or xml request
+    set $isAbout "F"; # is about server
+    set $isIndex "F"; # is index page
+    set $isApiSearch "F"; # is api search
+    
+    if ($scheme = https) {
+        set $do_https_rewrite "F";
+        set $isHttps "T";
+    }
+
+    if ($http_x_forwarded_proto = https) {
+        set $do_https_rewrite "F";
+        set $isHttps "T";
+    }
+
+
+
+    ########################################
+    # start static files
+    ########################################
+
+    # serve favicon
+    location = /favicon.ico  {
+        proxy_cache static_file_zone;
+        proxy_cache_valid  200 302  60m;
+        proxy_cache_valid  404      1m;
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @registry_ip_port %>/orcid-web/static/img/favicon.ico;
+        expires 30d;
+    }
+
+    location /static/  {
+        proxy_cache static_file_zone;
+        proxy_cache_valid  200 302  60m;
+        proxy_cache_valid  404      1m;
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @registry_ip_port %>/orcid-web/static/;
+        expires 30d;
+    }
+
+    ########################################
+    # end static files
+    ########################################
+
+
+    ########################################
+    # start about location
+    ########################################
+
+    # / or /[known about server url] 
+    location  ~ (^/$)|(^/(about|admin|admin_menu|batch|bylaws|blog|blogs|civicrm|category|ckeditor|ckfinder|cron.php|content|db_maintenance/optimize|document|faq-page|file/ajax|footer/privacy-policy|help|js|legal|news|newsletter|misc|modules|node|open-source-license.*|orcid-board-meeting-summary-2013-01-22|orcid-dispute-procedures|orcid-outreach-meeting-may-2013|orcid-outreach-meeting-november-2010|orcid-outreach-meeting-symposium-and-codefest-may-2013|orcid-public-data-file|organizations|policies|privacy-policy|principles|sites|search/node|system/ajax|trademark-and-id-display-guidelines|views/ajax|wp-content|update.php|user|users)($|/.*$)) {
+    
+        if ($uri ~ (^/$)) {
+            set $isIndex "T";
+        }
+    
+        set $isHttpsIsIndex "${isHttps}${isIndex}";
+        if ($isHttpsIsIndex = "TT") {
+           set $do_https_rewrite "F";
+           rewrite ^ http://$server_name$request_uri? permanent;
+        }
+    
+        client_max_body_size 200m;
+        limit_req   zone=web  burst=40;
+
+        proxy_set_header Host $http_host;
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
+
+        
+        set $proxHeader "${http_host}";   
+        proxy_pass http://<%= @about_ip_port %>;
+        
+        proxy_redirect http://$host/ http://$host/;
+        proxy_redirect https://$host/ https://$host/;  
+    
+    }
+
+
+    ########################################
+    # end about location
+    ########################################
+
+
+    ########################################
+    # start shibboleth
+    ########################################
+    
+    #FastCGI authorizer for Auth Request module
+    location = /shibauthorizer {
+        internal;
+        include fastcgi_params;
+        fastcgi_pass unix:/opt/shibboleth-sp/shibauthorizer.sock;
+    }
+
+    #FastCGI responder
+    location /Shibboleth.sso {
+        fastcgi_param SERVER_PORT 443;
+        include fastcgi_params;
+        fastcgi_pass unix:/opt/shibboleth-sp/shibresponder.sock;
+
+        location /Shibboleth.sso/DiscoFeed {
+            expires 1h;
+            gzip on;
+            gzip_comp_level 9;
+            gzip_types application/json;
+            gzip_proxied any;
+            fastcgi_cache shib_zone;
+            fastcgi_cache_valid 200 60m;
+            fastcgi_param SERVER_PORT 443;
+            include fastcgi_params;
+            fastcgi_pass unix:/opt/shibboleth-sp/shibresponder.sock;
+        }
+    }
+
+    #Resources for the Shibboleth error pages. This can be customised.
+    location /shibboleth-sp {
+        alias /usr/share/shibboleth/;
+    }
+
+    #A secured location.  Here all incoming requests query the
+    #FastCGI authorizer.  Watch out for performance issues and spoofing.
+    location /secure {
+        #Add your attributes here. They get introduced as headers
+        #by the FastCGI authorizer so we must prevent spoofing.
+        more_clear_input_headers 'Affiliation' 'Entitlement' 'Shib-Application-Id' 'Shib-Authentication-Instant' 'Shib-Authentication-Method' 'Shib-Authncontext-Class' 'Shib-Identity-Provider' 'Shib-Session-Id' 'Shib-Session-Index' 'Unscoped-Affiliation' 'Remote-User' 'REMOTE_USER' 'Auth-Type' 'AUTH_TYPE' 'displayName' 'mail' 'persistent-id' 'eppn';
+        shib_request /shibauthorizer;
+        proxy_pass http://httpbin.org/get;
+    }
+
+    #A secured location.  Here all incoming requests query the
+    #FastCGI authorizer.  Watch out for performance issues and spoofing.
+    location /shibboleth {
+        if ($do_https_rewrite = "T") {
+            rewrite ^ https://$server_name$request_uri? permanent;
+        }
+        
+        #Add your attributes here. They get introduced as headers
+        #by the FastCGI authorizer so we must prevent spoofing.
+        more_clear_input_headers 'Affiliation' 'Entitlement' 'Shib-Application-Id' 'Shib-Authentication-Instant' 'Shib-Authentication-Method' 'Shib-Authncontext-Class' 'Shib-Identity-Provider' 'Shib-Session-Id' 'Shib-Session-Index' 'Unscoped-Affiliation' 'Remote-User' 'REMOTE_USER' 'Auth-Type' 'AUTH_TYPE' 'displayName' 'mail' 'persistent-id' 'eppn';
+        shib_request /shibauthorizer;
+        
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_cookie_path /orcid-web/ /;
+        proxy_pass http://<%= @registry_ip_port %>/orcid-web/shibboleth;
+        
+        proxy_redirect http://$host/orcid-web/ http://$host/;
+        proxy_redirect https://$host/orcid-web/ https://$host/; 
+    }
+
+    location /saml2/provider/ {
+        root /opt/shibboleth-sp/share/published/;
+    }
+
+    location /echo {
+        default_type text/plain;
+        echo_duplicate 1 $echo_client_request_headers;
+        echo "\r";
+        echo_read_request_body;
+        echo $request_body;
+    }
+
+    ########################################
+    # end shibboleth
+    ########################################
+
+
+    # rewrite 000000000000 to 0000-0000-0000-0000
+    if ($uri ~ ^/\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d(\d|X)$) {
+       rewrite ^/(\d\d\d\d)(\d\d\d\d)(\d\d\d\d)(\d\d\d(\d|X))$ http://$server_name/$1-$2-$3-$4 break;
+    }
+
+    if ($uri ~* "^/tomcatUp.json$") {
+       set $do_https_rewrite "F";
+    }
+
+    if ($uri ~* "^/public/.*$") {
+       set $do_https_rewrite "F";
+    }
+	
+    # if it's a public orcid id request
+    if ( $uri ~ ^/(experimental_rdf_[^\/]*/)?\d\d\d\d-\d\d\d\d-\d\d\d\d-\d\d\d(\d|X).*$) {
+        set $isId "T";
+        set $do_https_rewrite "F";
+    }
+
+   # if it's a UI json request don't go to the pub api, even if contains orcid.
+   if ( $uri ~* ".json($|\?.*$)") {
+        set $isId "F";
+    }
+
+    if ( $http_accept ~ ^application/.*(xml|json|rdf) ) {
+        set $isMeta "T";
+    }
+
+    if ( $uri ~ ^(|/v[0-9\.]+)/search/orcid-bio($|/.*$)) {
+        set $isApiSearch "T";
+    }
+
+    if ( $http_accept ~ ^text/.*(n3|turtle) ) {
+        set $isMeta "T";
+    }
+
+    # finally make sure is meta doesn't ignore */*
+    # in which case we want to match html
+    if ( $http_accept ~ \*/\* ) {
+        set $isMeta "F";
+    }
+
+    location /manager {
+       # block all
+       deny    all;
+
+       # allow local
+       allow   127.0.0.0/24;
+
+    }
+
+    location / {
+
+        set $app_path "/orcid-web";
+        set $isIdIsMetaIsHttps "${isId}${isMeta}";
+        if ($isIdIsMetaIsHttps = "TT") {
+            set $app_path "/orcid-pub-web";
+        }
+
+
+#        set $isIdIsMetaIsHttps "${isId}${isMeta}${isHttps}";
+#        if ($isIdIsMetaIsHttps = "TTT") {
+#            return 303 https://pub.<%= @host_name %>$request_uri;
+#        }
+#
+#        if ($isIdIsMetaIsHttps = "TTF") {
+#            return 303 http://pub.<%= @host_name %>$request_uri;
+#        }
+    
+        # everything else is https
+        if ($do_https_rewrite = "T") {
+            rewrite ^ https://$server_name$request_uri? permanent;
+        }
+    
+        client_max_body_size 200m;
+        limit_req   zone=web  burst=40;
+
+
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        proxy_set_header Host $http_host;
+        proxy_cookie_path /orcid-web/ /;
+                
+        # api searches go to public api
+        if ( $isApiSearch = "T" ) {
+           set $app_path "/orcid-pub-web";
+        }
+                
+        set $proxHeader "${http_host}";   
+        proxy_pass http://<%= @registry_ip_port %>$app_path$request_uri;
+        
+        proxy_redirect http://$host/orcid-web/ http://$host/;
+        proxy_redirect https://$host/orcid-web/ https://$host/; 
+        
+    }
+
+
+    #redirect server error pages to the static page /50x.html
+    error_page 500 503 504 /50x.html;
+    location = /50x.html {
+          root /usr/share/nginx/html;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+          root /usr/share/nginx/html;
+    }
+
+    # 502 we are assuming we are doing a release
+    error_page 502 /maintenance.html;
+    location = /maintenance.html {
+          root /usr/share/nginx/html;
+    }
+
+}
+
+
+# redirected the WWWs
+server {
+    listen 80;
+    listen 443 ssl;
+
+    server_name www.<%= @host_name %>;
+    access_log  off;
+
+    set $isTomcatUp "F";
+
+    if ( $uri ~ ^/tomcatUp\.json($|/.*$)) {
+       set $isTomcatUp "T";
+    }
+
+    if ( $isTomcatUp = "F" ) {
+       rewrite ^ http://<%= @host_name %>$request_uri? permanent;
+    }
+
+    location / {
+        client_max_body_size 20m;
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @registry_ip_port %>;
+    }
+}
+
+

@@ -1,0 +1,4 @@
+VAGRANT_NGINX_SSH_PORT=`vagrant ssh-config nginx_shibboleth | awk '/Port/{print $2}'`
+echo "Enter your password to sudo to root"
+sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p $VAGRANT_NGINX_SSH_PORT -gNfL 80:localhost:80 -gNfL 443:localhost:443 -gNR 8080:localhost:8080 -gNR 7777:localhost:7777 -gNR 8888:localhost:8888 -gNR 9999:localhost:9999  vagrant@localhost -i .vagrant/machines/nginx_shibboleth/virtualbox/private_key
+echo "SSH tunnels set up"

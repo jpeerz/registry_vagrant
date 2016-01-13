@@ -3,10 +3,11 @@ class tools {
   # package install list
   $packages = [
     "curl",
+    "git",
     "git-core",
+    "ntp",
     "htop",
-    "vim",
-    "git"
+    "vim"
   ]
 
   # install packages
