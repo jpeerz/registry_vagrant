@@ -4,7 +4,8 @@ Exec {
 }
 
 include bootstrap
-include tools
+include orcid_base::baseapps
+include orcid_base::common_libs
 
 user { "orcid_tomcat":
   ensure  => present,
@@ -41,5 +42,8 @@ class {
 
 include orcid_maven
 include orcid_deployment
-include orcid_python
+class {
+  orcid_python:
+   require => [Class["orcid_base::common_libs"]],
+}
 include orcid_jenkins

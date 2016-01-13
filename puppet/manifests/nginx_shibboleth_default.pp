@@ -4,7 +4,8 @@ Exec {
 }
 
 include bootstrap
-include tools
+include orcid_base::baseapps
+include orcid_base::common_libs
 
 class {
    shibboleth_nginx:
@@ -21,4 +22,5 @@ class {
       ssl_certificate => "puppet:///modules/shibboleth_nginx/etc/nginx/ssl-cert-snakeoil.pem",
       ssl_certificate_key => "puppet:///modules/shibboleth_nginx/etc/nginx/ssl-cert-snakeoil.key",
       include_test_idps => true,
+      require => [Class["orcid_base::common_libs"]],
 }

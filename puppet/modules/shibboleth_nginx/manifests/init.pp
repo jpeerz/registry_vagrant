@@ -15,7 +15,7 @@ class shibboleth_nginx (
 
   include shibboleth_nginx::build_tools
   
-    $packages = [ "libcurl4-openssl-dev", "liblog4cpp5-dev", 
+    $packages = [ "liblog4cpp5-dev", 
         "libxerces-c-dev", "libxml-security-c-dev", "libgd3", "liblua5.1-0", 
         "libperl5.18", "libxslt1.1", "libpcre3-dev", "autotools-dev", "debhelper", 
         "dh-systemd", "libexpat1-dev", "libgd-dev", "libgeoip-dev", "liblua5.1-0-dev", 

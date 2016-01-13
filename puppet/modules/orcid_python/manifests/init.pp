@@ -11,7 +11,8 @@ class orcid_python {
 
   $packages = [
     "libssl-dev", "python", "python-setuptools", "libffi-dev", "python2.7-dev",
-    "python-dev", "libpq-dev", "python-openssl", "libcurl4-openssl-dev", "python-pip" 
+    "python-dev", "libpq-dev", "python-openssl", "python-pip",
+    "python-software-properties","python-psycopg2" 
   ]
 
   # install packages
