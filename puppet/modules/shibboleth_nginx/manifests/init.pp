@@ -40,7 +40,7 @@ class shibboleth_nginx (
             host_name => $host_name,
             sb_entity_id => $sb_entity_id,
             include_test_idps => $include_test_idps,
-            require   => [Class["shibboleth_nginx::build_tools"], Class["shibboleth_nginx::nginx"], Package[$packages]]         
+            require   => [Class["shibboleth_nginx::build_tools"], Class["shibboleth_nginx::nginx"], Package[$packages], Package["libcurl4-openssl-dev"]]         
     }
   
     class {

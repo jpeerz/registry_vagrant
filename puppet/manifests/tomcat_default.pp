@@ -42,8 +42,5 @@ class {
 
 include orcid_maven
 include orcid_deployment
-class {
-  orcid_python:
-   require => [Class["orcid_base::common_libs"]],
-}
+include orcid_python
 include orcid_jenkins
