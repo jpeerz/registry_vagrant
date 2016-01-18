@@ -52,6 +52,7 @@ CLEAR_OLDER_THAN = time.time() - (int(args.clear_older_than) * 24 * 60 * 60)
 path = args.path
 dirs = os.listdir( path )
 
+orcid_internal_api = {}
 orcid_api_web = {}
 orcid_pub_web = {}
 orcid_scheduler_web = {}
@@ -75,6 +76,8 @@ for dir in dirs:
 		orcid_solr_web[dir_mtime] = dir_path
 	elif dir.startswith( 'orcid-web' ):
 		orcid_web[dir_mtime] = dir_path
+	elif dir.startswith( 'orcid-internal-api' ):
+		orcid_internal_api[dir_mtime] = dir_path
 
 # -------------------------
 # Lets clean apps one type at a time		
@@ -163,5 +166,24 @@ if len(orcid_web) > RELEASES_TO_KEEP:
 			shutil.rmtree(orcid_web[orcid_web_keys[i]])
 		else:
 			logger.info('Release will be keept: %s dir: %s modified on: %s', str(i), orcid_web[orcid_web_keys[i]], time.ctime(dir_mtime)) 
+
+
+# Lets clean orcid_internal_api
+logger.info('Cleaning releases of orcid_internal_api')
+if len(orcid_internal_api) > RELEASES_TO_KEEP:	
+	# Get the list of keys	
+	orcid_internal_keys = list(reversed(sorted(orcid_internal_api.keys())))
+	for i in range(0, RELEASES_TO_KEEP):
+		dir_mtime = float(orcid_internal_keys[i])
+		logger.info('Release will be keept: %s dir: %s modified on: %s', str(i), orcid_internal_api[orcid_internal_keys[i]], time.ctime(dir_mtime)) 
+	# Keep RELEASES_TO_KEEP and delete the rest
+	for i in range(RELEASES_TO_KEEP, len(orcid_internal_keys) - 1):
+		dir_mtime = float(orcid_internal_keys[i])		
+		if(dir_mtime < CLEAR_OLDER_THAN):
+			logger.info('Release will be deleted: %s dir: %s modified on: %s', str(i), orcid_internal_api[orcid_internal_keys[i]], time.ctime(dir_mtime)) 
+			shutil.rmtree(orcid_internal_api[orcid_internal_keys[i]])
+		else:
+			logger.info('Release will be keept: %s dir: %s modified on: %s', str(i), orcid_internal_api[orcid_internal_keys[i]], time.ctime(dir_mtime)) 
 	
+			
 logger.info('Cleaner done')	
