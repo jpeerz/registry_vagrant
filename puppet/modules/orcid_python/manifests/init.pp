@@ -8,7 +8,7 @@ class orcid_python {
 
   exec { "python secure":
      environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-     command => "sudo apt-get -fy remove python; sudo apt-get -fy install python; sudo touch /usr/lib/python2.7/python_ssl.touched",
+     command => "sudo apt-get -fy remove python; sudo apt-get -fy install python; sudo ;sudo touch /usr/lib/python2.7/python_ssl.touched",
      returns => [0, 1],
      creates => "/usr/lib/python2.7/python_ssl.touched",
      require =>  [Package[$packages],Package["libcurl4-openssl-dev"]],
@@ -27,7 +27,8 @@ class orcid_python {
   }
 
   $pip_packages = [
-    "virtualenv", "python-gnupg", "pycurl", "filechunkio", "requests[security]"
+    "virtualenv", "python-gnupg", "pycurl", "filechunkio", "requests[security]", "certifi", 
+    "wrapt", "pyrax", "netifaces", "monotonic", "GitPython"
   ]
 
   package { $pip_packages:
@@ -36,13 +37,5 @@ class orcid_python {
     require =>  Package["pip"],
   }
 
-  exec { 'pyrax install':
-    command => 'sudo pip install --upgrade  wrapt pyrax netifaces monotonic;
-sudo easy_install --upgrade GitPython;
-touch /usr/local/lib/pryax_puppet_installed;
-',
-    creates => '/usr/local/lib/pryax_puppet_installed',
-    require => [Package["pip"]]
-  }
 
 }
