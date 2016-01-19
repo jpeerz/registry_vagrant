@@ -27,7 +27,7 @@ class orcid_python {
   }
 
   $pip_packages = [
-    "virtualenv", "python-gnupg", "pycurl", "filechunkio", "requests[security]", "certifi", 
+    "virtualenv", "python-gnupg", "pycurl", "filechunkio", "requests[security]", "certifi",
     "wrapt", "pyrax", "netifaces", "monotonic", "GitPython"
   ]
 
@@ -36,6 +36,5 @@ class orcid_python {
     provider => pip,
     require =>  Package["pip"],
   }
-
 
 }
