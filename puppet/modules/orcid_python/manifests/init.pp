@@ -28,7 +28,7 @@ class orcid_python {
 
   $pip_packages = [
     "virtualenv", "python-gnupg", "pycurl", "filechunkio", "requests[security]", "certifi",
-    "wrapt", "pyrax", "netifaces", "monotonic", "GitPython"
+    "wrapt", "pyrax", "netifaces", "monotonic", "boto", "argparse", "GitPython"
   ]
 
   package { $pip_packages:
