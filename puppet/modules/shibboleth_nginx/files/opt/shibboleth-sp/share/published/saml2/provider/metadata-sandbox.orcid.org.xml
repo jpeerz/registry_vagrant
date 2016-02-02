@@ -8,16 +8,16 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
-<ds:DigestValue>KnittEznvQSuzlHGeC7PrMvO3hmCqmDVQhh6exYErCKjFs1gVsoAbMyEvmqES//VMmZtUUiBJwX7
-bAkezJRVQQ==</ds:DigestValue>
+<ds:DigestValue>2bFqgh/Cx89mbb6FgnD9QmzE2X86aEWJj6psrG+uxTJXMYckI9VwL6QZVxT9U2t34h4KJXO47Zhe
+IO5DFh9XCw==</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-AYUJjL/KiAeOLVJA5j/ITf3WEdeTvS/5nF6rGBVW0K2aplsy2bcfMS0F8mOxPbleo6d8xgs2wumF
-rCm2P3aE2xA5BNYfgA5uuDzhZT+Mji983g70tMIGO0iNYMn5Q5ZcePET06l2ZLHXYWtIwyj8WVTY
-JLmyVrf6yfSdHlkezQ/2WfCmOhI974HoMvTPu1ri6kDxLgw0CWlJ1EriA/8UhqyzU4csppykkVRA
-d4Hdez0dEMdpMenVStknSP/V2Lr5uYChmTZcGVIbLwvPWNCUKbczx6rmlza0EbnV7b44e0tNHoNJ
-bYf75+xrS6icy03fd0Er1uGGNz7ii6OoeOUFiQ==
+otPDWZXr63ie14Fdn+05jpXKp7WE63NubiVI7HVk0V2xO7Eddl8bSf6TSkSjtVlV7XA+f26ITSs3
+uWp+58qmxxPPY3wSUg1MrcJ2wCGtuxITpDgUuKTnA6jV/MKDqGEEr5nrU5RQm1JkSM5htg+Zf1bQ
+g9pLuAwxw0awGzgXOnHMu6H0nJdrUApsFxGHa2VqVhOsRj3edpnK6m8EetXoImRXj9byJWGOC/qS
+v7rxp7EvZdS4f4WZaqSrovF02izbiud1nj2PmioY8Pl7rnzgfHLKlZwHdz++5SIu1Cx9lnebxakv
+9MImTvcPDE7nNZlxgu50O25H1DDi1tiaIQ0rYw==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -151,14 +151,12 @@ zi/mKw==
     <md:EmailAddress>support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="administrative">
-    <md:GivenName>Laura</md:GivenName>
-    <md:SurName>Paglione</md:SurName>
-    <md:EmailAddress>l.paglione@orcid.org</md:EmailAddress>
+    <md:GivenName>ORCID Team</md:GivenName>
+    <md:EmailAddress>info@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="technical">
-    <md:GivenName>Will</md:GivenName>
-    <md:SurName>Simpson</md:SurName>
-    <md:EmailAddress>w.simpson@ost.orcid.org</md:EmailAddress>
+    <md:GivenName>ORCID Development Team</md:GivenName>
+    <md:EmailAddress>support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
 
 </md:EntityDescriptor>
