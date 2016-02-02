@@ -8,16 +8,16 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
-<ds:DigestValue>TTQGQdZTJma3J1ET7rIKPTdeydHFIeWU+wnDpbagxZH/motTS/R+yIIymfXBvANiz7M6UlLtVBVf
-4mOjxkte0g==</ds:DigestValue>
+<ds:DigestValue>l3xt1Wk2nY4aTWSjlmGJPJY/MFkNeCzQTrqGMtoULLNWxQgV2QOJFnXbQYePMabcBfn1o7DKkj0L
+vo+TQ8b1KQ==</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-xWDK9RIuR8TQJtpSvG3nhmCblcmVuBr32n/A/drIRB8qOg1QVSkmPgJXvUHq1Cph7af0xRCsAAgr
-5ERw3UhotsBU2H20rD/rQ0TFJfWal2IRgng0yBQUKWtKF70+07Hukrbx5jhiaNkYuaWKof/js7S1
-6SRZuKrmWLtw8VyAd6rp5W/v7P3jEf+LmZAFStg6kY7xd+V7ckM3HZt1Zni4KjpIwUJo++zloNhl
-zdwCgQR9TksgT3xYyvtwsA2lqn7BYXCRn1PUaBno1zkVZB1vI2z0UHqE9OUddW5OrG76MPtLjjLi
-QVV8p5zjCIYEbcSWe/q5nE3KmvFaQ0U3eop+4w==
+WUwhdZgdAT2zHLSIJIqn4VNnAyUXlK165A+H/F+iQ7ibKP3TTC8p/Wzk/LvN2wDSR/Bm3UTkUkyT
+hepQwXgSYx+4EM4wHLTyyimNB7gELuPG/BE5no3VG3bcug1OoVul0TZRGOecpsMpDu59EGrBiYU8
+wJqYxwlzMZZJMpWeWJ8rUhc/rEEW+ixh/IteUXJdkeszzHNc1UcmLKwZpBL0nVnz2qPTMSzk6BNb
+LjXBBsL42h9NTH2sW+fL7yewJh0jXjRvH22cAhbfgR7YPhGV+Ru0abnQfW2KGHisqsk9Qap/2Sp9
+Zte9tPwAONPyQkugawlEttz1Huk9reIHW3RUeA==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -150,14 +150,12 @@ UXHHgh/dgmalPjdWLxfwdf31RumfOmINO5Y7/CmCe4MddvsU6g==
     <md:EmailAddress>support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="administrative">
-    <md:GivenName>Laura</md:GivenName>
-    <md:SurName>Paglione</md:SurName>
-    <md:EmailAddress>l.paglione@orcid.org</md:EmailAddress>
+    <md:GivenName>ORCID Team</md:GivenName>
+    <md:EmailAddress>info@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="technical">
-    <md:GivenName>Will</md:GivenName>
-    <md:SurName>Simpson</md:SurName>
-    <md:EmailAddress>w.simpson@ost.orcid.org</md:EmailAddress>
+    <md:GivenName>ORCID Development Team</md:GivenName>
+    <md:EmailAddress>support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
 
 </md:EntityDescriptor>
