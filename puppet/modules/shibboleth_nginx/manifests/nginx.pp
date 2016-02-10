@@ -92,6 +92,13 @@ class shibboleth_nginx::nginx (
         notify  => Service["nginx"],
         require => Exec["install nginx_orcid1_amd64"],
     }
+
+    cron { "nginx cache cleaner":
+        command => "rm -rf /tmp/nginx/*",
+        user => root,
+        hour => 0,
+        minute => 0
+    }
  
     case $environment {
 
