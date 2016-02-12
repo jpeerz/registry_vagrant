@@ -69,3 +69,19 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
         -Dorg.orcid.core.baseUri=https://localhost
         -Dorg.orcid.core.pubBaseUri=https://pub.localhost
         -Dorg.orcid.core.apiBaseUri=https://api.localhost
+
+# Running txgh
+
+1. Run vagrant txgh
+
+        vagrant up txgh
+
+2. SSH to txgh machine
+
+        vagrant ssh txgh
+
+3. Start txgh server (for testing - webhooks not yet configured)
+
+        cd ./github/txgh-master
+        rackup
+
