@@ -91,7 +91,7 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
 Note: default rack port is 9292; to access at http://localhost:8080 run
         
         cd ./github/txgh-master
-        rackup -p 80 -o 0.0.0.0
+        sudo rackup -p 80 -o 0.0.0.0
 
 
 
