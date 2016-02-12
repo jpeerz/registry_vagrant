@@ -69,3 +69,32 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
         -Dorg.orcid.core.baseUri=https://localhost
         -Dorg.orcid.core.pubBaseUri=https://pub.localhost
         -Dorg.orcid.core.apiBaseUri=https://api.localhost
+
+# Running txgh
+
+1. Run vagrant txgh
+
+        vagrant up txgh
+
+2. SSH to txgh machine
+
+        vagrant ssh txgh
+
+3. Start txgh server (for testing - webhooks not yet configured)
+
+        cd ./github/txgh-master
+        rackup -o 0.0.0.0
+
+
+4. Access at http://localhost:9292 
+
+Note: default rack port is 9292; to access at http://localhost:8080 run
+        
+        cd ./github/txgh-master
+        sudo rackup -p 80 -o 0.0.0.0
+
+
+
+        
+
+

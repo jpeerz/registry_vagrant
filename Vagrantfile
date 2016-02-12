@@ -53,9 +53,7 @@ Vagrant.configure("2") do |config|
        vb.memory = "4092"
     end
 
-    if !ENV.has_key?("HOST_NAME")
-      raise Vagrant::Errors::VagrantError.new, 'HOST_NAME needs to be defined'
-    end
+
 
     nginx_shibboleth.vm.provision "shell", inline: <<-SHELL
       if [ $(dpkg-query -s puppet | grep -c "3.8.1-1puppetlabs1") -eq 0 ];
@@ -78,6 +76,40 @@ Vagrant.configure("2") do |config|
         "SB_ENTITY_ID" => ENV['SB_ENTITY_ID'],
       }
       puppet.options = ENV['PUPPET_OPTIONS']
+    end
+    
+  end
+
+  config.vm.define "txgh", autostart: false do |txgh|
+
+
+    txgh.vm.box = "ubuntu/trusty64"
+    txgh.vm.provider "virtualbox" do |vb|
+       vb.memory = "4092"
+    end
+
+    # Forward guest port to host port and name mapping
+    txgh.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+    txgh.vm.network :forwarded_port, guest: 9292, host: 9292, auto_correct: true
+
+
+    txgh.vm.provision "shell", inline: <<-SHELL
+      if [ $(dpkg-query -s puppet | grep -c "3.8.1-1puppetlabs1") -eq 0 ];
+        then
+          sudo wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+          sudo dpkg -i puppetlabs-release-trusty.deb
+          sudo apt-get update;  
+          sudo apt-get -q -y --force-yes install puppet=3.8.1-1puppetlabs1 puppet-common=3.8.1-1puppetlabs1; 
+          sudo apt-mark -q hold puppet puppet-common;     
+      fi;
+    SHELL
+
+    host_name = ENV['HOST_NAME']
+    txgh.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file = "txgh_default.pp"
+      puppet.module_path = "puppet/modules"
+      puppet.options = "--verbose --debug"
     end
     
   end
