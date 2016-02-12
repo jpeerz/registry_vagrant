@@ -6,4 +6,4 @@ Exec {
 include bootstrap
 include orcid_base::baseapps
 include orcid_base::common_libs
-include orcid_ruby
+include orcid_txgh

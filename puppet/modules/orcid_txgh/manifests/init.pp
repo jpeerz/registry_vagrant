@@ -1,4 +1,4 @@
-class orcid_ruby {
+class orcid_txgh {
 
   $packages = [
     "build-essential", "zlib1g-dev", "libssl-dev", "libreadline6-dev", "libyaml-dev"
@@ -11,16 +11,16 @@ class orcid_ruby {
     require  => Exec["apt-get update"]
   }
 
-   exec { "ruby":
+  exec { "ruby":
     environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    command => template("orcid_ruby/scripts/install_ruby.erb"),
+    command => template("orcid_txgh/scripts/install_ruby.erb"),
     require => Package["wget"]
   }
 
-  package { "bundler":
-    ensure => latest,
-    provider => gem,
-    require  => Exec["ruby"],
+  exec { "txgh":
+    environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
+    command => template("orcid_txgh/scripts/install_txgh.erb"),
+    require => Exec["ruby"]
   }
 
 }
