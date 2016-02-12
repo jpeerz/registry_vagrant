@@ -88,8 +88,10 @@ Vagrant.configure("2") do |config|
        vb.memory = "4092"
     end
 
-    # Forward guest port to host portand name mapping
-    txgh.vm.network :forwarded_port, guest: 8080, host: 8080
+    # Forward guest port to host port and name mapping
+    txgh.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+    txgh.vm.network :forwarded_port, guest: 9292, host: 9292, auto_correct: true
+
 
     txgh.vm.provision "shell", inline: <<-SHELL
       if [ $(dpkg-query -s puppet | grep -c "3.8.1-1puppetlabs1") -eq 0 ];
