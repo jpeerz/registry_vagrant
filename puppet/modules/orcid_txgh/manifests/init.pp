@@ -17,9 +17,10 @@ class orcid_txgh {
     require => Package["wget"]
   }
 
-  exec { "txgh":
+  exec { "bundler":
     environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    command => template("orcid_txgh/scripts/install_txgh.erb"),
+    provider => shell,
+    command => template("orcid_txgh/scripts/install_bundler.erb"),
     require => Exec["ruby"]
   }
 
