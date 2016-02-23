@@ -82,7 +82,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header Host $http_host;
-        proxy_pass http://<%= @api_ip_port %>/orcid-api-web_broken$request_uri;
+        proxy_pass http://<%= @api_ip_port %>/orcid-api-web$request_uri;
 
         proxy_redirect http://$host/orcid-web/ http://$host/;
         proxy_redirect https://$host/orcid-web/ https://$host/;
