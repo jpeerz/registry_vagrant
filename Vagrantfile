@@ -72,8 +72,8 @@ Vagrant.configure("2") do |config|
       puppet.manifest_file = "nginx_shibboleth_default.pp"
       puppet.module_path = "puppet/modules"
       puppet.facter = {
-        "HOST_NAME" => ENV['HOST_NAME'],
-        "SB_ENTITY_ID" => ENV['SB_ENTITY_ID'],
+        "host_name" => ENV['HOST_NAME'],
+        "sb_entity_id" => ENV['SB_ENTITY_ID'],
       }
       puppet.options = ENV['PUPPET_OPTIONS']
     end
