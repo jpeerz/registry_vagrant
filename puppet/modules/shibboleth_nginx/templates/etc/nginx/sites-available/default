@@ -63,6 +63,11 @@ server {
 
     client_max_body_size 200m;
 
+    gzip on;
+    gzip_comp_level 9;
+    gzip_types application/xml application/orcid+xml application/vnd.orcid+xml application/json application/orcid+json application/vnd.orcid+json;
+    gzip_proxied any;
+
     # v2 operations per item request get higher request limits
     location ~* ^/v2\.[^/]*/\d\d\d\d-\d\d\d\d-\d\d\d\d-\d\d\d(\d|X)/.+$ {    
         limit_req   zone=api_v2  burst=40;
@@ -166,6 +171,11 @@ server {
     keepalive_timeout 5;
     
     client_max_body_size 200m;
+
+    gzip on;
+    gzip_comp_level 9;
+    gzip_types application/xml application/orcid+xml application/vnd.orcid+xml application/json application/orcid+json application/vnd.orcid+json;
+    gzip_proxied any;
 
     # v2 operations per item request get higher request limits
     location ~* ^/v2\.[^/]*/\d\d\d\d-\d\d\d\d-\d\d\d\d-\d\d\d(\d|X)/.+$ {
