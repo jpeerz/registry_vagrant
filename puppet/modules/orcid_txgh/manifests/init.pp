@@ -17,10 +17,29 @@ class orcid_txgh {
     require => Package["wget"]
   }
 
-  exec { "txgh":
-    environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    command => template("orcid_txgh/scripts/install_txgh.erb"),
+  $txgh_loc = '/home/$USER'
+  $txgh_rb = "txgh-master"
+  $txgh_zip = "${txgh_rb}.zip"
+
+
+  # download the txgh-master zip
+  file { "/home/$USER/$txgh_zip":
+    path   => "/home/$USER/$txgh_zip",
+    source  => "puppet:///modules/orcid_txgh/$txgh_zip",
+  }
+
+  # unzip txgh-master zip at the desired location
+  exec { "unzip $txgh_zip":
+    command => "unzip $txgh_loc/$txgh_zip",
+    creates => "/$txgh_loc/$txgh_rb",
     require => Exec["ruby"]
+  }
+
+  exec { "bundler":
+    environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
+    provider => shell,
+    command => template("orcid_txgh/scripts/install_bundler.erb"),
+    require => Exec["unzip $txgh_zip"]
   }
 
 }
