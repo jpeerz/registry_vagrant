@@ -398,7 +398,7 @@ server {
         proxy_set_header X-Forwarded-Proto $proto;
         proxy_set_header Host $http_host;
         proxy_cookie_path /orcid-web/ /;
-        proxy_pass http://<%= @registry_ip_port %>/orcid-web/shibboleth;
+        proxy_pass http://<%= @registry_ip_port %>/orcid-web$request_uri;
         
         proxy_redirect http://$host/orcid-web/ http://$host/;
         proxy_redirect https://$host/orcid-web/ https://$host/; 
