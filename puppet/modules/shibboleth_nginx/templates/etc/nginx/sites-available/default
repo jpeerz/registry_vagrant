@@ -65,7 +65,7 @@ server {
 
     gzip on;
     gzip_comp_level 9;
-    gzip_types application/xml application/orcid+xml application/vnd.orcid+xml application/json application/orcid+json application/vnd.orcid+json;
+    gzip_types *;
     gzip_proxied any;
 
     # v2 operations per item request get higher request limits
@@ -174,7 +174,7 @@ server {
 
     gzip on;
     gzip_comp_level 9;
-    gzip_types application/xml application/orcid+xml application/vnd.orcid+xml application/json application/orcid+json application/vnd.orcid+json;
+    gzip_types *;
     gzip_proxied any;
 
     # v2 operations per item request get higher request limits
