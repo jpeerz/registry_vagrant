@@ -47,7 +47,7 @@ map $limited $limit {
      0 "";
 }
 
-limit_req_zone  $limit  zone=api_default:50m   rate=1r/s;
+limit_req_zone  $limit  zone=api_default:50m   rate=8r/s;
 limit_req_zone  $limit  zone=api_v2:50m   rate=24r/s;
 limit_req_zone  $limit  zone=web:50m   rate=8r/s;
 
