@@ -440,11 +440,6 @@ server {
         set $do_https_rewrite "F";
     }
 
-	# if it's a request to get an access token
-	if ($uri ~* "^/oauth/token$") {
-		set $do_https_rewrite "F";
-	}
-	
    # if it's a UI json request don't go to the pub api, even if contains orcid.
    if ( $uri ~* ".json($|\?.*$)") {
         set $isId "F";
