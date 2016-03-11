@@ -39,6 +39,7 @@ Vagrant.configure("2") do |config|
 
     # Forward guest port to host portand name mapping
     tomcat.vm.network :forwarded_port, guest: 8080, host: 8080
+    tomcat.vm.network :forwarded_port, guest: 8383, host: 8383
 
 
     tomcat.vm.synced_folder "git", "/home/orcid_tomcat/git", 
