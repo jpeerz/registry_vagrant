@@ -66,6 +66,30 @@ class orcid_jenkins {
 		subscribe   => File["/etc/default/jenkins"]
 	}
 
+	exec { "jenkins CLI jar":
+		command => "curl http://localhost:8383/jnlpJars/jenkins-cli.jar > /var/lib/jenkins/jenkins-cli.jar",
+		creates => "/var/lib/jenkins/jenkins-cli.jar",
+		subscribe => Service["jenkins"]
+	}
+
+	install_plugin { "install maven-plugin":
+		plugin_name => "maven-plugin",
+		plugin_version => "2.12.1"
+	}
+
+	package { "libxml2-utils":
+		ensure => installed,
+	}
+
+	define install_plugin($plugin_name, $plugin_version) {
+		exec { "install jenkins plugin":
+			command => "java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8383 install-plugin http://updates.jenkins-ci.org/download/plugins/$plugin_name/$plugin_version/$plugin_name.hpi -name $plugin_name",
+			unless => "curl 'http://localhost:8383/pluginManager/api/xml?depth=1' | xmllint --xpath '//plugin[shortName=\"$plugin_name\"][version=\"$plugin_version\"]' -",
+			require => Package["libxml2-utils"],
+			notify => Service["jenkins"]
+		}
+	}
+
 }
 
 
