@@ -2,8 +2,8 @@ class orcid_jenkins {
 
 	$jenkins_ext_fw = 'server custom tomcat tcp/8383 default accept'
 	$jenkins_port = '8383'
-	$jenkins_user = 'orcid_tomcat'
-	$jenkins_group = 'orcid_tomcat'	
+	$jenkins_user = 'jenkins'
+	$jenkins_group = 'jenkins'
 
 	exec { "install jenkins 1":
 		command => "wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -",
@@ -26,29 +26,29 @@ class orcid_jenkins {
 	
 	file { "/var/lib/jenkins":
 		ensure  => directory,
-		owner => orcid_tomcat,
-		group => orcid_tomcat,
+		owner => jenkins,
+		group => jenkins,
 		require	=> Package["jenkins"]
 	}
 
 	file { "/var/cache/jenkins":
 		ensure  => directory,
-		owner => orcid_tomcat,
-		group => orcid_tomcat,
+		owner => jenkins,
+		group => jenkins,
 		require   => File["/var/lib/jenkins"]
 	}
 
 	file { "/var/log/jenkins":
 		ensure  => directory,
-		owner => orcid_tomcat,
-		group => orcid_tomcat,
+		owner => jenkins,
+		group => jenkins,
 		require   => File["/var/cache/jenkins"]
 	}
 
 	file { "/etc/apt/sources.list.d/jenkins.list":
 		mode => 644,
-		owner => orcid_tomcat,
-		group => orcid_tomcat,
+		owner => jenkins,
+		group => jenkins,
 		source => "puppet:///modules/orcid_jenkins/etc/apt/sources.list.d/jenkins.list",
 		require   => File["/var/log/jenkins"]
 	}
@@ -63,8 +63,9 @@ class orcid_jenkins {
 	service { "jenkins":
 		ensure    => running,
 		enable    => true,
-		require   => File["/etc/default/jenkins"]
-	}	
+		subscribe   => File["/etc/default/jenkins"]
+	}
+
 }
 
 
