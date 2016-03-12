@@ -58,6 +58,7 @@ class orcid_base::baseapps ($enable_google_authenticator = false) {
   file { '/etc/pam.d/sshd':
     mode   => '0644',
     source => 'puppet:///modules/orcid_base/etc/pam.d/sshd',
+    notify  => Service["ssh"],
     require => Package['libpam-google-authenticator'],
   }
 
