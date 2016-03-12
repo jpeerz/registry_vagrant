@@ -4,7 +4,11 @@ Exec {
 }
 
 include bootstrap
-include orcid_base::baseapps
+class {
+  orcid_base::baseapps:
+    enable_google_authenticator => false
+}
+
 include orcid_base::common_libs
 
 user { "orcid_tomcat":
