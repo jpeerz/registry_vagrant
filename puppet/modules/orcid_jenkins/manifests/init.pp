@@ -1,4 +1,4 @@
-class orcid_jenkins {	
+class orcid_jenkins ($is_vagrant = false) {
 
 	$jenkins_ext_fw = 'server custom tomcat tcp/8383 default accept'
 	$jenkins_port = '8383'
@@ -60,11 +60,14 @@ class orcid_jenkins {
 		require   => File["/etc/apt/sources.list.d/jenkins.list"]
 	} 
 
-	service { "jenkins":
+        # Vagrant puppet has issues starting a service vagrant         
+        if $is_vagrant == true {
+           service { "jenkins":
 		ensure    => running,
 		enable    => true,
 		require   => File["/etc/default/jenkins"]
-	}	
+	   }
+        }
 }
 
 
