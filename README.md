@@ -103,6 +103,15 @@ Note: default rack port is 9292; to access at http://localhost:8080 run
         cd transifex/txgh
         sudo rackup -p 80 -o 0.0.0.0
 
+5. Expose localhost webhooks using ngrok
+
+        ./ngrok http 9292
+
+Generates forwarded URL like:
+
+        Forwarding      http://ebefeec3.ngrok.io -> localhost:9292
+
+
 
 
         
