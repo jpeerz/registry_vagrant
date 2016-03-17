@@ -47,7 +47,8 @@ map $limited $limit {
      0 "";
 }
 
-limit_req_zone  $limit  zone=api:50m   rate=4r/s;
+limit_req_zone  $limit  zone=api_default:50m   rate=8r/s;
+limit_req_zone  $limit  zone=api_v2:50m   rate=24r/s;
 limit_req_zone  $limit  zone=web:50m   rate=8r/s;
 
 server {
@@ -62,18 +63,48 @@ server {
 
     client_max_body_size 200m;
 
-    location / {
-        client_max_body_size 200m;
-        limit_req   zone=web  burst=40;
+    gzip on;
+    gzip_comp_level 9;
+    gzip_types *;
+    gzip_proxied any;
 
+    # v2 operations per item request get higher request limits
+    location ~* ^/v2\.[^/]*/\d\d\d\d-\d\d\d\d-\d\d\d\d-\d\d\d(\d|X)/.+$ {    
+        limit_req   zone=api_v2  burst=40;
         proxy_read_timeout 120;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
         proxy_set_header Host $http_host;
         proxy_pass http://<%= @api_ip_port %>/orcid-api-web$request_uri;
 
         proxy_redirect http://$host/orcid-api-web/ http://$host/;
         proxy_redirect https://$host/orcid-api-web/ https://$host/;
+    }
+
+    location / {
+        limit_req   zone=api_default  burst=40;
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @api_ip_port %>/orcid-api-web$request_uri;
+
+        proxy_redirect http://$host/orcid-web/ http://$host/;
+        proxy_redirect https://$host/orcid-web/ https://$host/;
     }
 }
 
@@ -145,17 +176,50 @@ server {
 
     access_log  off;
     keepalive_timeout 5;
+    
     client_max_body_size 200m;
 
-    location / {
-        client_max_body_size 200m;
-        limit_req   zone=web  burst=40;
+    gzip on;
+    gzip_comp_level 9;
+    gzip_types *;
+    gzip_proxied any;
+
+    # v2 operations per item request get higher request limits
+    location ~* ^/v2\.[^/]*/\d\d\d\d-\d\d\d\d-\d\d\d\d-\d\d\d(\d|X)/.+$ {
+        limit_req   zone=api_v2  burst=40;
 
         proxy_read_timeout 120;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
         proxy_set_header Host $http_host;
-        proxy_pass http://<%= @pub_ip_port %>/orcid-pub-web/;
+        proxy_pass http://<%= @pub_ip_port %>/orcid-pub-web$request_uri;
+
+        proxy_redirect http://$host/orcid-pub-web/ http://$host/;
+        proxy_redirect https://$host/orcid-pub-web/ https://$host/;
+    }
+
+    location / {
+        limit_req   zone=api_default  burst=40;
+        
+        proxy_read_timeout 120;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
+        proxy_set_header Host $http_host;
+        proxy_pass http://<%= @pub_ip_port %>/orcid-pub-web$request_uri;
 
         proxy_redirect http://$host/orcid-pub-web/ http://$host/;
         proxy_redirect https://$host/orcid-pub-web/ https://$host/;
@@ -207,7 +271,8 @@ server {
         proxy_cache_valid  404      1m;
         proxy_read_timeout 120;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Proto $scheme;        
+    
         proxy_set_header Host $http_host;
         proxy_pass http://<%= @registry_ip_port %>/orcid-web/static/img/favicon.ico;
         expires 30d;
@@ -337,10 +402,17 @@ server {
         
         proxy_read_timeout 120;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
         proxy_set_header Host $http_host;
         proxy_cookie_path /orcid-web/ /;
-        proxy_pass http://<%= @registry_ip_port %>/orcid-web/shibboleth;
+        proxy_pass http://<%= @registry_ip_port %>/orcid-web$request_uri;
         
         proxy_redirect http://$host/orcid-web/ http://$host/;
         proxy_redirect https://$host/orcid-web/ https://$host/; 
@@ -443,7 +515,14 @@ server {
 
         proxy_read_timeout 120;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
         
         proxy_set_header Host $http_host;
         proxy_cookie_path /orcid-web/ /;
@@ -504,7 +583,14 @@ server {
         client_max_body_size 20m;
         proxy_read_timeout 120;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        set $proto 'http';
+        if ($scheme = 'https') {
+           set $proto 'https';
+        }
+        if ($http_x_forwarded_proto = 'https') {
+           set $proto 'https';
+        }
+        proxy_set_header X-Forwarded-Proto $proto;
         proxy_set_header Host $http_host;
         proxy_pass http://<%= @registry_ip_port %>;
     }

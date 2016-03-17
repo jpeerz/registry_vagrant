@@ -9,12 +9,10 @@ class orcid_java  () {
 
    exec { "java install 1":
       command => template("orcid_java/scripts/install_java.erb"),
-      creates => "/usr/lib/jvm/java-8-oracle/jre/bin/java",
+      creates => "/usr/lib/jvm/java-8-oracle/jre/lib/security/puppet_jce_installed",
       timeout     => 900,
       require => Exec["java install webupd8team"],
    }
-
-
 
 }
 
