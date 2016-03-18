@@ -140,12 +140,10 @@ This will generate an ngrok URL, which will be used to configure Github and Tran
 1. Navigate to https://github.com/ORCID/[repository]/settings/hooks
 2. Click Add Webhook
 3. Configure the webhook settings:
-
 * Payload URL: ```https://ebefeec3.ngrok.io/hooks/github```
 * Content type: ```application/x-www-form-urlencoded```
 * Secret: Leave blank
 * Which events: ```Just the push event```
-
 4. Click the Active checkbox, then click Add Webhook
 5. Github will send a test to your webhook endpoint - this should return a ```200``` response 
 
