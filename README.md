@@ -100,7 +100,6 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
         source_file = api_en.properties
         source_lang = en
         type = PROPERTIES
-
 tx.config file can also be generated automatically using the Transifex command line client. For more on formatting a tx.config file, see: [http://docs.transifex.com/client/config/#txconfig]
 
 
@@ -122,13 +121,11 @@ tx.config file can also be generated automatically using the Transifex command l
                         api_username: transifexuser
                         api_password: XXXXXXXXXXXXXXX
                         push_translations_to: ORCID/txgh_test 
-
 Note: For development purposes, you can use a [Github Personal API Token](https://github.com/blog/1509-personal-api-tokens); your Transifex API Password is the same as your Transifex web interface password.                                                    
 
 5. Start ngrok to expose localhost webhook port publicly (for local dev only)
 
         ./ngrok http 9292
-
 This will generate an ngrok URL, which will be used to configure Github and Transifex webhooks
 
         Forwarding      https://ebefeec3.ngrok.io -> localhost:9292
@@ -144,10 +141,10 @@ This will generate an ngrok URL, which will be used to configure Github and Tran
 2. Click Add Webhook
 3. Configure the webhook settings:
 
-        * Payload URL: ```https://ebefeec3.ngrok.io/hooks/github```
-        * Content type: ```application/x-www-form-urlencoded```
-        * Secret: Leave blank
-        * Which events: ```Just the push event```
+* Payload URL: ```https://ebefeec3.ngrok.io/hooks/github```
+* Content type: ```application/x-www-form-urlencoded```
+* Secret: Leave blank
+* Which events: ```Just the push event```
 
 4. Click the Active checkbox, then click Add Webhook
 5. Github will send a test to your webhook endpoint - this should return a ```200``` response 
@@ -161,7 +158,7 @@ This will generate an ngrok URL, which will be used to configure Github and Tran
 
 3. Click Save Project
 
-##Test the Github/Transifex sync
+##Test Github/Transifex sync
 
 1. Ensure that both ngrok and txgh are running 
 2. Make a change to your local git repo
