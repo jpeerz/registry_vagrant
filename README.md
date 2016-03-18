@@ -77,12 +77,9 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
 
 # Running txgh
 
-1. Pull the latest from the transifex repo
+##Configure the TXGH server
 
-        cd transifex
-        git pull
-
-2. Run vagrant txgh
+1. Run vagrant txgh
 
         vagrant up txgh
 
@@ -90,26 +87,87 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
 
         vagrant ssh txgh
 
-3. Start txgh server (for testing - webhooks not yet configured)
+3. Edit the tx.config file to include the information about your Transifex project resources
 
-        cd transifex/txgh
-        rackup -o 0.0.0.0
+        vim txgh-master/config/tx.config
+
+        [main]
+        host = https://www.transifex.com
+
+        #Create one such section per resource
+        [txgh-test-2.api]
+        file_filter = api_<lang>.properties
+        source_file = api_en.properties
+        source_lang = en
+        type = PROPERTIES
+
+tx.config file can also be generated automatically using the Transifex command line client. For more on formatting a tx.config file, see: [http://docs.transifex.com/client/config/#txconfig]
 
 
-4. Access at http://localhost:9292 
+4. Edit the txgh.yml file to include the information for your Github repo and Transifex project
 
-Note: default rack port is 9292; to access at http://localhost:8080 run
-        
-        cd transifex/txgh
-        sudo rackup -p 80 -o 0.0.0.0
+        vim txgh-master/config/txgh.yml
 
-5. Expose localhost webhooks using ngrok
+        txgh:
+            github:
+               repos:
+                   ORCID/txgh_test:
+                        api_username: gituser
+                        api_token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        push_source_to: txgh-test-2
+            transifex:
+                projects:
+                    txgh-test-2:
+                        tx_config: "/home/vagrant/txgh-master/config/tx.config"
+                        api_username: transifexuser
+                        api_password: XXXXXXXXXXXXXXX
+                        push_translations_to: ORCID/txgh_test 
+
+Note: For development purposes, you can use a [Github Personal API Token](https://github.com/blog/1509-personal-api-tokens); your Transifex API Password is the same as your Transifex web interface password.                                                    
+
+5. Start ngrok to expose localhost webhook port publicly (for local dev only)
 
         ./ngrok http 9292
 
-Generates forwarded URL like:
+This will generate an ngrok URL, which will be used to configure Github and Transifex webhooks
 
-        Forwarding      http://ebefeec3.ngrok.io -> localhost:9292
+        Forwarding      https://ebefeec3.ngrok.io -> localhost:9292
+
+6. Start the txgh server
+
+        cd txgh-master
+        rackup -o 0.0.0.0
+
+##Configure Github webhook
+
+1. Navigate to https://github.com/ORCID/[repository]/settings/hooks
+2. Click Add Webhook
+3. Configure the webhook settings:
+
+        * Payload URL: ```https://ebefeec3.ngrok.io/hooks/github```
+        * Content type: ```application/x-www-form-urlencoded```
+        * Secret: Leave blank
+        * Which events: ```Just the push event```
+
+4. Click the Active checkbox, then click Add Webhook
+5. Github will send a test to your webhook endpoint - this should return a ```200``` response 
+
+##Configure Transifex webhook
+
+1. Navigate to https://www.transifex.com/orcid-inc-1/[project slug]/settings
+2. In the Webhook URL field, enter
+        
+        http://ebefeec3.ngrok.io/hooks/transifex
+
+3. Click Save Project
+
+##Test the Github/Transifex sync
+
+1. Ensure that both ngrok and txgh are running 
+2. Make a change to your local git repo
+2. Commit and push your changes to the Github remote
+3. Verify webhook received and commit pushed to Transifex in TXGH console output
+4. Log into [Transifex](https://www.transifex.com/signin) to verify that project resources were updated 
 
 
 
