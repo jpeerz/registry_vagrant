@@ -100,7 +100,7 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
         source_file = api_en.properties
         source_lang = en
         type = PROPERTIES
-tx.config file can also be generated automatically using the Transifex command line client. For more on formatting a tx.config file, see: [http://docs.transifex.com/client/config/#txconfig]
+tx.config file can also be generated automatically using the Transifex command line client. For more on formatting a tx.config file, see: http://docs.transifex.com/client/config/#txconfig
 
 
 4. Edit the txgh.yml file to include the information for your Github repo and Transifex project
@@ -137,13 +137,15 @@ This will generate an ngrok URL, which will be used to configure Github and Tran
 
 ##Configure Github webhook
 
-1. Navigate to https://github.com/ORCID/[repository]/settings/hooks
+1. Navigate to ```https://github.com/ORCID/[repository]/settings/hooks```
 2. Click Add Webhook
 3. Configure the webhook settings:
+
         * Payload URL: https://ebefeec3.ngrok.io/hooks/github
         * Content type: application/x-www-form-urlencoded
         * Secret: Leave blank
         * Which events: Just the push event
+        
 4. Click the Active checkbox, then click Add Webhook
 5. Github will send a test to your webhook endpoint - this should return a ```200``` response 
 
