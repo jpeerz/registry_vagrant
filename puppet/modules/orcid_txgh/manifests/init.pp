@@ -42,4 +42,22 @@ class orcid_txgh {
     require => Exec["unzip $txgh_zip"]
   }
 
+  $ngrok_loc = '/home/$USER'
+  $ngrok_bin = "ngrok-stable-linux-amd64"
+  $ngrok_zip = "${ngrok_bin}.zip"
+
+
+  # download the ngrok zip
+  file { "/home/$USER/$ngrok_zip":
+    path   => "/home/$USER/$ngrok_zip",
+    source  => "puppet:///modules/orcid_txgh/$ngrok_zip",
+  }
+
+  # unzip ngrok zip at the desired location
+  exec { "unzip $ngrok_zip":
+    command => "unzip $ngrok_loc/$ngrok_zip",
+    creates => "/$ngrok_loc/$ngrok_bin",
+    require => Exec["bundler"]
+  }
+
 }
