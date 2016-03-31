@@ -77,6 +77,42 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
 
 # Running txgh
 
+##Create the txgh.yml configuration file
+
+**NOTE: Puppet will not run correctly without this file configured**
+
+1. Copy puppet/modules/orcid_txgh/example-txgh.yml in the same directory and name it txgh.yml
+        
+        cp puppet/modules/orcid_txgh/example-txgh.yml puppet/modules/orcid_txgh/txgh.yml
+
+2. Edit txgh.yml to add the credential information for your Github repo and Transifex project
+
+        vim puppet/modules/orcid_txgh/txgh.yml
+
+        txgh:
+            github:
+                repos:
+                   #full github repo name including username
+                   githubuser/repo-name:
+                        #your github username
+                        api_username: githubuser
+                        #github personal api token - see https://github.com/blog/1509-personal-api-tokens
+                        api_token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        #get this from the project URL when logged into transifex web UI (project URL like: https://www.transifex.com/account-name/transifex-project-id)
+                        push_source_to: transifex-project-id
+            transifex:
+                projects:
+                   #transifex project id - same as push_source_to value above
+                   transifex-project-id:
+                        #tx.config file location 
+                        tx_config: "/home/orcid_txgh/txgh-master/config/tx.config"
+                        #transifex username
+                        api_username: transifexuser
+                        #transifex password - same as web UI password
+                        api_password: XXXXXXXXXXXXXXX
+                        #full github repo name including username - same as repo name in repos section above
+                        push_translations_to: githubuser/repo-name 
+
 ##Configure the TXGH server
 
 1. Run vagrant txgh
@@ -100,28 +136,8 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
         source_file = api_en.properties
         source_lang = en
         type = PROPERTIES
-tx.config file can also be generated automatically using the Transifex command line client. For more on formatting a tx.config file, see: http://docs.transifex.com/client/config/#txconfig
 
-
-4. Edit the txgh.yml file to include the information for your Github repo and Transifex project
-
-        vim txgh-master/config/txgh.yml
-
-        txgh:
-            github:
-               repos:
-                   ORCID/txgh_test:
-                        api_username: gituser
-                        api_token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                        push_source_to: txgh-test-2
-            transifex:
-                projects:
-                    txgh-test-2:
-                        tx_config: "/home/vagrant/txgh-master/config/tx.config"
-                        api_username: transifexuser
-                        api_password: XXXXXXXXXXXXXXX
-                        push_translations_to: ORCID/txgh_test 
-Note: For development purposes, you can use a [Github Personal API Token](https://github.com/blog/1509-personal-api-tokens); your Transifex API Password is the same as your Transifex web interface password.                                                    
+tx.config file can also be generated automatically using the Transifex command line client. For more on formatting a tx.config file, see: http://docs.transifex.com/client/config/#txconfig                                                    
 
 5. Start ngrok to expose localhost webhook port publicly (for local dev only)
 
