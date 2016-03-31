@@ -49,7 +49,7 @@ map $limited $limit {
 
 limit_req_zone  $limit  zone=api_default:50m   rate=8r/s;
 limit_req_zone  $limit  zone=api_v2:50m   rate=24r/s;
-limit_req_zone  $limit  zone=web:50m   rate=8r/s;
+limit_req_zone  $limit  zone=web:50m   rate=24r/s;
 
 server {
     listen 80;
@@ -121,7 +121,7 @@ server {
 
     location / {
         client_max_body_size 200m;
-        limit_req   zone=web  burst=40;
+        limit_req   zone=web  burst=64;
 
         proxy_read_timeout 120;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
