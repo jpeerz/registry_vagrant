@@ -37,11 +37,18 @@ class orcid_txgh {
     require => File["/home/orcid_txgh/$txgh_zip"]
   }
 
+  # download the txgh.yml configuration file
+  file { "$txgh_loc/$txgh_rb/config/txgh.yml":
+    path   => "$txgh_loc/$txgh_rb/config/txgh.yml",
+    source  => "puppet:///modules/orcid_txgh/txgh.yml",
+    require => Exec["unzip $txgh_zip"]
+  }
+
   exec { "bundler":
     environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
     provider => shell,
     command => template("orcid_txgh/scripts/install_bundler.erb"),
-    require => Exec["unzip $txgh_zip"]
+    require => File["$txgh_loc/$txgh_rb/config/txgh.yml"]
   }
 
   $ngrok_loc = '/home/orcid_txgh'
