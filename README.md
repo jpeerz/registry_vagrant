@@ -77,17 +77,87 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
 
 # Running txgh
 
+##Prerequisites
+1. Create a Transifex account https://www.transifex.com/signin
+2. Create a new Transifex project https://www.transifex.com/[account-name]/add/
+3. Install the Transifex command line client http://docs.transifex.com/tutorials/client/#1-initialize-a-transifex-project
+
+##(New Transifex projects only) Create the .tx/config file
+
+Transifex requires a per project configuration file to store the project's details and the file-to-resource mappings. This file is stored in .tx/config of your project's root directory. This file can either be created manually, or automatically using the Transifex client. To create .tx/config for a new project using the Transifex client:
+
+1. Clone the repository that contains the source language properties files
+
+        git clone [repo]
+
+3. Change directories into the repo that you just cloned
+
+        cd ~/git/repo-name
+
+4. Initialize the repo as a TXGH project, per http://docs.transifex.com/tutorials/client/#1-initialize-a-transifex-project
+
+        tx init
+
+5. When ```Transifex instance [https://www.transifex.com]:``` is displayed, press ```Enter``` This creates an empty .tx/config file.
+
+6. Add each resource type to the .tx/config file, per http://docs.transifex.com/client/set/
+
+        tx set --auto-local -r txgh-test-2.api 'api_<lang>.properties' --source-lang en --type PROPERTIES --source-file api_en.properties --execute
+
+        tx set --auto-local -r txgh-test-2.email 'email_<lang>.properties' --source-lang en --type PROPERTIES --source-file email_en.properties --execute
+
+        tx set --auto-local -r txgh-test-2.javascript 'javascript_<lang>.properties' --source-lang en --type PROPERTIES --source-file javascript_en.properties --execute
+
+        tx set --auto-local -r txgh-test-2.messages 'messages_<lang>.properties' --source-lang en --type PROPERTIES --source-file messages_en.properties --execute
+
+7. Verify that the resources have been added to .tx/config
+
+        cat .tx/config
+
+        [main]
+        host = https://www.transifex.com
+
+        [txgh-test-2.api]
+        file_filter = api_<lang>.properties
+        source_file = api_en.properties
+        source_lang = en
+        type = PROPERTIES
+
+        [txgh-test-2.messages]
+        file_filter = messages_<lang>.properties
+        source_file = messages_en.properties
+        source_lang = en
+        type = PROPERTIES
+
+        [txgh-test-2.email]
+        file_filter = email_<lang>.properties
+        source_file = email_en.properties
+        source_lang = en
+        type = PROPERTIES
+
+        [txgh-test-2.javascript]
+        file_filter = javascript_<lang>.properties
+        source_file = javascript_en.properties
+        source_lang = en
+        type = PROPERTIES
+
+8. Commit and push the changes to the remote repository
+9. Edit the ```github_repo``` variable in ```puppet/manifests/txgh_default.pp``` to include the name of your repo.
+        
+        github_repo => 'ORCID/txgh_test',
+        
+
 ##Create the txgh.yml configuration file
 
 **NOTE: Puppet will not run correctly without this file configured**
 
-1. Copy puppet/modules/orcid_txgh/example-txgh.yml in the same directory and name it txgh.yml
+1. Copy ```puppet/modules/orcid_txgh/example-txgh.yml``` in the same directory and name it ```txgh.yml```
         
-        cp puppet/modules/orcid_txgh/example-txgh.yml puppet/modules/orcid_txgh/txgh.yml
+        cp puppet/modules/orcid_txgh/files/example-txgh.yml puppet/modules/orcid_txgh/files/txgh.yml
 
 2. Edit txgh.yml to add the credential information for your Github repo and Transifex project
 
-        vim puppet/modules/orcid_txgh/txgh.yml
+        vim puppet/modules/orcid_txgh/files/txgh.yml
 
         txgh:
             github:
@@ -113,7 +183,7 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
                         #full github repo name including username - same as repo name in repos section above
                         push_translations_to: githubuser/repo-name 
 
-##Configure the TXGH server
+##Start the TXGH server
 
 1. Run vagrant txgh
 
@@ -121,34 +191,18 @@ Hint: For tomcat you need to modify your VM arguments to support https and new d
 
 2. SSH to txgh machine
 
-        vagrant ssh txgh
+        vagrant ssh txgh         
 
-3. Edit the tx.config file to include the information about your Transifex project resources
-
-        vim txgh-master/config/tx.config
-
-        [main]
-        host = https://www.transifex.com
-
-        #Create one such section per resource
-        [txgh-test-2.api]
-        file_filter = api_<lang>.properties
-        source_file = api_en.properties
-        source_lang = en
-        type = PROPERTIES
-
-tx.config file can also be generated automatically using the Transifex command line client. For more on formatting a tx.config file, see: http://docs.transifex.com/client/config/#txconfig                                                    
-
-5. Start ngrok to expose localhost webhook port publicly (for local dev only)
+3. Start ngrok to expose localhost webhook port publicly (for local dev only)
 
         ./ngrok http 9292
 This will generate an ngrok URL, which will be used to configure Github and Transifex webhooks
 
         Forwarding      https://ebefeec3.ngrok.io -> localhost:9292
 
-6. Start the txgh server
+4. Start the txgh server
 
-        cd txgh-master
+        cd /home/orcid_txgh/txgh-master
         rackup -o 0.0.0.0
 
 ##Configure Github webhook

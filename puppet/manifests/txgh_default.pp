@@ -6,7 +6,14 @@ Exec {
 include bootstrap
 include orcid_base::baseapps
 include orcid_base::common_libs
-include orcid_txgh
+#include orcid_txgh
+
+class {
+  orcid_txgh:
+    github_repo => 'ORCID/txgh_test',
+}
+
+
 
 user { "orcid_txgh":
   ensure  => present,
