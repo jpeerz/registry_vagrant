@@ -1,0 +1,7 @@
+/home/orcid_tomcat/bin/tomcat/logs/catalina.out {
+    copytruncate
+    daily
+    dateext
+    compress
+    missingok
+}
