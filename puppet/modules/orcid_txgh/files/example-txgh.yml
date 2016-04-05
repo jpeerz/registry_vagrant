@@ -1,0 +1,23 @@
+txgh:
+    github:
+        repos:
+           #full github repo name including username
+           githubuser/repo-name:
+                #your github username
+                api_username: githubuser
+                #github personal api token - see https://github.com/blog/1509-personal-api-tokens
+                api_token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                #get this from the project URL when logged into transifex web UI (project URL like: https://www.transifex.com/account-name/transifex-project-id)
+                push_source_to: transifex-project-id
+    transifex:
+        projects:
+           #transifex project id - same as push_source_to value above
+           transifex-project-id:
+                #tx.config file location 
+                tx_config: "/home/orcid_txgh/txgh-master/config/tx.config"
+                #transifex username
+                api_username: transifexuser
+                #transifex password - same as web UI password
+                api_password: XXXXXXXXXXXXXXX
+                #full github repo name including username - same as repo name in repos section above
+                push_translations_to: githubuser/repo-name 
