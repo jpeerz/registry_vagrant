@@ -165,4 +165,17 @@ class orcid_tomcat($orcid_config_file = 'file:///home/orcid_tomcat/git/ORCID-Sou
 	hour => 0,
 	minute => 0	
   }
+
+  package { logrotate:
+    ensure => installed,
+  }
+
+  file { "/etc/logrotate.d/catalina_out":
+    owner => root,
+    group => root,
+    mode => 644,
+    source => "puppet:///modules/orcid_tomcat/etc/logrotate.d/catalina_out",
+    require => Package["logrotate"],
+  }
+
 }
