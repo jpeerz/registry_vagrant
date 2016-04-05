@@ -33,7 +33,7 @@ https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPConfiguration
         <Sessions lifetime="28800" timeout="3600" checkAddress="false" relayState="ss:mem" handlerSSL="true" cookieProps="https">
 
             <!-- https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPServiceSSO -->
-            <SSO discoveryProtocol="SAMLDS" discoveryURL="https://<%= @host_name %>/disco">
+            <SSO discoveryProtocol="SAMLDS" discoveryURL="https://<%= @host_name %>/signin?newlogin">
                 SAML2 SAML1
             </SSO>
 
