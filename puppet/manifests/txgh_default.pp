@@ -13,11 +13,9 @@ class {
     github_repo => 'ORCID/txgh_test',
 }
 
-
-
 user { "orcid_txgh":
   ensure  => present,
-  uid  => '7012',
+  uid  => '7013',
   shell  => '/bin/bash',
   home  => '/home/orcid_txgh',
   managehome => true,
