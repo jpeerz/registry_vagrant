@@ -1,4 +1,4 @@
-class orcid_base::baseapps {
+class orcid_base::baseapps ($enable_google_authenticator = false) {
 
   # Every machine should have these packages and configuration files
 
@@ -12,6 +12,7 @@ class orcid_base::baseapps {
     "haveged",
     "htop",
     "language-pack-en-base",
+    "libpam-google-authenticator",
     "locate",
     "lsof",
     "mailutils",
@@ -50,15 +51,31 @@ class orcid_base::baseapps {
   service { 'ssh':
     ensure    => running,
     enable    => true,
-    subscribe => File['sshd_config'],
+    subscribe => File['/etc/ssh/sshd_config'],
     require => Package['openssh-server'],
   }
 
-  file { 'sshd_config':
-    path    => '/etc/ssh/sshd_config',
-    ensure  => file,
-    require => Package['openssh-server'],
-    source  => 'puppet:///modules/orcid_base/etc/ssh/sshd_config',
+  file { '/etc/pam.d/sshd':
+    mode   => '0644',
+    source => 'puppet:///modules/orcid_base/etc/pam.d/sshd',
+    notify  => Service["ssh"],
+    require => Package['libpam-google-authenticator'],
+  }
+
+  if $enable_google_authenticator == true { 
+     file { '/etc/ssh/sshd_config':
+        ensure  => file,
+        require => Package['openssh-server','libpam-google-authenticator'],
+        notify  => Service["ssh"],
+        source  => 'puppet:///modules/orcid_base/etc/ssh/sshd_config_google_authenticator',
+     }
+  } else {
+     file { '/etc/ssh/sshd_config':
+        ensure  => file,
+        require => Package['openssh-server'],
+        notify  => Service["ssh"],
+        source  => 'puppet:///modules/orcid_base/etc/ssh/sshd_config',
+     }
   }
 
   file { '/etc/default/puppet':

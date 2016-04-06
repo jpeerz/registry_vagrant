@@ -4,7 +4,11 @@ Exec {
 }
 
 include bootstrap
-include orcid_base::baseapps
+class {
+  orcid_base::baseapps:
+    enable_google_authenticator => false
+}
+
 include orcid_base::common_libs
 
 user { "orcid_tomcat":
@@ -43,4 +47,7 @@ class {
 include orcid_maven
 include orcid_deployment
 include orcid_python
-include orcid_jenkins
+class {
+   orcid_jenkins:
+      is_vagrant => true,
+}
