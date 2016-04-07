@@ -4,18 +4,20 @@ class orcid_txgh ($github_repo) {
     "build-essential", "zlib1g-dev", "libssl-dev", "libreadline6-dev", "libyaml-dev"
   ]
 
-
   # install packages
   package { $packages:
     ensure => present,
     require  => Exec["apt-get update"]
   }
 
+  exec { "rvm":
+    command => "sudo apt-add-repository ppa:rael-gc/rvm && sudo apt-get update && sudo apt-get -y install rvm && sudo usermod -a -G rvm orcid_txgh",
+  }
+
   exec { "ruby":
-    environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    command => template("orcid_txgh/scripts/install_ruby.erb"),
-    require => Package["wget"],
-    timeout => 1800,
+    user => "orcid_txgh",
+    command => "bash --login -c 'rvm install 2.1.5'",
+    require => Exec["rvm"]
   }
 
   $txgh_loc = '/home/orcid_txgh'
@@ -44,20 +46,21 @@ class orcid_txgh ($github_repo) {
     require => Exec["unzip $txgh_zip"]
   }
 
+
   # download the .tx/config configuration file
-  exec {"tx.config":
+  exec { "tx.config":
     environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
     provider => shell,
     command => template("orcid_txgh/scripts/download_tx_config.erb"),
     require => File["txgh.yml"]
   }
 
-  exec { "bundler":
-    environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    provider => shell,
-    command => template("orcid_txgh/scripts/install_bundler.erb"),
-    require => Exec["tx.config"]
-  }
+  #exec { "bundler":
+    #environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
+    #provider => shell,
+    #command => template("orcid_txgh/scripts/install_bundler.erb"),
+    #require => Exec["tx.config"]
+  #}
 
   $ngrok_loc = '/home/orcid_txgh'
   $ngrok_bin = "ngrok-stable-linux-amd64"
@@ -74,7 +77,7 @@ class orcid_txgh ($github_repo) {
   exec { "unzip $ngrok_zip":
     command => "sudo unzip -o $ngrok_loc/$ngrok_zip",
     creates => "/$ngrok_loc/$ngrok_bin",
-    require => Exec["bundler"]
+    #require => Exec["bundler"]
   }
 
 
