@@ -15,9 +15,6 @@ class orcid_txgh ($github_repo) {
     require  => Exec["apt-get update"]
   }
 
-  $as_orcid_txgh = 'sudo -u orcid_txgh -H bash -l -c'
-  $orcid_txgh_home = '/home/orcid_txgh'
-
   exec { 'gpg_key':
     command => "sudo bash -l -c 'gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3'",
     require => [File["/home/orcid_txgh"], User["orcid_txgh"], Exec["sudo_orcid_txgh"]]
