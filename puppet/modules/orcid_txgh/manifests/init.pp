@@ -1,5 +1,10 @@
 class orcid_txgh ($github_repo) {
 
+  exec { "sudo_orcid_txgh":
+    command => "sudo usermod -a -G sudo orcid_txgh",
+    require => User["orcid_txgh"]
+  }
+
   $packages = [
     "build-essential", "zlib1g-dev", "libssl-dev", "libreadline6-dev", "libyaml-dev"
   ]
@@ -10,14 +15,24 @@ class orcid_txgh ($github_repo) {
     require  => Exec["apt-get update"]
   }
 
-  exec { "rvm":
-    command => "sudo apt-add-repository ppa:rael-gc/rvm && sudo apt-get update && sudo apt-get -y install rvm && sudo usermod -a -G rvm orcid_txgh",
+  $as_orcid_txgh = 'sudo -u orcid_txgh -H bash -l -c'
+  $orcid_txgh_home = '/home/orcid_txgh'
+
+  exec { 'gpg_key':
+    command => "sudo bash -l -c 'gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3'",
+    require => [File["/home/orcid_txgh"], User["orcid_txgh"], Exec["sudo_orcid_txgh"]]
   }
 
-  exec { "ruby":
-    user => "orcid_txgh",
-    command => "bash --login -c 'rvm install 2.1.5'",
-    require => Exec["rvm"]
+  exec { 'rvm':
+    command => "sudo bash -l -c 'curl -L https://get.rvm.io | bash -s stable'",
+    creates => "/usr/local/rvm/bin/rvm",
+    require => [Package['curl'], Exec['gpg_key']]
+  }
+
+  exec { 'ruby':
+    command => "sudo bash -l -c '/usr/local/rvm/bin/rvm autolibs disable && /usr/local/rvm/bin/rvm install 2.1.5'",
+    creates => "/usr/local/rvm/bin/rvm/ruby",
+    require => Exec['rvm']
   }
 
   $txgh_loc = '/home/orcid_txgh'
