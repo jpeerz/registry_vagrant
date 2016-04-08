@@ -1,0 +1,91 @@
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ORCID - Model 1.1.5-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] [8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m--- maven-clean-plugin:2.5:clean (default-clean) @ orcid-model ---
+[INFO] Deleting /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/target
+[INFO] 
+[INFO] [8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m--- maven-resources-plugin:2.5:resources (default-resources) @ orcid-model ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 182 resources
+[INFO] 
+[INFO] [8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m--- maven-compiler-plugin:2.3.2:compile (default-compile) @ orcid-model ---
+[INFO] Compiling 475 source files to /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/target/classes
+[INFO] 
+[INFO] [8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m--- maven-resources-plugin:2.5:testResources (default-testResources) @ orcid-model ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] [8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m--- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ orcid-model ---
+[INFO] Compiling 7 source files to /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/target/test-classes
+[INFO] 
+[INFO] [8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m--- maven-surefire-plugin:2.10:test (default-test) @ orcid-model ---
+[INFO] Surefire report directory: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running org.orcid.entities.MarshallingTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.157 sec
+Running org.orcid.jaxb.model.message.ScopePathTypeTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running org.orcid.jaxb.model.message.VisibilityTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running org.orcid.jaxb.model.notification.custom.MarshallingTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 sec
+Running org.orcid.jaxb.model.notification.permission.MarshallingTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 sec
+Running org.orcid.record.ValidateV2RC1SamplesTest
+log4j:WARN No appenders could be found for logger (org.orcid.record.ValidateV2RC1SamplesTest).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.862 sec
+Running org.orcid.record.ValidateV2RC2SamplesTest
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.792 sec
+
+Results :
+
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0
+
+[JENKINS] Recording test results
+[INFO] 
+[INFO] [8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m--- maven-license-plugin:1.9.0:check (default) @ orcid-model ---
+[INFO] Checking licenses...
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.13.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.17.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.23.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.22.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] [WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/record_2.0_rc1/peer-review-guide-v2.0_rc1.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.14.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2_rc3.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2_rc1.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/group-id-2.0_rc2/README.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/record_2.0_rc1/README.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2_rc6.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2_rc2.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.15.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/notification_2.0_rc2/README.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2_rc5.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.7.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2_rc4.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.19.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/record_2.0_rc2/peer-review-guide-v2.0_rc2.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] [WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/notification_2.0_rc1/README.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.9.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/group-id-2.0_rc1/README.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.21.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/README.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.8.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.1.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.18.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.11.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.10.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.12.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.2_rc7.md
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/record_2.0_rc2/README.md
+Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/record_2.0_rc2/peer-review-guide-v2.0_rc1.md
+Unknown file extension: /var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-model/src/main/resources/orcid-message-1.0.16.md

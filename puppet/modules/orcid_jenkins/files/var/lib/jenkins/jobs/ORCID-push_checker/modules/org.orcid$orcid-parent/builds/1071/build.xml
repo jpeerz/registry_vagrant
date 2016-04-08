@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.maven.MavenBuild plugin="maven-plugin@2.12.1">
+  <actions>
+    <hudson.tasks.Fingerprinter_-FingerprintAction>
+      <record>
+        <entry>
+          <string>org.orcid:orcid-parent:pom.xml</string>
+          <string>d5968e64f35434390f598c6d55fb45f1</string>
+        </entry>
+      </record>
+    </hudson.tasks.Fingerprinter_-FingerprintAction>
+    <com.sonyericsson.rebuild.RebuildAction plugin="rebuild@1.25"/>
+    <hudson.maven.reporters.MavenArtifactRecord>
+      <records/>
+      <parent reference="../../.."/>
+      <pomArtifact>
+        <groupId>org.orcid</groupId>
+        <artifactId>orcid-parent</artifactId>
+        <version>1.1.5-SNAPSHOT</version>
+        <type>pom</type>
+        <fileName>pom.xml</fileName>
+        <canonicalName>orcid-parent-1.1.5-SNAPSHOT.pom</canonicalName>
+        <md5sum>d5968e64f35434390f598c6d55fb45f1</md5sum>
+      </pomArtifact>
+      <mainArtifact reference="../pomArtifact"/>
+      <attachedArtifacts/>
+    </hudson.maven.reporters.MavenArtifactRecord>
+  </actions>
+  <queueId>-1</queueId>
+  <timestamp>1460046399560</timestamp>
+  <startTime>1460046405150</startTime>
+  <result>SUCCESS</result>
+  <duration>3685</duration>
+  <keepLog>false</keepLog>
+  <builtOn></builtOn>
+  <workspace>/var/lib/jenkins/jobs/ORCID-push_checker/workspace</workspace>
+  <executedMojos class="java.util.concurrent.CopyOnWriteArrayList">
+    <hudson.maven.ExecutedMojo>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-clean-plugin</artifactId>
+      <version>2.5</version>
+      <goal>clean</goal>
+      <executionId>default-clean</executionId>
+      <duration>590</duration>
+      <digest>9a18e4d3f6e6495ed92b7d4694b41e66</digest>
+    </hudson.maven.ExecutedMojo>
+    <hudson.maven.ExecutedMojo>
+      <groupId>com.mycila.maven-license-plugin</groupId>
+      <artifactId>maven-license-plugin</artifactId>
+      <version>1.9.0</version>
+      <goal>check</goal>
+      <executionId>default</executionId>
+      <duration>2537</duration>
+      <digest>9fdd5110cbba9575e25de9b58f713095</digest>
+    </hudson.maven.ExecutedMojo>
+  </executedMojos>
+</hudson.maven.MavenBuild>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result plugin="junit@1.11">
+  <suites>
+    <suite>
+      <file>/var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-internal-api/target/surefire-reports/TEST-org.orcid.internal.server.InternalApiServiceDelegatorTest.xml</file>
+      <name>org.orcid.internal.server.InternalApiServiceDelegatorTest</name>
+      <duration>47.013</duration>
+      <cases>
+        <case>
+          <duration>16.441</duration>
+          <className>org.orcid.internal.server.InternalApiServiceDelegatorTest</className>
+          <testName>viewStatusText</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>15.41</duration>
+          <className>org.orcid.internal.server.InternalApiServiceDelegatorTest</className>
+          <testName>viewLastModified</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>15.162</duration>
+          <className>org.orcid.internal.server.InternalApiServiceDelegatorTest</className>
+          <testName>viewMemberInfo</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>47.013</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>

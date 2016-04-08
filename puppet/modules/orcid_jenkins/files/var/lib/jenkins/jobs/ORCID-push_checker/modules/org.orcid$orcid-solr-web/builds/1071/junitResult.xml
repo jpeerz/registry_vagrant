@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result plugin="junit@1.11">
+  <suites>
+    <suite>
+      <file>/var/lib/jenkins/jobs/ORCID-push_checker/workspace/orcid-solr-web/target/surefire-reports/TEST-org.orcid.solr.AppContextSolrTest.xml</file>
+      <name>org.orcid.solr.AppContextSolrTest</name>
+      <duration>0.0</duration>
+      <cases>
+        <case>
+          <duration>0.0</duration>
+          <className>org.orcid.solr.AppContextSolrTest</className>
+          <testName>testServerRunning</testName>
+          <skipped>true</skipped>
+          <failedSince>55</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>0.0</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>

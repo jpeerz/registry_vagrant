@@ -1,0 +1,247 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.orcid</groupId>
+        <artifactId>orcid-parent</artifactId>
+        <version>1.1.5-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>orcid-api-common</artifactId>
+
+    <name>ORCID - API Commons</name>
+    <description>Common classes and resources shared between the two API tiers.</description>
+
+    <properties>
+        <main.basedir>${project.parent.basedir}</main.basedir>
+        <jena.dir>${project.build.directory}/generated-sources/jena</jena.dir>
+    </properties>
+
+	<repositories>
+	  <repository>
+	    <id>oss-snapshots-repo</id>
+	    <name>Sonatype OSS Maven Repository</name>
+	    <url>https://oss.sonatype.org/content/groups/public</url>
+	    <snapshots>
+	      <enabled>true</enabled>
+	      <updatePolicy>always</updatePolicy>
+	    </snapshots>
+	  </repository>
+	</repositories>
+	
+    <dependencies>
+        <!-- Internal dependencies -->
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>orcid-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>orcid-utils</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- External dependencies -->
+         <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>                
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring-web</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+        </dependency>
+
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jersey-jaxrs</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
+		<!-- citeproc support -->
+		<dependency>
+			<groupId>de.undercouch</groupId>
+			<artifactId>citeproc-java</artifactId>
+			<version>0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.citationstyles</groupId>
+			<artifactId>styles</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.citationstyles</groupId>
+			<artifactId>locales</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		
+        <!-- Test dependencies -->
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>orcid-test</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <finalName>orcid-api-common</finalName>        
+         <plugins>
+            <plugin>               
+                <groupId>com.mycila.maven-license-plugin</groupId>               
+                <artifactId>maven-license-plugin</artifactId>                                                     
+                <configuration>
+                    <excludes>
+                        <exclude>**/.gitignore</exclude>
+                        <exclude>**/rebel.xml</exclude>
+                        <exclude>**/xmlns/org/eurocris/cerif_1/*.java</exclude>
+                        <exclude>**/xmlns/org/eurocris/cerif_api/*.java</exclude>
+                        <exclude>**/cerif/*.xsd</exclude>
+                        <exclude>**/cerif/*.xml</exclude>                        
+                        <exclude>**/cerif/cerif-api/*.xsd</exclude>
+                    </excludes>               
+                </configuration>
+            </plugin>
+		    <plugin>
+		      <groupId>org.apache.jena</groupId>
+		      <artifactId>jena-maven-tools</artifactId>
+		      <executions>
+		        <execution>
+		          <id>schemagen</id>
+                  <phase>generate-sources</phase>
+		          <goals>
+		            <goal>translate</goal>
+		          </goals>
+		        </execution>
+		      </executions>
+		      <configuration>
+		      	
+		      	<includes>
+  					<include>src/main/vocabs/*.rdf</include>  					 
+				</includes>
+				<fileOptions>
+			        <source>
+			          <input>default</input>
+			          <package-name>org.orcid.api.common.writer.rdf.vocabs</package-name>
+			          <output>${jena.dir}</output>		          
+			        </source>
+			        <source>
+			          <input>src/main/vocabs/prov-o.rdf</input>
+			          <className>PROV</className>
+			          <output>${jena.dir}</output>
+			          <ontology>true</ontology>		          
+			        </source>
+			        <source>
+			          <input>src/main/vocabs/pav.rdf</input>
+			          <className>PAV</className>
+			          <output>${jena.dir}</output>
+			          <ontology>true</ontology>		          
+			        </source>
+			        <source>
+			          <input>src/main/vocabs/geonames_v3.1.rdf</input>
+			          <className>Geonames</className>
+			          <output>${jena.dir}</output>
+			          <ontology>true</ontology>				          
+			        </source>			        
+		        </fileOptions>
+		      </configuration>
+		    </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${jena.dir}</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+                </plugin>		              
+        </plugins>
+        <!-- m2eclipse setting to execute jena-maven-tools plugin -->
+		<pluginManagement>
+		  <plugins>
+		    <plugin>
+		     <groupId>org.eclipse.m2e</groupId>
+		     <artifactId>lifecycle-mapping</artifactId>
+		     <version>1.0.0</version>
+		     <configuration>
+		       <lifecycleMappingMetadata>
+		         <pluginExecutions>
+		           <pluginExecution>
+		             <pluginExecutionFilter>
+				      <groupId>org.apache.jena</groupId>
+				      <artifactId>jena-maven-tools</artifactId>
+		               <versionRange>[${jena.version},)</versionRange>
+		               <goals>
+		                 <goal>translate</goal>
+		               </goals>
+		             </pluginExecutionFilter>
+		             <action>
+		               <execute>
+		               	<runOnIncremental>true</runOnIncremental>
+		               </execute>
+		             </action>
+		           </pluginExecution>
+		         </pluginExecutions>
+		       </lifecycleMappingMetadata>
+		     </configuration>
+		    </plugin>
+		  </plugins>
+		</pluginManagement>        
+    </build>
+
+</project>
