@@ -1,4 +1,5 @@
+su - orcid_txgh
 cd /home/orcid_txgh/txgh-master
-sudo gem install bundler
-bundle install
-sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
+/usr/local/rvm/bin/rvm use 2.1.5
+/usr/local/rvm/bin/rvm gem install bundler
+/usr/local/rvm/bin/rvm bundle install
