@@ -32,10 +32,17 @@ class orcid_txgh ($github_repo) {
     require => Exec['rvm']
   }
 
+
   $txgh_loc = '/home/orcid_txgh'
   $txgh_rb = "txgh-master"
   $txgh_zip = "${txgh_rb}.zip"
 
+  # download the .ruby-version file
+  file {".ruby-version":
+    path   => "$txgh_loc/$txgh_rb/.ruby-version",
+    source  => "puppet:///modules/orcid_txgh/.ruby-version",
+    require => Exec["ruby"]
+  }
 
   # download the txgh-master zip
   file { "/home/orcid_txgh/$txgh_zip":
