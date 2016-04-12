@@ -37,13 +37,6 @@ class orcid_txgh ($github_repo) {
   $txgh_rb = "txgh-master"
   $txgh_zip = "${txgh_rb}.zip"
 
-  # download the .ruby-version file
-  file {".ruby-version":
-    path   => "$txgh_loc/$txgh_rb/.ruby-version",
-    source  => "puppet:///modules/orcid_txgh/.ruby-version",
-    require => Exec["ruby"]
-  }
-
   # download the txgh-master zip
   file { "/home/orcid_txgh/$txgh_zip":
     path   => "$txgh_loc/$txgh_zip",
@@ -56,6 +49,13 @@ class orcid_txgh ($github_repo) {
     command => "sudo unzip -o $txgh_loc/$txgh_zip -d $txgh_loc",
     creates => "$txgh_loc/$txgh_rb",
     require => File["/home/orcid_txgh/$txgh_zip"]
+  }
+
+   # download the .ruby-version file
+  file {".ruby-version":
+    path   => "$txgh_loc/$txgh_rb/.ruby-version",
+    source  => "puppet:///modules/orcid_txgh/.ruby-version",
+    require => Exec["unzip $txgh_zip"]
   }
 
   # download the txgh.yml configuration file
@@ -74,12 +74,10 @@ class orcid_txgh ($github_repo) {
     require => File["txgh.yml"]
   }
 
-  #exec { "bundler":
-    #environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    #provider => shell,
-    #command => template("orcid_txgh/scripts/install_bundler.erb"),
-    #require => Exec["tx.config"]
-  #}
+  exec { "bundler":
+    command => "bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && gem install bundler && bundle install'",
+    require => [Exec["tx.config"], File[".ruby-version"]]
+  }
 
   $ngrok_loc = '/home/orcid_txgh'
   $ngrok_bin = "ngrok-stable-linux-amd64"
