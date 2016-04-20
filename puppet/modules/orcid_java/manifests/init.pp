@@ -14,5 +14,12 @@ class orcid_java  () {
       require => Exec["java install webupd8team"],
    }
 
+   exec { "java lets encrypt cert":
+      command => template("orcid_java/scripts/install_letsencrypt_cert.erb"),
+      creates => "/usr/lib/jvm/java-8-oracle/jre/lib/security/added_letsencryptauthorityx1_to_cacerts",
+      timeout     => 900,
+      require => Exec["java install 1"],
+   }
+
 }
 
