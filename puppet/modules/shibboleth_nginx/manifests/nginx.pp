@@ -8,7 +8,8 @@ class shibboleth_nginx::nginx (
     $members_ip_port,
     $communities_ip_port,
     $pub_ip_port,
-    $registry_ip_port, ) {
+    $registry_ip_port,
+    $txgh_ip_port, ) {
 
     /*
 

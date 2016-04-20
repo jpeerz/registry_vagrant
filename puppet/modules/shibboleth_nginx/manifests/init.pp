@@ -11,6 +11,7 @@ class shibboleth_nginx (
     $communities_ip_port,
     $pub_ip_port,
     $registry_ip_port,
+    $txgh_ip_port,
     $include_test_idps = false,) {
 
   include shibboleth_nginx::build_tools
@@ -55,6 +56,7 @@ class shibboleth_nginx (
             members_ip_port => $members_ip_port, 
             pub_ip_port => $pub_ip_port,
             registry_ip_port => $registry_ip_port,
+            txgh_ip_port => $txgh_ip_port,
             require    => [Class["shibboleth_nginx::build_tools"], Package[$packages]]
     }
 }

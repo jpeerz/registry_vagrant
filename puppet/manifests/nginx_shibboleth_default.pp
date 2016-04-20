@@ -16,6 +16,7 @@ class {
       members_ip_port => "127.0.0.1:9999",
       pub_ip_port => "127.0.0.1:8080",
       registry_ip_port => "127.0.0.1:8080",
+      txgh_ip_port => "127.0.0.1:9292",
       host_name => $host_name,
       sb_entity_id => $sb_entity_id,
       ssl_dhparam => "puppet:///modules/shibboleth_nginx/etc/nginx/dhparam-snakeoil.pem",
