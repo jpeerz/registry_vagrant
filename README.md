@@ -43,7 +43,7 @@
         cd ~/git/registry_vagrant
         vagrant ssh tomcat
         sudo su - orcid_tomcat
-        /home/orcid_tomcat/bin/scripts/deployment/deploy-app.py master
+        /home/orcid_tomcat/bin/scripts/deployment/deploy-app.py all
 
 # Running Nginx Shibboleth
 
