@@ -2,7 +2,10 @@
 
 # Standard Un*x authentication.
 #@include common-auth
-auth required pam_google_authenticator.so nullok
+# skip one-time password if logging in from the local network
+# read (including comments): http://serverfault.com/questions/518802/two-factor-ssh-authentication-on-external-address-only 
+auth [success=done default=ignore] pam_access.so accessfile=/etc/security/access-local.conf
+auth optional pam_google_authenticator.so nullok
 
 # Disallow non-root logins when /etc/nologin exists.
 account    required     pam_nologin.so

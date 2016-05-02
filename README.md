@@ -28,6 +28,12 @@
          127.0.0.1       members.localhost
          127.0.0.1       pub.localhost
 
+# Running orcid_base
+
+1. Run vagrant orcid_base
+
+        vagrant up orcid_base
+
 # Running tomcat
 
 1. Run vagrant tomcat

@@ -62,6 +62,13 @@ class orcid_base::baseapps ($enable_google_authenticator = false) {
     require => Package['libpam-google-authenticator'],
   }
 
+  file { '/etc/security/access-local.conf':
+    mode   => '0644',
+    source => 'puppet:///modules/orcid_base/etc/security/access-local.conf',
+    notify  => Service["ssh"],
+    require => Package['libpam-google-authenticator'],
+  }
+
   if $enable_google_authenticator == true { 
      file { '/etc/ssh/sshd_config':
         ensure  => file,
