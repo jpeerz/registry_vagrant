@@ -6,6 +6,7 @@ Exec {
 include bootstrap
 include orcid_base::baseapps
 include orcid_base::common_libs
+include orcid_auto_upgrades
 
 class {
    shibboleth_nginx:
