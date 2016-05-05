@@ -81,6 +81,8 @@ https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPConfiguration
 
             <MetadataProvider type="XML" uri="https://engine.surfconext.nl/authentication/idp/metadata"
                  backingFilePath="surfnet-diy-idp-metadata.xml" reloadInterval="180000" />
+
+            <MetadataProvider type="XML" path="mujina_metadata.xml" />
             <% end %>
         </MetadataProvider>
 

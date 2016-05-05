@@ -52,6 +52,17 @@ class shibboleth_nginx::shibboleth($host_name, $sb_entity_id = sprintf("https://
         require => Exec["build shibboleth"]
     }
 
+    if $include_test_idps {
+        file { "/opt/shibboleth-sp/etc/shibboleth/mujina_metadata.xml":
+			path    => "/opt/shibboleth-sp/etc/shibboleth/mujina_metadata.xml",
+			source => "puppet:///modules/shibboleth_nginx/opt/shibboleth-sp/etc/shibboleth/mujina_metadata.xml",
+			owner   => www-data,
+			group   => www-data,
+			notify  => Service["shibd"],
+			require => Exec["build shibboleth"]
+		}
+    }
+
     file { "/opt/shibboleth-sp/share/published":
         source  => "puppet:///modules/shibboleth_nginx/opt/shibboleth-sp/share/published",
         recurse => true,
