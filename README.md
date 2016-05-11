@@ -52,9 +52,13 @@
 
          vagrant up nginx_shibboleth
 
-2. Set host name(Linux and OSX):
+2. Set host name:
 
+        (Linux and OSX)
          export HOST_NAME="localhost"
+
+        (Windows)
+        set HOST_NAME="localhost"
 
 3. Throw in nifty ssh hack to get around protected ports. Add 80 and 443 port forwards and 8080, 7777, 8888, 9999 reverse forward. 
 
