@@ -41,7 +41,7 @@ def wait_for_tomcat():
     
 def clean_tomcat():
 	# Clean directories
-    dirs_to_clean = ['work']
+    dirs_to_clean = ['work','temp']
     for dir_to_clean in dirs_to_clean:
         full_dir_path = os.path.join(tomcat_home, dir_to_clean, '*')
         info('About to clean directory %s' , full_dir_path)
