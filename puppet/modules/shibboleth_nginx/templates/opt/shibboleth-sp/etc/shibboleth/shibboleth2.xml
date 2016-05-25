@@ -69,7 +69,8 @@ https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPConfiguration
         <MetadataProvider type="Chaining">
 
             <MetadataProvider type="XML" uri="http://mds.edugain.org"
-                 backingFilePath="federation-metadata.xml" reloadInterval="7200">
+                 backingFilePath="federation-metadata.xml" reloadInterval="7200"
+                 legacyOrgNames="true">
                 <DiscoveryFilter type="Blacklist" matcher="EntityAttributes" trimTags="true"
                      attributeName="http://macedir.org/entity-category"
                      attributeNameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
