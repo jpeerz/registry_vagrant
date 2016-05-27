@@ -180,7 +180,9 @@ Transifex requires a per project configuration file to store the project's detai
                         #transifex password - same as web UI password
                         api_password: XXXXXXXXXXXXXXX
                         #full github repo name including username - same as repo name in repos section above
-                        push_translations_to: githubuser/repo-name 
+                        push_translations_to: githubuser/repo-name
+                        #(optional)specifies which status should trigger push from transifex to github - translated or reviewed
+                        push_trigger: reviewed 
 
 ##Start the TXGH server
 
