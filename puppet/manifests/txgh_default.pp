@@ -10,7 +10,7 @@ include orcid_base::common_libs
 
 class {
   orcid_txgh:
-    github_repo => 'ORCID/txgh_test',
+    github_repo => 'ORCID/ORCID-Source',
 }
 
 user { "orcid_txgh":
