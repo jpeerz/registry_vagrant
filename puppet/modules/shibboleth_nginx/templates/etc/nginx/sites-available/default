@@ -103,8 +103,8 @@ server {
         proxy_set_header Host $http_host;
         proxy_pass http://<%= @api_ip_port %>/orcid-api-web$request_uri;
 
-        proxy_redirect http://$host/orcid-web/ http://$host/;
-        proxy_redirect https://$host/orcid-web/ https://$host/;
+        proxy_redirect http://$host/orcid-api-web/ http://$host/;
+        proxy_redirect https://$host/orcid-api-web/ https://$host/;
     }
 }
 
