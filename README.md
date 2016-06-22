@@ -19,7 +19,6 @@
 
          127.0.0.1       localhost
          127.0.0.1       api.localhost
-         127.0.0.1       communities.localhost
          127.0.0.1       members.localhost
          127.0.0.1       pub.localhost
 
@@ -69,8 +68,7 @@
 | domain                 | proxies to port/path               | description                |
 |------------------------|------------------------------------|----------------------------|
 | localhost              | 8080/orcid-web or 8888/ or shib    | about server and registry  |
-| api.localhost          | 8080/orcid-api-web                 | Registery API              |
-| communities.localhost  | 7777/                              | communities                |
+| api.localhost          | 8080/orcid-api-web                 | Registery API              |             |
 | members.localhost      | 9999/                              | members                    |
 | pub.localhost          | 8080/orcid-pub-web                 | Registry Pub API           |
 
