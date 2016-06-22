@@ -6,6 +6,7 @@ class shibboleth_nginx::nginx (
     $about_ip_port,
     $api_ip_port,
     $members_ip_port,
+    $communities_ip_port,
     $pub_ip_port,
     $registry_ip_port, ) {
 
