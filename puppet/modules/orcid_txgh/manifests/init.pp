@@ -46,7 +46,7 @@ class orcid_txgh ($github_repo) {
 
   # unzip txgh-master zip at the desired location
   exec { "unzip $txgh_zip":
-    command => "sudo unzip -o $txgh_loc/$txgh_zip -d $txgh_loc",
+    command => "sudo unzip -o $txgh_loc/$txgh_zip -d $txgh_loc && chown orcid_txgh:orcid_txgh $txgh_loc/$txgh_rb",
     creates => "$txgh_loc/$txgh_rb",
     require => File["/home/orcid_txgh/$txgh_zip"]
   }
@@ -97,6 +97,9 @@ class orcid_txgh ($github_repo) {
     #require => Exec["bundler"]
   }
 
-
+  exec { "rackup":
+    command => "bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && nohup rackup -o 0.0.0.0 > $(date +%m-%d-%Y)_txgh.log&'",
+    require => Exec["bundler"]
+  }
 
 }
