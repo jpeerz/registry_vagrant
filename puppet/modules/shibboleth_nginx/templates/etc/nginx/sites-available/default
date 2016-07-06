@@ -111,6 +111,20 @@ server {
 server {
     listen 80;
     listen 443 ssl;
+
+    server_name communities.<%= @host_name %>;
+    access_log  off;
+
+    keepalive_timeout 5;
+
+    client_max_body_size 200m;
+
+    return 301 $scheme://<%= @host_name %>;
+}
+
+server {
+    listen 80;
+    listen 443 ssl;
     server_name members.<%= @host_name %>;
 
     access_log  off;
