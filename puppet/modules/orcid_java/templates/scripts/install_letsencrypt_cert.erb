@@ -1,0 +1,5 @@
+wget https://letsencrypt.org/certs/isrgrootx1.pem; 
+wget https://letsencrypt.org/certs/letsencryptauthorityx1.der; 
+sudo keytool -trustcacerts -keystore /usr/lib/jvm/java-8-oracle/jre/lib/security/cacerts -storepass changeit -noprompt -importcert -alias isrgrootx1 -file ~/isrgrootx1.pem;
+sudo keytool -trustcacerts -keystore /usr/lib/jvm/java-8-oracle/jre/lib/security/cacerts -storepass changeit -noprompt -importcert -alias letsencryptauthorityx1 -file ~/letsencryptauthorityx1.der;
+touch "/usr/lib/jvm/java-8-oracle/jre/lib/security/added_$(keytool -keystore '/tmp/cacerts-includingletsencrypt' -storepass changeit -list |  grep letsencrypta | awk  -F',' '{ print $1 }')_to_cacerts";

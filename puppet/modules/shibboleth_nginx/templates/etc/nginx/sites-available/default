@@ -103,8 +103,8 @@ server {
         proxy_set_header Host $http_host;
         proxy_pass http://<%= @api_ip_port %>/orcid-api-web$request_uri;
 
-        proxy_redirect http://$host/orcid-web/ http://$host/;
-        proxy_redirect https://$host/orcid-web/ https://$host/;
+        proxy_redirect http://$host/orcid-api-web/ http://$host/;
+        proxy_redirect https://$host/orcid-api-web/ https://$host/;
     }
 }
 
@@ -119,24 +119,7 @@ server {
 
     client_max_body_size 200m;
 
-    location / {
-        client_max_body_size 200m;
-        limit_req   zone=web  burst=64;
-
-        proxy_read_timeout 120;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        set $proto 'http';
-        if ($scheme = 'https') {
-           set $proto 'https';
-        }
-        if ($http_x_forwarded_proto = 'https') {
-           set $proto 'https';
-        }
-        proxy_set_header X-Forwarded-Proto $proto;
-
-        proxy_set_header Host $http_host;
-        proxy_pass http://<%= @communities_ip_port %>/;
-    }
+    return 301 $scheme://<%= @host_name %>;
 }
 
 server {

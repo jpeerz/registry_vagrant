@@ -5,12 +5,7 @@
 
         git clone git@github.com:ORCID/registry_vagrant.git
 
-2. For TXGH, clone (transifex repo)[https://github.com/ORCID/transifex] inside registry_vagrant
-
-        cd registry_vagrant
-        git clone git@github.com:ORCID/transifex.git
-
-3. Make sure you have Vagrant 1.7.2 or later.
+2. Make sure you have Vagrant 1.7.2 or later.
 
         vagrant -v
 
@@ -24,9 +19,14 @@
 
          127.0.0.1       localhost
          127.0.0.1       api.localhost
-         127.0.0.1       communities.localhost
          127.0.0.1       members.localhost
          127.0.0.1       pub.localhost
+
+# Running orcid_base
+
+1. Run vagrant orcid_base
+
+        vagrant up orcid_base
 
 # Running tomcat
 
@@ -43,7 +43,7 @@
         cd ~/git/registry_vagrant
         vagrant ssh tomcat
         sudo su - orcid_tomcat
-        /home/orcid_tomcat/bin/scripts/deployment/deploy-app.py master
+        /home/orcid_tomcat/bin/scripts/deployment/deploy-app.py all
 
 # Running Nginx Shibboleth
 
@@ -51,9 +51,13 @@
 
          vagrant up nginx_shibboleth
 
-2. Set host name(Linux and OSX):
+2. Set host name:
 
+        (Linux and OSX)
          export HOST_NAME="localhost"
+
+        (Windows)
+        set HOST_NAME="localhost"
 
 3. Throw in nifty ssh hack to get around protected ports. Add 80 and 443 port forwards and 8080, 7777, 8888, 9999 reverse forward. 
 
@@ -64,8 +68,7 @@
 | domain                 | proxies to port/path               | description                |
 |------------------------|------------------------------------|----------------------------|
 | localhost              | 8080/orcid-web or 8888/ or shib    | about server and registry  |
-| api.localhost          | 8080/orcid-api-web                 | Registery API              |
-| communities.localhost  | 7777/                              | communities                |
+| api.localhost          | 8080/orcid-api-web                 | Registery API              |             |
 | members.localhost      | 9999/                              | members                    |
 | pub.localhost          | 8080/orcid-pub-web                 | Registry Pub API           |
 
@@ -102,13 +105,13 @@ Transifex requires a per project configuration file to store the project's detai
 
 6. Add each resource type to the .tx/config file, per http://docs.transifex.com/client/set/
 
-        tx set --auto-local -r txgh-test-2.api 'api_<lang>.properties' --source-lang en --type PROPERTIES --source-file api_en.properties --execute
+        tx set --auto-local -r txgh-test.api 'i18n/api_<lang>.properties' --source-lang en --type UNICODEPROPERTIES --source-file i18n/api_en.properties --execute
 
-        tx set --auto-local -r txgh-test-2.email 'email_<lang>.properties' --source-lang en --type PROPERTIES --source-file email_en.properties --execute
+        tx set --auto-local -r txgh-test.email 'i18n/email_<lang>.properties' --source-lang en --type UNICODEPROPERTIES --source-file i18n/email_en.properties --execute
 
-        tx set --auto-local -r txgh-test-2.javascript 'javascript_<lang>.properties' --source-lang en --type PROPERTIES --source-file javascript_en.properties --execute
+        tx set --auto-local -r txgh-test.javascript 'i18n/javascript_<lang>.properties' --source-lang en --type UNICODEPROPERTIES --source-file i18n/javascript_en.properties --execute
 
-        tx set --auto-local -r txgh-test-2.messages 'messages_<lang>.properties' --source-lang en --type PROPERTIES --source-file messages_en.properties --execute
+        tx set --auto-local -r txgh-test.messages 'i18n/messages_<lang>.properties' --source-lang en --type UNICODEPROPERTIES --source-file i18n/messages_en.properties --execute
 
 7. Verify that the resources have been added to .tx/config
 
@@ -117,31 +120,35 @@ Transifex requires a per project configuration file to store the project's detai
         [main]
         host = https://www.transifex.com
 
-        [txgh-test-2.api]
-        file_filter = api_<lang>.properties
-        source_file = api_en.properties
+        [txgh-test.api]
+        file_filter = i18n/api_<lang>.properties
+        source_file = i18n/api_en.properties
         source_lang = en
-        type = PROPERTIES
+        type = UNICODEPROPERTIES
 
-        [txgh-test-2.messages]
-        file_filter = messages_<lang>.properties
-        source_file = messages_en.properties
+        [txgh-test.messages]
+        file_filter = i18n/messages_<lang>.properties
+        source_file = i18n/messages_en.properties
         source_lang = en
-        type = PROPERTIES
+        type = UNICODEPROPERTIES
 
-        [txgh-test-2.email]
-        file_filter = email_<lang>.properties
-        source_file = email_en.properties
+        [txgh-test.email]
+        file_filter = i18n/email_<lang>.properties
+        source_file = i18n/email_en.properties
         source_lang = en
-        type = PROPERTIES
+        type = UNICODEPROPERTIES
 
-        [txgh-test-2.javascript]
-        file_filter = javascript_<lang>.properties
-        source_file = javascript_en.properties
+        [txgh-test.javascript]
+        file_filter = i18n/javascript_<lang>.properties
+        source_file = i18n/javascript_en.properties
         source_lang = en
-        type = PROPERTIES
+        type = UNICODEPROPERTIES
 
-8. Commit and push the changes to the remote repository
+8. Commit and push the changes to Github
+9. Push the project files to Transifex
+
+        tx push -s -t
+
 9. Edit the ```github_repo``` variable in ```puppet/manifests/txgh_default.pp``` to include the name of your repo.
         
         github_repo => 'ORCID/txgh_test',
@@ -181,7 +188,9 @@ Transifex requires a per project configuration file to store the project's detai
                         #transifex password - same as web UI password
                         api_password: XXXXXXXXXXXXXXX
                         #full github repo name including username - same as repo name in repos section above
-                        push_translations_to: githubuser/repo-name 
+                        push_translations_to: githubuser/repo-name
+                        #(optional)specifies which status should trigger push from transifex to github - translated or reviewed
+                        push_trigger: reviewed 
 
 ##Start the TXGH server
 

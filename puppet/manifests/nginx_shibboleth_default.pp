@@ -6,13 +6,14 @@ Exec {
 include bootstrap
 include orcid_base::baseapps
 include orcid_base::common_libs
+include orcid_auto_upgrades
 
 class {
    shibboleth_nginx:
       env => 'dev',
       api_ip_port => "127.0.0.1:8080",
-      about_ip_port => "127.0.0.1:8888",
       communities_ip_port => "127.0.0.1:7777",
+      about_ip_port => "127.0.0.1:8888",
       members_ip_port => "127.0.0.1:9999",
       pub_ip_port => "127.0.0.1:8080",
       registry_ip_port => "127.0.0.1:8080",

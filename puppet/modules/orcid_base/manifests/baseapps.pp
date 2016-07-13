@@ -2,13 +2,18 @@ class orcid_base::baseapps ($enable_google_authenticator = false) {
 
   # Every machine should have these packages and configuration files
 
+   exec { "install git-core ppa":
+      environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
+      command => "sudo add-apt-repository -y ppa:git-core/ppa",
+      returns => [0, 1],
+      creates => "/etc/apt/sources.list.d/git-core-ppa-trusty.list",
+   }
+
+
   $packagelist = [
     "curl",
-    "dnsutils",
     "emacs23-nox",
     "etckeeper",
-    "git",
-    "git-core",
     "haveged",
     "htop",
     "language-pack-en-base",
@@ -17,9 +22,6 @@ class orcid_base::baseapps ($enable_google_authenticator = false) {
     "lsof",
     "mailutils",
     "mosh",
-    "ntp",
-    "openssh-server",
-    "sudo",
     "tmux",
     "tcsh",
     "vim",
@@ -29,8 +31,23 @@ class orcid_base::baseapps ($enable_google_authenticator = false) {
     "unzip",
   ]
 
+  $packagelist_latest = [
+    "dnsutils",
+    "git",
+    "git-core",
+    "ntp",
+    "openssh-server",
+    "sudo",
+  ]
+
   package { $packagelist:
-    ensure => installed
+    ensure => installed,
+    require => [Exec['install git-core ppa']]
+  }
+
+  package { $packagelist_latest:
+    ensure => latest,
+    require => [Exec['install git-core ppa']]
   }
 
   ## Everyone deserves some good times.  Swap in a reasonable ntp.conf
@@ -55,9 +72,18 @@ class orcid_base::baseapps ($enable_google_authenticator = false) {
     require => Package['openssh-server'],
   }
 
-  file { '/etc/pam.d/sshd':
+  if $enable_google_authenticator == true {
+	  file { '/etc/pam.d/sshd':
+		mode   => '0644',
+		source => 'puppet:///modules/orcid_base/etc/pam.d/sshd',
+		notify  => Service["ssh"],
+		require => Package['libpam-google-authenticator'],
+	  }
+  }
+
+  file { '/etc/security/access-local.conf':
     mode   => '0644',
-    source => 'puppet:///modules/orcid_base/etc/pam.d/sshd',
+    source => 'puppet:///modules/orcid_base/etc/security/access-local.conf',
     notify  => Service["ssh"],
     require => Package['libpam-google-authenticator'],
   }

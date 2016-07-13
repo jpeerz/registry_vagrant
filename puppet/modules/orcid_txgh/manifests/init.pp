@@ -1,9 +1,13 @@
 class orcid_txgh ($github_repo) {
 
+  exec { "sudo_orcid_txgh":
+    command => "sudo usermod -a -G sudo orcid_txgh",
+    require => User["orcid_txgh"]
+  }
+
   $packages = [
     "build-essential", "zlib1g-dev", "libssl-dev", "libreadline6-dev", "libyaml-dev"
   ]
-
 
   # install packages
   package { $packages:
@@ -11,17 +15,27 @@ class orcid_txgh ($github_repo) {
     require  => Exec["apt-get update"]
   }
 
-  exec { "ruby":
-    environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    command => template("orcid_txgh/scripts/install_ruby.erb"),
-    require => Package["wget"],
-    timeout => 1800,
+  exec { 'gpg_key':
+    command => "sudo bash -l -c 'gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3'",
+    require => [File["/home/orcid_txgh"], User["orcid_txgh"], Exec["sudo_orcid_txgh"]]
   }
+
+  exec { 'rvm':
+    command => "sudo bash -l -c 'curl -L https://get.rvm.io | bash -s stable'",
+    creates => "/usr/local/rvm/bin/rvm",
+    require => [Package['curl'], Exec['gpg_key']]
+  }
+
+  exec { 'ruby':
+    command => "sudo bash -l -c '/usr/local/rvm/bin/rvm autolibs disable && /usr/local/rvm/bin/rvm install 2.1.5'",
+    creates => "/usr/local/rvm/bin/rvm/ruby",
+    require => Exec['rvm']
+  }
+
 
   $txgh_loc = '/home/orcid_txgh'
   $txgh_rb = "txgh-master"
   $txgh_zip = "${txgh_rb}.zip"
-
 
   # download the txgh-master zip
   file { "/home/orcid_txgh/$txgh_zip":
@@ -32,9 +46,16 @@ class orcid_txgh ($github_repo) {
 
   # unzip txgh-master zip at the desired location
   exec { "unzip $txgh_zip":
-    command => "sudo unzip -o $txgh_loc/$txgh_zip -d $txgh_loc",
+    command => "sudo unzip -o $txgh_loc/$txgh_zip -d $txgh_loc && chown orcid_txgh:orcid_txgh $txgh_loc/$txgh_rb",
     creates => "$txgh_loc/$txgh_rb",
     require => File["/home/orcid_txgh/$txgh_zip"]
+  }
+
+   # download the .ruby-version file
+  file {".ruby-version":
+    path   => "$txgh_loc/$txgh_rb/.ruby-version",
+    source  => "puppet:///modules/orcid_txgh/.ruby-version",
+    require => Exec["unzip $txgh_zip"]
   }
 
   # download the txgh.yml configuration file
@@ -44,8 +65,9 @@ class orcid_txgh ($github_repo) {
     require => Exec["unzip $txgh_zip"]
   }
 
+
   # download the .tx/config configuration file
-  exec {"tx.config":
+  exec { "tx.config":
     environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
     provider => shell,
     command => template("orcid_txgh/scripts/download_tx_config.erb"),
@@ -53,10 +75,8 @@ class orcid_txgh ($github_repo) {
   }
 
   exec { "bundler":
-    environment => [ "DEBIAN_FRONTEND=noninteractive" ], # same as export DEBIAN_FRONTEND=noninteractive
-    provider => shell,
-    command => template("orcid_txgh/scripts/install_bundler.erb"),
-    require => Exec["tx.config"]
+    command => "bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && gem install bundler && bundle install'",
+    require => [Exec["tx.config"], File[".ruby-version"]]
   }
 
   $ngrok_loc = '/home/orcid_txgh'
@@ -74,9 +94,12 @@ class orcid_txgh ($github_repo) {
   exec { "unzip $ngrok_zip":
     command => "sudo unzip -o $ngrok_loc/$ngrok_zip",
     creates => "/$ngrok_loc/$ngrok_bin",
-    require => Exec["bundler"]
+    #require => Exec["bundler"]
   }
 
-
+  exec { "rackup":
+    command => "bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && nohup rackup -o 0.0.0.0 > $(date +%m-%d-%Y)_txgh.log&'",
+    require => Exec["bundler"]
+  }
 
 }

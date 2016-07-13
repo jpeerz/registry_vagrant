@@ -10,14 +10,12 @@ include orcid_base::common_libs
 
 class {
   orcid_txgh:
-    github_repo => 'ORCID/txgh_test',
+    github_repo => 'ORCID/ORCID-Source',
 }
-
-
 
 user { "orcid_txgh":
   ensure  => present,
-  uid  => '7012',
+  uid  => '7013',
   shell  => '/bin/bash',
   home  => '/home/orcid_txgh',
   managehome => true,

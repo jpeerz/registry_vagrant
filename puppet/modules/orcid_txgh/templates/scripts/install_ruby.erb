@@ -5,3 +5,6 @@ cd ruby-2.1.5/
 ./configure --prefix=/usr/local
 make
 sudo make install
+sudo update-alternatives --install /usr/bin/ruby ruby /usr/local/bin/ruby 400
+sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 900
+sudo update-alternatives --set ruby /usr/local/bin/ruby
