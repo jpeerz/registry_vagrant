@@ -5,7 +5,8 @@ class orcid_jenkins ($is_vagrant = false) {
 	$jenkins_user = 'jenkins'
 	$jenkins_group = 'jenkins'
 
-	require orcid_tomcat
+	require orcid_java
+	require orcid_maven
 
 	exec { "install jenkins 1":
 		command => "wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -",
