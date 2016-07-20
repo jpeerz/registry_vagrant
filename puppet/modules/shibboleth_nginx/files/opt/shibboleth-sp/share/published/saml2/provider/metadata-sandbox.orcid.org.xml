@@ -8,16 +8,16 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
-<ds:DigestValue>2bFqgh/Cx89mbb6FgnD9QmzE2X86aEWJj6psrG+uxTJXMYckI9VwL6QZVxT9U2t34h4KJXO47Zhe
-IO5DFh9XCw==</ds:DigestValue>
+<ds:DigestValue>RKBQ8nOjYH+dqnZkJLxYxOsVp5XcabFBHZZUf1RWqrtGjFmpi8euOIw/oGonaArEgPqmgpnUU5j9
+PjM8am9x4w==</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-otPDWZXr63ie14Fdn+05jpXKp7WE63NubiVI7HVk0V2xO7Eddl8bSf6TSkSjtVlV7XA+f26ITSs3
-uWp+58qmxxPPY3wSUg1MrcJ2wCGtuxITpDgUuKTnA6jV/MKDqGEEr5nrU5RQm1JkSM5htg+Zf1bQ
-g9pLuAwxw0awGzgXOnHMu6H0nJdrUApsFxGHa2VqVhOsRj3edpnK6m8EetXoImRXj9byJWGOC/qS
-v7rxp7EvZdS4f4WZaqSrovF02izbiud1nj2PmioY8Pl7rnzgfHLKlZwHdz++5SIu1Cx9lnebxakv
-9MImTvcPDE7nNZlxgu50O25H1DDi1tiaIQ0rYw==
+PE4jj3S/jnZbsyRl11FoizuCiK3/9YF+YZWA3dzXPdYKYekEGs4ncuwfDSbN1m72svRIqF7pJcV0
+NstavsP0sfd4HJFHwyyG/g9LjEJnHhXtQIkeDlf8WkvIHfUGBaHgx+MsQiO/oGfrCRZiKjUZJOOk
+ua01BeRnVBMwCaePSTbCuhNbSH+XRku8hlsJamaeAJKpZlDm1zFLmWN3uNlLvWBsZS00Y1OdX5hV
+EmEVh0jk0+Xahps4jC5qMvvNnRhn5/2FXomz/g48QixRApeDl0CHU+mQQuZ4vC9hk7DllIZuY7DS
+k7R03usMiijL82052LRfKTmQfgJdMjjhuEkknw==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -77,8 +77,8 @@ CS4l691bU1aXdAVZ4gUi4yJF+P00QeMYL/jYzi/mKw==
       <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://sandbox.orcid.org/Shibboleth.sso/Login"/>
       <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://sandbox.orcid.org/Shibboleth.sso/Login" index="1"/>
       <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
-        <mdui:DisplayName xml:lang="en">ORCID Sandbox</mdui:DisplayName>
-        <mdui:Description xml:lang="en">ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized.</mdui:Description>
+        <mdui:DisplayName xml:lang="en">ORCID Sandbox (test) SP</mdui:DisplayName>
+        <mdui:Description xml:lang="en">ORCID’s vision is a world where all who participate in research, scholarship, and innovation are uniquely identified and connected to their contributions and affiliations across disciplines, borders, and time. The ORCID Sandbox test environment primary is used for testing ORCID API functions.</mdui:Description>
         <mdui:InformationURL xml:lang="en">http://members.orcid.org/api/faq/sandbox-different-production-registry</mdui:InformationURL>
         <mdui:PrivacyStatementURL xml:lang="en">http://orcid.org/content/orcid-privacy-policy</mdui:PrivacyStatementURL>
       </mdui:UIInfo>
@@ -130,8 +130,8 @@ zi/mKw==
     <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://sandbox.orcid.org/Shibboleth.sso/SAML2/Artifact" index="3"/>
     <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://sandbox.orcid.org/Shibboleth.sso/SAML2/ECP" index="4"/>
     <md:AttributeConsumingService index="1">
-      <md:ServiceName xml:lang="en">ORCID</md:ServiceName>
-      <md:ServiceDescription xml:lang="en">ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized.</md:ServiceDescription>
+      <md:ServiceName xml:lang="en">ORCID Sandbox (test) SP</md:ServiceName>
+      <md:ServiceDescription xml:lang="en">ORCID’s vision is a world where all who participate in research, scholarship, and innovation are uniquely identified and connected to their contributions and affiliations across disciplines, borders, and time. The ORCID Sandbox test environment primary is used for testing ORCID API functions.</md:ServiceDescription>
       <md:RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
       <md:RequestedAttribute FriendlyName="eduPersonTargetedID" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
       <md:RequestedAttribute FriendlyName="displayName" Name="urn:oid:2.16.840.1.113730.3.1.241" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>

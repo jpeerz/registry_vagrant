@@ -8,16 +8,16 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
-<ds:DigestValue>SzM5G4MMO3zgYoPMooGJZYT6uZIVIvCqMOP+mXY/ci20TyTCM3Z8TuGt8up1dfnLNCEg1Q9s15vK
-AK6RdpQYUw==</ds:DigestValue>
+<ds:DigestValue>OajEi+b+tEhg3BgWFixBG4IZw5QJoaVE1X7v4O9Vr+iflMpWn5+/m3/I6xNtbHsHLLTSx/NHrrFQ
+exu623BTbw==</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-h756v2+HifT2NXW9Q5GCml09DwL14ca7toDYNWpOGECp23kNX7fsFdB6ZD3/JJKM3GmAz0K5UjD+
-X3Us6bBht73hEsbNzEJRQPhU2CyNdqnsdPuotMAlQMyK4o7OF8TpvTYzRgd6Man698RcGUuE8LIu
-/w5fkqZuFk6K9c1scmfu6r14qpLDIOmLwoIbmpUh9oSq6M8dYrzVv2XYPqC+2TN0fx3TQXwyGMXW
-rqDtFO+3ZQ2BQXuD/EY+9ezFNtMHwAX5xw8jXxgnVxPMvMTzSv2P7XDnw2o1CYTcTPTjGTDffvK9
-VmWV1L9oDoukh+tsiOYyIKMDzm+I0dwmukAIBw==
+OM5l1vfRubGjLYmQRJthOtu/KVBz79HJdlRwh2aU0kCC3hOJ9MuJRKxJrkc3Bq294uyip9n6KMaW
+I8mbgrlJbAAd3wO/RqEfzNqPJofWWAHJ2sp5dWDhQexfrgasorG3LtU0TK4Q0/QEMZKeMDLqlifJ
+HyA2+8Qr7ZIfeYyYw4pZYREnbme45Z2BoVEnzgLVGDL64TY5EiIiUNd+09gTWMpdyHVkBldAdsID
+TrwLRXgIpkQszktInRZMQmNzMyMIsWSlDjVAPEP1mj59OEsjpj9lrlNv0Oc6KBwwwm9O1M1ulZLs
+HBSMopkY+DsmHEts1u18Zutwj+Mu4PUDxA16sQ==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -78,7 +78,7 @@ X3SaEh/RQYZJA3QVBkWiqkc6JA==
       <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://orcid.org/Shibboleth.sso/Login" index="1"/>
       <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
         <mdui:DisplayName xml:lang="en">ORCID</mdui:DisplayName>
-        <mdui:Description xml:lang="en">ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized.</mdui:Description>
+        <mdui:Description xml:lang="en">ORCID’s vision is a world where all who participate in research, scholarship, and innovation are uniquely identified and connected to their contributions and affiliations across disciplines, borders, and time. We provide an identifier for these individuals to use with their name, and open tools that enable transparent and trustworthy connections between researchers, their contributions, and affiliations.</mdui:Description>
         <mdui:InformationURL xml:lang="en">http://orcid.org/content/about-orcid</mdui:InformationURL>
         <mdui:PrivacyStatementURL xml:lang="en">http://orcid.org/content/orcid-privacy-policy</mdui:PrivacyStatementURL>
       </mdui:UIInfo>
@@ -130,7 +130,7 @@ te/OkSSYJpEuzeIrdfyHcsf9dHj+wE1MORUFfbx0FsGx2majBhOeRBSM5bjT1yQe
     <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://orcid.org/Shibboleth.sso/SAML2/ECP" index="4"/>
     <md:AttributeConsumingService index="1">
       <md:ServiceName xml:lang="en">ORCID</md:ServiceName>
-      <md:ServiceDescription xml:lang="en">ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized.</md:ServiceDescription>
+      <md:ServiceDescription xml:lang="en">ORCID’s vision is a world where all who participate in research, scholarship, and innovation are uniquely identified and connected to their contributions and affiliations across disciplines, borders, and time. We provide an identifier for these individuals to use with their name, and open tools that enable transparent and trustworthy connections between researchers, their contributions, and affiliations.</md:ServiceDescription>
       <md:RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
       <md:RequestedAttribute FriendlyName="eduPersonTargetedID" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
       <md:RequestedAttribute FriendlyName="displayName" Name="urn:oid:2.16.840.1.113730.3.1.241" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
