@@ -8,16 +8,16 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
-<ds:DigestValue>RKBQ8nOjYH+dqnZkJLxYxOsVp5XcabFBHZZUf1RWqrtGjFmpi8euOIw/oGonaArEgPqmgpnUU5j9
-PjM8am9x4w==</ds:DigestValue>
+<ds:DigestValue>gz8n6XuUO2EAjbEWUFGr4u2clHrwvL9y+45SUzZlfnB9JCnH1s/kEsj9PY3ycjrkdlAkH0QvmFG4
+iRiX45kFSg==</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-PE4jj3S/jnZbsyRl11FoizuCiK3/9YF+YZWA3dzXPdYKYekEGs4ncuwfDSbN1m72svRIqF7pJcV0
-NstavsP0sfd4HJFHwyyG/g9LjEJnHhXtQIkeDlf8WkvIHfUGBaHgx+MsQiO/oGfrCRZiKjUZJOOk
-ua01BeRnVBMwCaePSTbCuhNbSH+XRku8hlsJamaeAJKpZlDm1zFLmWN3uNlLvWBsZS00Y1OdX5hV
-EmEVh0jk0+Xahps4jC5qMvvNnRhn5/2FXomz/g48QixRApeDl0CHU+mQQuZ4vC9hk7DllIZuY7DS
-k7R03usMiijL82052LRfKTmQfgJdMjjhuEkknw==
+Qfle5RGlEnMvBjMobx++X36cjjHOpjNpPM5gm/FZHUuEb3uHWCMEudSePVz72LuFEV2yT2ALVqhK
+hetxcmuUmBl21OKpPo7tb8yGO1R5Yf4WuDqNplR57BcWwH8bXYfO5fCMH08pCZUCYcx0lwF6lJMY
+XRwoq1BIPnC6Eg1SXEBauZuX1i4GcaLy17MOGSm5DTzzXfrlBRG1bQcHh5VVSrek7Nv0Mn2rcM2R
+4OIZKwj4va3xgSFOfF5NUUvzuh9cJ84huIadpWVRHF3wQeR1/uADO86IEKYTYSJK88VbRSD/C6UI
+/Zw9AzQisqW21a39CzVg8tWyQMBaChBvZcFrmw==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -148,15 +148,15 @@ zi/mKw==
 
   <md:ContactPerson contactType="support">
     <md:GivenName>ORCID Support</md:GivenName>
-    <md:EmailAddress>support@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="administrative">
     <md:GivenName>ORCID Team</md:GivenName>
-    <md:EmailAddress>info@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:info@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="technical">
     <md:GivenName>ORCID Development Team</md:GivenName>
-    <md:EmailAddress>support@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
 
 </md:EntityDescriptor>
