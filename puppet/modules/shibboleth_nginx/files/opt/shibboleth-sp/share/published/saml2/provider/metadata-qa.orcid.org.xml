@@ -8,16 +8,16 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
-<ds:DigestValue>l3xt1Wk2nY4aTWSjlmGJPJY/MFkNeCzQTrqGMtoULLNWxQgV2QOJFnXbQYePMabcBfn1o7DKkj0L
-vo+TQ8b1KQ==</ds:DigestValue>
+<ds:DigestValue>f2JU25ITsNVunuuqZE3PrceE2TpqU2KbnXquaOnADtK4XIG8ZGcoEoLdC+Qe429oW4MP/bvLvldS
+Pds0d1kPcw==</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-WUwhdZgdAT2zHLSIJIqn4VNnAyUXlK165A+H/F+iQ7ibKP3TTC8p/Wzk/LvN2wDSR/Bm3UTkUkyT
-hepQwXgSYx+4EM4wHLTyyimNB7gELuPG/BE5no3VG3bcug1OoVul0TZRGOecpsMpDu59EGrBiYU8
-wJqYxwlzMZZJMpWeWJ8rUhc/rEEW+ixh/IteUXJdkeszzHNc1UcmLKwZpBL0nVnz2qPTMSzk6BNb
-LjXBBsL42h9NTH2sW+fL7yewJh0jXjRvH22cAhbfgR7YPhGV+Ru0abnQfW2KGHisqsk9Qap/2Sp9
-Zte9tPwAONPyQkugawlEttz1Huk9reIHW3RUeA==
+qZ0xH6hcL2GQCWqy6lr8JIB7sNNSCVbVoev2nNtXBQ9QTDubCppYMaCxiZc2Ad/m+5RcArihRycp
+ooi4MDoPK2WdzaIr5ZjQ924Ay7SLMIZMxfdZzkwS+R0RnQDqLSctKKV7JAMufOavG5YOXYojb7nG
+lbmz3oKk+FN8wWJgMK8IdEh/HBdpNd4vEB0bu+z7+8rbEAcgwAIYAECYvrQZWRF7eORRrxLjLh1a
+wdcrmjL5qSXdT2lJ3eOboMSk529dMbReogzbaxIxg97v6xcgmRKPOQRgnbral3E2dBsim6zQ51cd
+X76fiyE9ZhPGeqZlMrVMXbwKxFNwHwlzsTC49g==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -147,15 +147,15 @@ UXHHgh/dgmalPjdWLxfwdf31RumfOmINO5Y7/CmCe4MddvsU6g==
 
   <md:ContactPerson contactType="support">
     <md:GivenName>ORCID Support</md:GivenName>
-    <md:EmailAddress>support@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="administrative">
     <md:GivenName>ORCID Team</md:GivenName>
-    <md:EmailAddress>info@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:info@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="technical">
     <md:GivenName>ORCID Development Team</md:GivenName>
-    <md:EmailAddress>support@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
 
 </md:EntityDescriptor>

@@ -8,16 +8,16 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
-<ds:DigestValue>OajEi+b+tEhg3BgWFixBG4IZw5QJoaVE1X7v4O9Vr+iflMpWn5+/m3/I6xNtbHsHLLTSx/NHrrFQ
-exu623BTbw==</ds:DigestValue>
+<ds:DigestValue>cpEaAMn/nvjKbYPxMDapD5s//Mo8XL3LZMOoz6VdxVFVbmCCHQ+sdr/VHqKhMDjnUOGxXE479RLj
+5w8YtDKMew==</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-OM5l1vfRubGjLYmQRJthOtu/KVBz79HJdlRwh2aU0kCC3hOJ9MuJRKxJrkc3Bq294uyip9n6KMaW
-I8mbgrlJbAAd3wO/RqEfzNqPJofWWAHJ2sp5dWDhQexfrgasorG3LtU0TK4Q0/QEMZKeMDLqlifJ
-HyA2+8Qr7ZIfeYyYw4pZYREnbme45Z2BoVEnzgLVGDL64TY5EiIiUNd+09gTWMpdyHVkBldAdsID
-TrwLRXgIpkQszktInRZMQmNzMyMIsWSlDjVAPEP1mj59OEsjpj9lrlNv0Oc6KBwwwm9O1M1ulZLs
-HBSMopkY+DsmHEts1u18Zutwj+Mu4PUDxA16sQ==
+UBUAZTcDdfLKylc4D0pR1Kqj1giynh+jsq2RQvZKc3BLpPEYlXxNF5i9Arl9kFI0G01v9yI5Zfdh
+GKS2FyINooLdnAyCkWl5w7A+DR0NJLATufkvaIn3WsF5LwpvgGfsBqEsdBFOvxtjth+JJxae9Ed6
+47qj3/wz67ztByhA1Bb2kYeyTLqzEbbrJWvZx6GenOcB6hilH/a64/qYup/iq6A5BD+u1H7s0LuY
+RinFzrdMTDP+/E2t4J8mNER25IiAmhkc5iv4GgdS/pUnCuZAg9vAwLc7OoiCIG2S4zeA+O+jI8T8
+or3n4A570loJd7LuWCWo6dUT6rmAdq+0aj37Mw==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -147,15 +147,15 @@ te/OkSSYJpEuzeIrdfyHcsf9dHj+wE1MORUFfbx0FsGx2majBhOeRBSM5bjT1yQe
 
   <md:ContactPerson contactType="support">
     <md:GivenName>ORCID Support</md:GivenName>
-    <md:EmailAddress>support@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="administrative">
     <md:GivenName>ORCID Team</md:GivenName>
-    <md:EmailAddress>info@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:info@orcid.org</md:EmailAddress>
   </md:ContactPerson>
   <md:ContactPerson contactType="technical">
     <md:GivenName>ORCID Development Team</md:GivenName>
-    <md:EmailAddress>support@orcid.org</md:EmailAddress>
+    <md:EmailAddress>mailto:support@orcid.org</md:EmailAddress>
   </md:ContactPerson>
 
 </md:EntityDescriptor>
