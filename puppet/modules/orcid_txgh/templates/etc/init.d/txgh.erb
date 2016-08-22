@@ -1,0 +1,61 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:        txgh
+# Required-Start:  $network
+# Required-Stop:   $network
+# Default-Start:   2 3 4 5
+# Default-Stop:    1
+# Short-Description: Start TXGH
+### END INIT INFO
+
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/local/rvm/bin
+
+. /lib/lsb/init-functions
+
+PRGDIR="<%= @txgh_loc %>/<%= @txgh_rb %>"
+EXECUTABLE="start_txgh.sh"
+
+case $1 in
+        start)
+                log_daemon_msg "Starting TXGH"
+                bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && nohup rackup -o 0.0.0.0 > $(date +%m-%d-%Y)_txgh.log&'
+                status=$?
+                log_end_msg $status
+                ;;
+        stop)
+                log_daemon_msg "Stopping TXGH"
+                exec "$PRGDIR"/"$EXECUTABLE" stop "$@"
+                log_end_msg $?
+                ;;
+        restart|force-reload)
+                $0 stop && sleep 2 && $0 start
+                ;;
+        try-restart)
+                if $0 status >/dev/null; then
+                        $0 restart
+                else
+                        exit 0
+                fi
+                ;;
+        reload)
+                exit 3
+                ;;
+        status)
+                PID=`pgrep -f txgh-master`
+                STATUS=$?
+                if [ $STATUS = 0 ]; then
+                        echo "TXGH is running: pid $PID"
+                        exit 0
+                else
+                        echo "TXGH is not running"
+                        exit 2
+                fi
+                ;;
+        *)
+                echo "Usage: $0 {start|stop|restart|try-restart|force-reload|status}"
+                exit 2
+                ;;
+esac
+                                                                                                                                                                  70,1          Bot
+

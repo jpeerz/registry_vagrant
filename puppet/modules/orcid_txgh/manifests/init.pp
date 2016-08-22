@@ -97,9 +97,32 @@ class orcid_txgh ($github_repo) {
     #require => Exec["bundler"]
   }
 
-  exec { "rackup":
-    command => "bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && nohup rackup -o 0.0.0.0 > $(date +%m-%d-%Y)_txgh.log&'",
+  #exec { "rackup":
+    #command => "bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && nohup rackup -o 0.0.0.0 > $(date +%m-%d-%Y)_txgh.log&'",
+    #require => Exec["bundler"]
+  #}
+
+  file { "/etc/init.d/txgh":
+    ensure => file,
+    mode  => '0755',
+    content => template('orcid_txgh/etc/init.d/txgh.erb'),
+    owner  => "root",
+    group  => "root",
     require => Exec["bundler"]
   }
+
+  file { [ "/etc/rc0.d/K20txgh", "/etc/rc1.d/K20txgh", "/etc/rc2.d/S20txgh",
+    "/etc/rc3.d/S20txgh", "/etc/rc4.d/S20txgh", "/etc/rc5.d/S20txgh", "/etc/rc6.d/K20txgh" ]:
+    ensure  => link,
+    target  => '/etc/init.d/txgh',
+    require => File["/etc/init.d/txgh"]
+  }
+
+  service { 'txgh':
+    ensure => 'running',
+    enable => 'true',
+    require => File["/etc/init.d/txgh"]
+  }
+
 
 }
