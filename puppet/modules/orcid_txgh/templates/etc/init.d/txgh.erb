@@ -21,7 +21,7 @@ EXECUTABLE="start_txgh.sh"
 case $1 in
         start)
                 log_daemon_msg "Starting TXGH"
-                bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && nohup rackup -o 0.0.0.0 > $(date +%m-%d-%Y)_txgh.log&'
+                bash -l -c 'su - orcid_txgh && cd /home/orcid_txgh/txgh-master && nohup rackup -o 0.0.0.0 > txgh.log&'
                 status=$?
                 log_end_msg $status
                 ;;

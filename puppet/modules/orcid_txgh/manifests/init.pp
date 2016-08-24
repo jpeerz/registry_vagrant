@@ -124,5 +124,17 @@ class orcid_txgh ($github_repo) {
     require => File["/etc/init.d/txgh"]
   }
 
+  package { logrotate:
+    ensure => installed,
+  }
+
+  file { "/etc/logrotate.d/txgh":
+    owner => root,
+    group => root,
+    mode => 644,
+    source => "puppet:///modules/orcid_txgh/etc/logrotate.d/txgh",
+    require => Package["logrotate"],
+  }
+
 
 }
