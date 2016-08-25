@@ -1,0 +1,7 @@
+/home/orcid_txgh/txgh-master/txgh.log {
+    copytruncate
+    monthly
+    dateext
+    compress
+    missingok
+}
