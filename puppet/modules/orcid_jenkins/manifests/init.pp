@@ -11,7 +11,7 @@ class orcid_jenkins ($is_vagrant = false) {
           shell  => '/bin/bash',
           home  => '/var/lib/jenkins',
           managehome => true,
-          password => '$6$ZHUQRrIW.9iTAJ0Z$9vyWYor7k6SwxWvra5osKjZyuqHN30tQQJJFsrbDQkwfN1z1eRG7LUJUK6krOIWlCLCR9G05tA5pXfS4CPsyO/',
+          password => '$6$Gs4NbjDfI$cMEvLx6RXFwSBelTRxdCnhGDKxLV286gLqTcP.oODSaN4m4TDxTYF5yp4lHBQCfbn2bbF0v.dCQe2xAcnxnxu1',
         }
         
 	exec { "install_jenkins_key":
@@ -29,8 +29,7 @@ class orcid_jenkins ($is_vagrant = false) {
 	}
 	
 	package { "jenkins":
-		#ensure => installed,
-                ensure => "latest",
+                ensure => 1.639,
 		require => Exec["update_ubuntu_repos"]
 	}
 	
@@ -67,17 +66,17 @@ class orcid_jenkins ($is_vagrant = false) {
 		ensure        => file,
 		path          => '/etc/default/jenkins',
 		content       => template('orcid_jenkins/etc/default/jenkins.erb'),
-		require       => [
-                    File["/var/lib/jenkins"],
-                    Package['jenkins']
-                ]
+		require       => File["/var/lib/jenkins"]
 	}
 	
         file { "/etc/default/jenkins2":
                 ensure        => file,
                 path          => '/etc/default/jenkins2',
                 content       => template('orcid_jenkins/etc/default/jenkins.erb'),
-                require       => File["/var/lib/jenkins"]
+                require       => [
+                    File["/var/lib/jenkins"],
+                    Package['jenkins']
+                ]
         }
         
         # Vagrant puppet has issues starting a service vagrant         
