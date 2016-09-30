@@ -29,7 +29,7 @@ class orcid_jenkins ($is_vagrant = false) {
 	}
 	
 	package { "jenkins":
-                ensure => 1.639,
+                ensure => latest,
 		require => Exec["update_ubuntu_repos"]
 	}
 	
