@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>script</fullName>
+  <description></description>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>oU/a2fAAhZv192aj1s3jWT58NCg7UCLKDWyZ4Y2P9pPvCrzA45ZmG6BMgXjioWdE</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.18">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.11">
+      <emailAddress>script@invalid.org</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName></primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>#jbcrypt:$2a$10$/kOJC/u8fY9dM2x5DklaPO/LWkr32O9ovU5aSISvE0cmAb4wsm3da</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+WKzdmKVcRtyp9CzuFCSc2mvLmFdWbygwgOdXSlnq2nTX/DYRIvsfHxo7Fda55Qhk+ClKASQE83a6EAaeD8RHOj3Rd4bi0qPf7YKxDDn0y3TlLWJuF7OWbs28SaNHIoxM/cFsgV8L51zz7tqhWBA1zAYXKOtnO7p5fQwnSQF2dVSWNLC4z356E1UBdwZwdxWfKKKJ4P8gh6U3RwnhAF8lUogXN2cGvNIXOkwImYgdYW8mgT9Nm8pZkkK5F8fvziBSdj0MEbhFXA5lo31A056GCIPj46HTwhRQu3DcCZDm/O6BPpRDB/fiOD6i7b30c8LBMLu4n8FxFb3nvgCa1EL9 root@localhost</authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+    <jenkins.security.LastGrantedAuthoritiesProperty>
+      <roles>
+        <string>authenticated</string>
+      </roles>
+      <timestamp>1475189417618</timestamp>
+    </jenkins.security.LastGrantedAuthoritiesProperty>
+  </properties>
+</user>
