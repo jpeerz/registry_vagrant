@@ -4,15 +4,6 @@ class orcid_jenkins ($is_vagrant = false) {
 	$jenkins_port   = '8383'
 	$jenkins_user   = 'jenkins'
 	$jenkins_group  = 'jenkins'
-	
-        user { "jenkins":
-          ensure  => present,
-          uid  => '5001',
-          shell  => '/bin/bash',
-          home  => '/var/lib/jenkins',
-          managehome => true,
-          password => '$6$Gs4NbjDfI$cMEvLx6RXFwSBelTRxdCnhGDKxLV286gLqTcP.oODSaN4m4TDxTYF5yp4lHBQCfbn2bbF0v.dCQe2xAcnxnxu1',
-        }
         
 	exec { "install_jenkins_key":
 		command => "wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -",
@@ -68,16 +59,6 @@ class orcid_jenkins ($is_vagrant = false) {
 		content       => template('orcid_jenkins/etc/default/jenkins.erb'),
 		require       => File["/var/lib/jenkins"]
 	}
-	
-        file { "/etc/default/jenkins2":
-                ensure        => file,
-                path          => '/etc/default/jenkins2',
-                content       => template('orcid_jenkins/etc/default/jenkins.erb'),
-                require       => [
-                    File["/var/lib/jenkins"],
-                    Package['jenkins']
-                ]
-        }
         
         # Vagrant puppet has issues starting a service vagrant         
         if $is_vagrant == true {
@@ -88,6 +69,3 @@ class orcid_jenkins ($is_vagrant = false) {
 	   }
         }
 }
-
-
-
