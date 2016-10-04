@@ -51,7 +51,14 @@ We can confirm new version is installed with
         get-node                        Dumps the node definition XML to stdout.
         get-view                        Dumps the view definition XML to stdout.
         
-    
+        
+        ```
+        java -jar jenkins-cli.jar -i ~/.ssh/id_rsa_jenkins -s http://ci-2.orcid.org:8383/ list-plugins
+        java -jar jenkins-cli.jar -i ~/.ssh/id_rsa_jenkins -s http://ci-2.orcid.org:8383/ get-job ORCID-push_checker > ORCID-push_checker.xml
+        ```
+        
+        Next are available options in version 2.x (only for reference)
+        
         ```
         java -jar jenkins-cli.jar -i .ssh/id_rsa_jenkins -s http://ci-2.orcid.org:8383/ get-credentials-as-xml > credentials.xml
         java -jar jenkins-cli.jar -i .ssh/id_rsa_jenkins -s http://ci-2.orcid.org:8383/ get-credentials-domain-as-xml > credentials-domain.xml
@@ -59,17 +66,6 @@ We can confirm new version is installed with
         java -jar jenkins-cli.jar -i .ssh/id_rsa_jenkins -s http://ci-2.orcid.org:8383/ get-view > view.xml
         ```
 
-
-TODO Migration
-
-    
-    
-    
-    
-    
-    
-    
-    
 2. At ispuppet server
     * Update puppet _package_ definition to *latest* in file /root/git/registry_vagrant/puppet/modules/orcid_jenkins/manifests/init.pp
     ```
@@ -80,7 +76,7 @@ TODO Migration
     ```
 3. At ci-2 server
     * Run puppet agent command
-4. Additional UI configuration steps are required
+4. Additional UI configuration steps might be required
     * Follow instructions at [JENKINS/Upgrade+wizard](https://wiki.jenkins-ci.org/display/JENKINS/Upgrade+wizard)
 
 ## Validation
