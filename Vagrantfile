@@ -143,5 +143,33 @@ Vagrant.configure("2") do |config|
     end
 
   end
+  
+  config.vm.define "orcid_jenkins", autostart: false do |orcid_jenkins|
+      
+    orcid_jenkins.vm.box = "trusty64"
 
+    orcid_jenkins.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+
+    orcid_jenkins.vm.provider "virtualbox" do |v|
+      v.gui = true
+      v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
+      v.memory = 4000
+      v.cpus = 4
+    end
+    
+    orcid_jenkins.vm.network :forwarded_port, guest: 8383, host: 8383
+    orcid_jenkins.vm.network :forwarded_port, guest: 8080, host: 8081
+
+    orcid_jenkins.vm.provision :shell, :path => "install_puppet.sh"
+
+    host_name = ENV['HOST_NAME']
+
+    orcid_jenkins.vm.provision "puppet" do |puppet|
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file  = "orcid_jenkins.pp"
+      puppet.module_path    = "puppet/modules"
+      puppet.options        = "--verbose --debug"
+    end         
+  end
+  
 end
