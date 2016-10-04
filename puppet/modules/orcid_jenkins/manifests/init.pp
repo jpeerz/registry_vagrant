@@ -20,12 +20,14 @@ class orcid_jenkins ($is_vagrant = false) {
 	}
 	
 	package { "jenkins":
-                ensure => latest,
+    ensure => latest,
+    #ensure => 1.639,
 		require => Exec["update_ubuntu_repos"]
 	}
 	
 	file { "/var/lib/jenkins":
 		ensure  => directory,
+    recurse => true,
 		owner => jenkins,
 		group => jenkins,
 		require	=> Package["jenkins"]
@@ -33,6 +35,7 @@ class orcid_jenkins ($is_vagrant = false) {
 
 	file { "/var/cache/jenkins":
 		ensure  => directory,
+    recurse => true,
 		owner => jenkins,
 		group => jenkins,
 		require   => File["/var/lib/jenkins"]
@@ -40,6 +43,7 @@ class orcid_jenkins ($is_vagrant = false) {
 
 	file { "/var/log/jenkins":
 		ensure  => directory,
+    recurse => true,
 		owner => jenkins,
 		group => jenkins,
 		require   => File["/var/cache/jenkins"]
@@ -60,12 +64,12 @@ class orcid_jenkins ($is_vagrant = false) {
 		require       => File["/var/lib/jenkins"]
 	}
         
-        # Vagrant puppet has issues starting a service vagrant         
-        if $is_vagrant == true {
-           service { "jenkins":
-		ensure    => running,
-		enable    => true,
-		require   => File["/etc/default/jenkins"]
-	   }
-        }
+  # Vagrant puppet has issues starting a service vagrant         
+  if $is_vagrant == true {
+    service { "jenkins":
+      ensure    => running,
+      enable    => true,
+      require   => File["/etc/default/jenkins"]
+    }
+  }
 }
