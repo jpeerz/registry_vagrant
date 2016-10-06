@@ -1,4 +1,4 @@
-class orcid_jenkins::autoconfigure {
+class orcid_jenkins::securitysetup {
 
   $jenkins_port   = '8383'
   $jenkins_user   = 'jenkins'
