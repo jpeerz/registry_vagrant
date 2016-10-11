@@ -20,8 +20,10 @@ class orcid_jenkins ($is_vagrant = false) {
   }
   
   package { "jenkins":
-    ensure => latest,
+    #ensure => latest,
     #ensure => 1.639,
+    #ensure => 2.25,
+    ensure => installed,  
     require => Exec["update_ubuntu_repos"]
   }
   

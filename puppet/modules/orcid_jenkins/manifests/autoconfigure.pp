@@ -30,7 +30,9 @@ class orcid_jenkins::autoconfigure {
     "slack",
     "scm-api",
     "junit",
-    "windows-slaves"
+    "windows-slaves",
+    "copyartifact",
+    "shared-workspace"
   ]
   
   $jobs = [
@@ -53,7 +55,9 @@ class orcid_jenkins::autoconfigure {
     group   => jenkins,
     require => Exec['download_jenkins_cli']
   }
-      
+  
+  orcid_jenkins::plugin { $plugins: }
+  
   orcid_jenkins::job { $jobs:}
 
 }

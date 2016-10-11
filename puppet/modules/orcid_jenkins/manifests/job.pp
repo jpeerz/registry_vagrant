@@ -14,7 +14,7 @@ define orcid_jenkins::job(
   
   $create_job_command = "$jenkins_cli $security create-job $title < /tmp/${title}.xml"
   
-  notify { "Running: $create_job_command":}
+  #notify { "Running: $create_job_command":}
   
   exec { "${title}_job":
     require  => [
