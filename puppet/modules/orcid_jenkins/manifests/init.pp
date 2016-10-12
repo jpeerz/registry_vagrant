@@ -55,14 +55,14 @@ class orcid_jenkins ($is_vagrant = false) {
     mode => 644,
     owner => root,
     group => root,    
-    source => "puppet:///modules/orcid_jenkins/etc/apt/sources.list.d/jenkins.list",
+    source => "puppet:///modules/orcid_jenkins/etc_apt_sources.list.d_jenkins.list",
     require => File["/var/log/jenkins"]
   }
   
   file { "/etc/default/jenkins":
     ensure        => file,
     path          => '/etc/default/jenkins',
-    content       => template('orcid_jenkins/etc/default/jenkins.erb'),
+    content       => template('orcid_jenkins/etc_default_jenkins.erb'),
     require       => File["/var/lib/jenkins/"]
   }
   

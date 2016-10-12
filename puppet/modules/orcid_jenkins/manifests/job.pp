@@ -2,14 +2,14 @@
 define orcid_jenkins::job(
   $security    = "-i /var/lib/jenkins/.ssh/id_rsa_jenkins",
   $jenkins_cli = "java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8383/",
-  $job_path    = "/var/lib/jenkins/jobs"
+  $jenkins_home= "/var/lib/jenkins"
 ) {
 
   file { "/tmp/${title}.xml":
     ensure  => file,
     owner   => jenkins,
     group   => jenkins,    
-    source  => "puppet:///modules/orcid_jenkins/var/lib/jenkins/jobs/${title}.xml"
+    source  => "puppet:///modules/orcid_jenkins/jobs/${title}.xml"
   }
   
   $create_job_command = "$jenkins_cli $security create-job $title < /tmp/${title}.xml"
@@ -20,10 +20,10 @@ define orcid_jenkins::job(
     require  => [
       File["/tmp/${title}.xml"]
     ],
-    onlyif   => "test ! -d $job_path/$title && test -f /var/lib/jenkins/jenkins-cli.jar && test -f /var/lib/jenkins/.ssh/id_rsa_jenkins",
+    onlyif   => "test ! -d $jenkins_home/jobs/$title && test -f $jenkins_home/jenkins-cli.jar && test -f $jenkins_home/.ssh/id_rsa_jenkins",
     provider => 'shell',
     path     => ["/bin","/usr/bin"],
-    cwd      => "/var/lib/jenkins/",
+    cwd      => "$jenkins_home",
     command  => $create_job_command
   }
 }

@@ -36,10 +36,8 @@ class orcid_jenkins::autoconfigure {
   ]
   
   $jobs = [
-    "test"
+    "ORCID-push_checker"
   ]
-  
-  # "ORCID-push_checker",
         
   exec { "download_jenkins_cli":
     onlyif   => "test ! -f /var/lib/jenkins/jenkins-cli.jar",
@@ -56,8 +54,8 @@ class orcid_jenkins::autoconfigure {
     require => Exec['download_jenkins_cli']
   }
   
-  orcid_jenkins::plugin { $plugins: }
+  #orcid_jenkins::job { $jobs:}
   
-  orcid_jenkins::job { $jobs:}
+  #orcid_jenkins::plugin { $plugins: }
 
 }
