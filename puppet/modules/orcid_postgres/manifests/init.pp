@@ -37,6 +37,7 @@ class orcid_postgres (
   
   file { "/etc/postgresql/$version/main/pg_hba.conf":
     ensure  => file,
+    backup  => true,
     owner   => 'postgres',
     group   => 'postgres',
     mode    => '0440',
@@ -46,6 +47,7 @@ class orcid_postgres (
 
   file { "/etc/postgresql/$version/main/postgresql.conf":
     ensure  => file,
+    backup  => true,
     owner   => 'postgres',
     group   => 'postgres',
     mode    => '0440',
