@@ -1,7 +1,10 @@
 class orcid_postgres (
   $version = "9.5",
   $hba,
-  $conf
+  $conf,
+  $gnupg_key_name,
+  $gnupg_key_content,
+  $dot_boto_content
 ) {
   
   $pg_package_name = "postgresql-${version}"
@@ -53,6 +56,35 @@ class orcid_postgres (
     mode    => '0440',
     content  => $conf,
     require => Package[$pg_package_name],
+  } 
+  
+  # backup section
+  
+  file { "/var/lib/postgresql/.gnupg":
+      ensure  => directory,
+      owner   => 'postgres',
+      group   => 'postgres',
+      mode    => '0700',
+      recurse => true,
+      require => Package[$pg_package_name],
+  }
+  
+  file { "/var/lib/postgresql/.gnupg/$gnupg_key_name":
+      ensure  => file,
+      owner   => 'postgres',
+      group   => 'postgres',
+      mode    => '0600',
+      content => $gnupg_key_content,
+      require => [Package[$pg_package_name], File['/var/lib/postgresql/.gnupg']],
+  }  
+    
+  file { "/var/lib/postgresql/.boto":
+      ensure  => file,
+      owner   => 'postgres',
+      group   => 'postgres',
+      mode    => '0440',
+      content => $dot_boto_content,
+      require => Package[$pg_package_name],
   }  
 
 }
