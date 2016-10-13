@@ -172,4 +172,29 @@ Vagrant.configure("2") do |config|
     end         
   end
   
+  config.vm.define "orcid_postgres", autostart: false do |orcid_postgres|
+      
+    orcid_postgres.vm.box = "trusty64"
+
+    orcid_postgres.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+
+    orcid_postgres.vm.provider "virtualbox" do |v|
+      v.gui = true
+      v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
+      v.memory = 4000
+      v.cpus = 4
+    end
+
+    orcid_postgres.vm.provision :shell, :path => "install_puppet.sh"
+
+    host_name = ENV['HOST_NAME']
+
+    orcid_postgres.vm.provision "puppet" do |puppet|
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file  = "orcid_db.pp"
+      puppet.module_path    = "puppet/modules"
+      puppet.options        = "--verbose --debug"
+    end         
+  end  
+  
 end

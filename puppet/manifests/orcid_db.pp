@@ -3,7 +3,7 @@ Exec {
 }
 
 class {
-  orcid_base::postgresql:
+  orcid_postgres:
   
     version => "9.5",
     
